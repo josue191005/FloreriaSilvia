@@ -59,7 +59,7 @@
     font-family:inherit;
     cursor:pointer;
     transition:var(--transition)}
-        @media (min-width:992px) {
+       @media (min-width:992px) {
         .nav-item {
     position:relative;
     cursor:pointer;
@@ -67,13 +67,17 @@
     color:var(--text-main);
     font-family:var(--font-title);
     font-size:1.15rem;
-    transition:color 0.3s}
+    transition:color 0.3s;
+    height: 75px;
+    display: flex;
+    align-items: center;
+}
         .nav-item:hover,.nav-item.active {
     color:var(--accent)}
         .dropdown-menu {
     display:none;
     position:absolute;
-    top:40px;
+    top:75px;
     left:0;
     background:#fff;
     box-shadow:0 10px 30px rgba(0,0,0,0.1);
@@ -83,7 +87,7 @@
     z-index:1000;
     flex-direction:column;
     border:1px solid #f0f0f0}
-        .nav-item.active .dropdown-menu {
+        .nav-item:hover .dropdown-menu {
     display:flex;
     animation:slideDownNav 0.3s ease forwards}
         .dropdown-menu a {
@@ -1187,7 +1191,7 @@
         <div
             class="font-title text-[clamp(1.5rem,4vw,2.2rem)] font-bold text-textMain text-center flex-1 tracking-[0.5px] lg:text-left lg:flex-none lg:text-accentDark hover:scale-105 transition-transform duration-300 cursor-pointer">
             Floreria Silvia</div>
-        <nav class="hidden lg:flex gap-[25px] items-center" id="desktopNav">
+        <nav class="hidden lg:flex gap-[25px] h-full items-center" id="desktopNav">
         </nav>
     </header>
     <section
@@ -1548,20 +1552,15 @@
                         price: 95,
                         img: "1mG4E833M45n7d87sEgpJ2NlVrxhhjfJ-"
                     },
+                    
                     {
                         id: "t2",
-                        name: "Tulipanes Amarillos",
-                        price: 95,
-                        img: "https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=400&q=80"
-                    },
-                    {
-                        id: "t3",
                         name: "Mix de Tulipanes Primavera",
                         price: 110,
                         img: "1KBrj0pzLxShvvs9qmC8FDtpOKPmQpOy8"
                     },
                     {
-                        id: "t4",
+                        id: "t3",
                         name: "Caja de 6 Tulipanes",
                         price: 125,
                         img: "1KBrro4nuTLI2EfBJ1w6LftGW59yHkRse"
@@ -1694,14 +1693,9 @@
                         price: 45,
                         img: "1nWOuocAOdFJ7rzwE7xpduIbX54PL3WHg"
                     },
+                    
                     {
                         id: "cl3",
-                        name: "Mix de Claveles Coloridos",
-                        price: 55,
-                        img: "https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=400&q=80"
-                    },
-                    {
-                        id: "cl4",
                         name: "Claveles en Balde",
                         price: 65,
                         img: "1qQGT_C_4PuWo9X791TccWqpNKIehM_zI"
@@ -1714,7 +1708,7 @@
                     },
                     {
                         id: "new_1014",
-                        name: "Ramo de claveles rosa y dorados",
+                        name: "Ramo de claveles rosa",
                         price: 45,
                         img: "1-f06Xao1KldIRwU7wQn9oWlwI6v1ONdy"
                     },
@@ -1914,30 +1908,6 @@
                 bannerImg: "1H1Uz9VjHtLZPn5sWguQmIvUFvTFQw0zn",
                 items: [
                     {
-                        id: "gl1",
-                        name: "Globo Metálico Cumpleaños",
-                        price: 15,
-                        img: "https://images.unsplash.com/photo-1530103862676-de8c9de0f8d9?w=400&q=80"
-                    },
-                    {
-                        id: "gl2",
-                        name: "Burbuja Personalizada",
-                        price: 35,
-                        img: "https://images.unsplash.com/photo-1522273400909-fd1a8f77637e?w=400&q=80"
-                    },
-                    {
-                        id: "gl3",
-                        name: "Pack Globos Corazón",
-                        price: 20,
-                        img: "https://images.unsplash.com/photo-1506806732259-39c2d0f68daf?w=400&q=80"
-                    },
-                    {
-                        id: "gl4",
-                        name: "Globo Metálico Amor",
-                        price: 18,
-                        img: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&q=80"
-                    },
-                    {
                         id: "new_1035",
                         name: "Estrella",
                         price: 45,
@@ -1975,56 +1945,32 @@
                 bannerImg: "18V7I7XpxXVMyv0QcQlARy52NLXqbXz3P",
                 items: [
                     {
-                        id: "ex1",
-                        name: "Chocolates Surtidos",
-                        price: 30,
-                        img: "https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=400&q=80"
-                    },
-                    {
-                        id: "ex2",
-                        name: "Caja Bombones x8",
-                        price: 25,
-                        img: "https://images.unsplash.com/photo-1511914265872-c40672604a80?w=400&q=80"
-                    },
-                    {
-                        id: "ex3",
-                        name: "Topper Feliz Día",
-                        price: 15,
-                        img: "https://images.unsplash.com/photo-1548843254-24eed50359aa?w=400&q=80"
-                    },
-                    {
-                        id: "ex4",
-                        name: "Vino Tinto de Ocasión",
-                        price: 45,
-                        img: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=400&q=80"
-                    },
-                    {
                         id: "new_1030",
-                        name: "cajaFerrero8",
+                        name: "cajaFerrero 8",
                         price: 45,
                         img: "1smXVxR8KKu8aeBOB901EvDbopwijcaLY"
                     },
                     {
                         id: "new_1031",
-                        name: "Chocolatekissme",
+                        name: "Chocolate kiss me",
                         price: 45,
                         img: "1AmIt6ZnkKxlf7gkRkp0IRyT945ag30p6"
                     },
                     {
                         id: "new_1032",
-                        name: "ChocolateFerreroRocher",
+                        name: "Chocolate Ferrero Rocher",
                         price: 45,
                         img: "1nP2isWpMsddDREFWyde2lBO9irU8vVu5"
                     },
                     {
                         id: "new_1033",
-                        name: "ChocolateVizzio",
+                        name: "Chocolate Vizzio",
                         price: 45,
                         img: "191oZX2-DPAhwOJSJOGeNGuUN8dOJxJCB"
                     },
                     {
                         id: "new_1034",
-                        name: "CarritosHotwheels",
+                        name: "Carritos Hot wheels",
                         price: 45,
                         img: "1j8JYcxDeGdffphltIN1kt41gD7pTp8nH"
                     }
@@ -2042,7 +1988,7 @@
                 items: [
                     {
                         id: "mc1",
-                        name: "Mis Maceteros Especiales",
+                        name: "Maceteros Especiales",
                         price: 35,
                         img: "1cnYTzaPWsRbBdrSYeYqBuL3il2wn9qBn"
                     },
@@ -2058,12 +2004,7 @@
                         price: 50,
                         img: "1FMlZ6xL9-JFjjPq4VtsBId8RDRiiFD2v"
                     },
-                    {
-                        id: "mc4",
-                        name: "Macetero Vintage",
-                        price: 40,
-                        img: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&q=80"
-                    }
+                    
                 ]
             },
             {
@@ -2083,18 +2024,7 @@
                         price: 35,
                         img: "https://images.unsplash.com/photo-1453904300235-0f2f60b15b5d?w=400&q=80"
                     },
-                    {
-                        id: "pt3",
-                        name: "Bonsai Ficus",
-                        price: 45,
-                        img: "https://images.unsplash.com/photo-1416879598555-aca725dc39ab?w=400&q=80"
-                    },
-                    {
-                        id: "pt4",
-                        name: "Cactus Decorativo",
-                        price: 20,
-                        img: "https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=400&q=80"
-                    },
+                    
                     {
                         id: "new_1040",
                         name: "Drácena",
@@ -2109,7 +2039,7 @@
                     },
                     {
                         id: "new_1042",
-                        name: "PinoLimón",
+                        name: "Pino Limón",
                         price: 45,
                         img: "1cQA9YkVHdpw47cC9GPyDOH9HHP3rUFFV"
                     },
@@ -2133,19 +2063,19 @@
                     },
                     {
                         id: "new_1046",
-                        name: "ÁrbolDeAbundancia",
+                        name: "Árbol De Abundancia",
                         price: 45,
                         img: "17JUswUrfAEt8r-qwOXoOvxX-qmWjB0LN"
                     },
                     {
                         id: "new_1047",
-                        name: "OrejaDeElefante",
+                        name: "Oreja De Elefante",
                         price: 45,
                         img: "1u8o1bS7eG-Xx8ksaGsBh3Mjg_TY4LLFE"
                     },
                     {
                         id: "new_1048",
-                        name: "LenguaDeSuegra",
+                        name: "Lengua De Suegra",
                         price: 45,
                         img: "1y7mNMjo0EWx1ZDbNJZVXXzbz6L6zp4xk"
                     }
@@ -2156,33 +2086,11 @@
                 title: "Semillas",
                 bannerImg: "1VkLp8Ht3hz0u_2_pdBzg_By6FM3IiL4P",
                 items: [
-                    {
-                        id: "sm1",
-                        name: "Semillas de Girasol",
-                        price: 10,
-                        img: "https://images.unsplash.com/photo-1587049352847-4d4b126a11fe?w=400&q=80"
-                    },
-                    {
-                        id: "sm2",
-                        name: "Semillas de Margarita",
-                        price: 10,
-                        img: "https://images.unsplash.com/photo-1596547609652-9cb5d8d76921?w=400&q=80"
-                    },
-                    {
-                        id: "sm3",
-                        name: "Pack Huerto Casero",
-                        price: 25,
-                        img: "https://images.unsplash.com/photo-1530836369250-ef71a3f55ce8?w=400&q=80"
-                    },
-                    {
-                        id: "sm4",
-                        name: "Semillas de Tulipán",
-                        price: 15,
-                        img: "https://images.unsplash.com/photo-1510462006323-add7ff2439d5?w=400&q=80"
-                    },
+                    
+                   
                     {
                         id: "new_1049",
-                        name: "MargaritaAfricana",
+                        name: "Margarita Africana",
                         price: 45,
                         img: "1sRjbKzCfyHDbW8bL2xQcNLYVJmrQJ1RH"
                     },
@@ -2200,7 +2108,7 @@
                     },
                     {
                         id: "new_1052",
-                        name: "CebollaChina",
+                        name: "Cebolla China",
                         price: 45,
                         img: "1pDdinVawTRpgxW0YYTHPCf32tYq1Hlca"
                     },
@@ -2289,7 +2197,7 @@
                 `;
                 // Menú Escritorio (Dropdown clickeable)
                 desktopHtml += `
-                    <div class="nav-item" onclick="toggleDesktopDropdown(this, event)">
+                    <div class="nav-item">
                         ${macro.macroTitle} <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; margin-left: 4px;"></i>
                         <div class="dropdown-menu">
                 `;
@@ -2435,7 +2343,7 @@
             let html = '';
             cart.forEach(item => {
                 html += `
-                        < div class="cart-item-card" >
+                        <div class="cart-item-card" >
                             <img src="${getImgUrl(item.img)}" alt="${item.name}" class="cart-item-img">
                                 <div class="cart-item-info">
                                     <div class="cart-item-title">${item.name}</div>
