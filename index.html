@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Florería Silvia: Detalles que florecen emociones. Ramos de flores frescas, arreglos y complementos.">
+    <title>Florería Silvia | Detalles que florecen emociones</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- 1. VARIABLES DE DISEÑO (TONOS ROSA) --- */
+        :root {
+            --bg-color: #FAFAFA;          
+            --header-bg: #FFF0F5; /* Rosita pastel elegante */
+            --text-main: #111111;          
+            --text-light: #666666;         
+            
+            --primary: #FAD4DF;            
+            --accent: #FF4D85; /* Rosa vibrante principal */             
+            --accent-dark: #D81B60; /* Rosa oscuro para hover */        
+            
+            --footer-bg: #112a1e; /* Verde oscuro del footer */
+            --footer-text: #E8EBE9;
+            
+            --border-radius: 16px;
+            --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+            --font-title: 'Playfair Display', serif;
+            --font-body: 'Nunito', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { font-family: var(--font-body); background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; padding-bottom: 90px; overflow-x: hidden; scroll-behavior: smooth; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { display: block; max-width: 100%; object-fit: cover; cursor: pointer; }
+        button { border: none; outline: none; background: none; font-family: inherit; cursor: pointer; transition: var(--transition); }
+
+        /* --- 2. HEADER Y NAVEGACIÓN PC --- */
+        header {
+            background: var(--header-bg); position: sticky; top: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 20px; height: 75px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo { font-family: var(--font-title); font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 700; color: var(--text-main); text-align: center; flex: 1; letter-spacing: 0.5px; }
+        .hamburger { font-size: 1.5rem; cursor: pointer; padding: 10px; color: var(--text-main); }
+        
+        /* Navegación Exclusiva PC */
+        .desktop-nav { display: none; }
+        
+        @media (min-width: 992px) {
+            .hamburger { display: none; }
+            .logo { text-align: left; flex: 0 0 auto; color: var(--accent-dark); }
+            .desktop-nav { display: flex; gap: 25px; align-items: center; }
+            
+            .nav-item { position: relative; cursor: pointer; font-weight: 700; color: var(--text-main); font-family: var(--font-title); font-size: 1.15rem; transition: color 0.3s; }
+            .nav-item:hover, .nav-item.active { color: var(--accent); }
+            
+            .dropdown-menu { 
+                display: none; position: absolute; top: 40px; left: 0; background: #fff; 
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 12px; min-width: 240px; 
+                padding: 10px 0; z-index: 1000; flex-direction: column; border: 1px solid #f0f0f0;
+            }
+            .nav-item.active .dropdown-menu { display: flex; animation: slideDownNav 0.3s ease forwards; }
+            
+            .dropdown-menu a { padding: 12px 20px; font-family: var(--font-body); font-weight: 600; font-size: 0.95rem; color: var(--text-light); transition: 0.2s; }
+            .dropdown-menu a:hover { background: #fafafa; color: var(--accent); padding-left: 25px; }
+            
+            @keyframes slideDownNav { from{ opacity:0; transform: translateY(-10px); } to{ opacity:1; transform: translateY(0); } }
+        }
+
+        /* --- 3. MENÚ LATERAL MÓVIL (CON COLORES) --- */
+        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 2000; opacity: 0; visibility: hidden; transition: var(--transition); backdrop-filter: blur(2px); }
+        .sidebar-overlay.active { opacity: 1; visibility: visible; }
+        
+        .sidebar { position: fixed; top: 0; left: 0; height: 100%; width: 300px; background: #fff; z-index: 2001; transform: translateX(-100%); transition: transform 0.4s ease; display: flex; flex-direction: column; overflow-y: auto; }
+        .sidebar.active { transform: translateX(0); }
+        
+        .sidebar-header { padding: 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; background: var(--header-bg); }
+        .sidebar-header span { font-family: var(--font-title); font-weight: 700; font-size: 1.5rem; letter-spacing: 1px; color: var(--accent-dark); }
+        .close-btn { font-size: 1.8rem; cursor: pointer; color: var(--text-main); line-height: 1; }
+        
+        .sidebar-menu { padding: 10px 0; }
+        .menu-accordion { width: 100%; border-bottom: 1px solid #f5f5f5; }
+        .accordion-btn { 
+            width: 100%; text-align: left; padding: 18px 25px; font-family: var(--font-title); 
+            font-size: 1.2rem; font-weight: 700; color: var(--text-main);
+            display: flex; justify-content: space-between; align-items: center; transition: 0.3s;
+        }
+        /* Colores Pastel en Móvil */
+        .color-1 .accordion-btn { background-color: #FFF0F4; border-left: 5px solid #FF9EAA; }
+        .color-2 .accordion-btn { background-color: #F0F8FF; border-left: 5px solid #8EA9FF; }
+        .color-3 .accordion-btn { background-color: #FFF9E6; border-left: 5px solid #FFD700; }
+        .color-4 .accordion-btn { background-color: #F0FFF0; border-left: 5px solid #98FB98; }
+
+        .accordion-btn i { transition: 0.3s; font-size: 0.9rem; color: var(--text-light); }
+        .accordion-btn.active i { transform: rotate(180deg); color: var(--accent); }
+        
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #fafafa; }
+        .accordion-content a { display: block; padding: 12px 25px 12px 40px; font-size: 0.95rem; color: var(--text-light); font-weight: 600; border-top: 1px solid #eee; }
+        .accordion-content a:hover { color: var(--accent); padding-left: 45px; background: #fff; }
+
+        .direct-link { display: block; padding: 15px 25px; font-family: var(--font-title); font-size: 1.2rem; font-weight: 700; color: var(--text-main); border-bottom: 1px solid #f5f5f5; }
+
+        /* --- 4. HERO SECTION --- */
+        .hero {
+            position: relative; height: 65vh; 
+            background: url('https://wsrv.nl/?url=https://drive.google.com/uc?id=1XylhTEu2T7G_a5U62x0iaTaIW3R3RoiB&w=1600') center/cover;
+            display: flex; align-items: center; justify-content: center; text-align: center; color: white;
+        }
+        @media (min-width: 768px) { .hero { height: 85vh; } }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)); }
+        .hero-content { position: relative; z-index: 2; padding: 20px; max-width: 900px; }
+        .hero h1 { font-family: var(--font-title); font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 15px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero p { font-size: clamp(1.1rem, 2vw, 1.3rem); font-weight: 400; max-width: 600px; margin: 0 auto; text-shadow: 1px 1px 5px rgba(0,0,0,0.6); }
+
+        /* --- 5. ARMA TU PEDIDO IDEAL (COMPACTO Y ANIMADO) --- */
+        .custom-order { padding: 40px 15px 60px; text-align: center; background: #fff; border-bottom: 1px solid #f0f0f0; overflow: hidden; }
+        .custom-order h2 { font-family: var(--font-title); font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 5px; color: var(--text-main); }
+        .custom-order > p { font-size: 1rem; margin-bottom: 30px; color: var(--text-light); }
+        
+        .steps-wrapper { display: flex; flex-direction: column; gap: 15px; max-width: 1000px; margin: 0 auto; }
+        
+        /* Diseño Móvil: Horizontal, compacto y flotante */
+        .step-v-card { 
+            background: #fafafa; border-radius: 16px; padding: 12px; 
+            display: flex; align-items: center; gap: 15px; text-align: left; 
+            border: 1px solid #eee; position: relative; 
+            animation: floatStepMobile 4s ease-in-out infinite;
+        }
+        .step-v-card:nth-child(2) { animation-delay: 1.2s; }
+        .step-v-card:nth-child(3) { animation-delay: 2.4s; }
+
+        @keyframes floatStepMobile {
+            0%, 100% { transform: translateY(0); box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+            50% { transform: translateY(-4px); box-shadow: 0 8px 15px rgba(0,0,0,0.06); }
+        }
+
+        .step-img-box { width: 85px; height: 85px; flex-shrink: 0; border-radius: 12px; position: relative; }
+        .step-img-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px;}
+        
+        .step-number { 
+            position: absolute; top: -8px; left: -8px;
+            width: 30px; height: 30px; background: var(--accent); color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-family: var(--font-body); font-weight: 900; font-size: 0.95rem;
+            border: 2px solid #fff; z-index: 2;
+            animation: pulsePink 2s infinite;
+        }
+
+        @keyframes pulsePink {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 133, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(255, 77, 133, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 133, 0); }
+        }
+
+        .step-text { flex: 1; }
+        .step-text h3 { font-family: var(--font-title); font-size: 1.15rem; color: var(--text-main); margin-bottom: 2px; }
+        .step-text p { font-size: 0.85rem; color: var(--text-light); line-height: 1.3; margin: 0;}
+
+        .btn-wsp-pedido {
+            margin-top: 30px; background: #25D366; color: white; padding: 14px 30px; border-radius: 50px; 
+            border: none; font-family: var(--font-body); font-weight: 800; font-size: 1.05rem; 
+            display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); 
+            transition: transform 0.3s; cursor: pointer;
+        }
+        .btn-wsp-pedido:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4); }
+
+        /* Diseño PC: Vuelve a ser 3 columnas, pero animado */
+        @media (min-width: 768px) { 
+            .custom-order { padding: 60px 20px 80px; }
+            .steps-wrapper { flex-direction: row; gap: 30px; }
+            .step-v-card { 
+                flex-direction: column; text-align: center; padding: 25px; padding-bottom: 35px;
+                animation: floatStepPC 5s ease-in-out infinite; 
+            }
+            .step-v-card:nth-child(2) { animation-delay: 1.5s; }
+            .step-v-card:nth-child(3) { animation-delay: 3s; }
+
+            @keyframes floatStepPC {
+                0%, 100% { transform: translateY(0); box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+                50% { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+            }
+
+            .step-img-box { width: 100%; height: 200px; margin-bottom: 25px; border-radius: 16px; overflow: visible;}
+            .step-img-box img { border-radius: 16px; }
+            .step-number { 
+                top: auto; bottom: -20px; left: 50%; transform: translateX(-50%); 
+                width: 50px; height: 50px; font-size: 1.4rem; border: 4px solid #fff; 
+            }
+            @keyframes pulsePink { 
+                0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 133, 0.4); }
+                70% { transform: translateX(-50%) scale(1.1); box-shadow: 0 0 0 12px rgba(255, 77, 133, 0); }
+                100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 133, 0); }
+            }
+            .step-text h3 { font-size: 1.6rem; margin-bottom: 8px; }
+            .step-text p { font-size: 0.95rem; }
+            .btn-wsp-pedido { margin-top: 40px; font-size: 1.15rem; padding: 16px 40px; }
+        }
+
+        /* --- 6. CATÁLOGO ESTILO ROSATEL --- */
+        .catalog-container { padding: 60px 15px; max-width: 1400px; margin: 0 auto; }
+        
+        .rosatel-section {
+            display: flex; flex-direction: column; margin-bottom: 60px; gap: 15px;
+        }
+        
+        .cat-banner-side {
+            width: 100%; height: 250px; border-radius: 20px; overflow: hidden; position: relative;
+            box-shadow: var(--shadow-card); background: #f0f0f0; flex-shrink: 0;
+        }
+        .cat-banner-side img { width: 100%; height: 100%; object-fit: cover; }
+        .cat-banner-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+            display: flex; align-items: flex-end; justify-content: center; padding-bottom: 30px;
+        }
+        .cat-banner-overlay h2 { color: white; font-family: var(--font-title); font-size: clamp(1.8rem, 4vw, 2.5rem); letter-spacing: 2px; text-shadow: 2px 2px 8px rgba(0,0,0,0.4); text-transform: uppercase; text-align: center;}
+
+        .cat-slider-side {
+            width: 100%; position: relative; display: flex; align-items: center; padding: 10px 0;
+            min-width: 0; 
+        }
+        
+        .slider-track {
+            display: flex; flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; 
+            gap: 15px; padding: 15px 5px; flex: 1; scrollbar-width: none; -ms-overflow-style: none; scroll-behavior: smooth;
+        }
+        .slider-track::-webkit-scrollbar { display: none; }
+
+        .nav-arrow {
+            background: white; color: var(--accent); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            position: absolute; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.15); font-size: 1.1rem; border: none; cursor: pointer;
+        }
+        .nav-arrow.left { left: -10px; } .nav-arrow.right { right: -10px; }
+        .nav-arrow:hover { background: var(--accent); color: white; }
+
+        /* --- TARJETAS DE PRODUCTO (2 MÓVIL / 3 PC) --- */
+        .prod-card {
+            flex: 0 0 calc(50% - 7.5px); 
+            scroll-snap-align: start; 
+            background: #fff; border-radius: var(--border-radius); border: 1px solid #f0f0f0;
+            padding: 0 0 20px 0; text-align: center; display: flex; flex-direction: column;
+            box-shadow: var(--shadow-card); transition: var(--transition);
+        }
+        .prod-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+
+        .prod-img-wrap { width: 100%; aspect-ratio: 1; background: #fff; border-radius: 16px 16px 0 0; overflow: hidden; }
+        .prod-img-wrap img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.5s; }
+        .prod-img-wrap:hover img { transform: scale(1.08); }
+        
+        .prod-name { font-family: var(--font-body); font-weight: 800; font-size: 0.95rem; margin: 10px; color: var(--text-main); height: 40px; display: flex; align-items: center; justify-content: center; line-height: 1.2; overflow: hidden; }
+        
+        .prod-price { color: var(--accent); font-weight: 900; font-size: 1.2rem; margin-bottom: 5px; }
+        
+        .comprar-txt { font-size: 0.85rem; color: var(--text-light); margin-bottom: 12px; cursor: pointer; transition: 0.2s; }
+        .comprar-txt:hover { color: var(--text-main); text-decoration: underline; }
+
+        .btn-add { 
+            margin: auto auto 0; width: 85%; padding: 10px 0; border: 1.5px solid var(--accent); color: var(--accent); 
+            border-radius: 50px; font-weight: 800; font-size: 0.85rem; background: #fff; transition: 0.3s;
+        }
+        .btn-add:hover { background: var(--accent); color: white; }
+
+        @media (min-width: 992px) {
+            .rosatel-section { 
+                flex-direction: row; align-items: stretch; height: 460px; gap: 30px; 
+                margin-bottom: 120px; 
+            }
+            .rosatel-section:nth-child(even) { flex-direction: row-reverse; } 
+            .cat-banner-side { width: 35%; height: auto; }
+            .cat-slider-side { width: 65%; }
+            .cat-banner-overlay { align-items: center; padding-bottom: 0; background: rgba(0,0,0,0.3); }
+            .nav-arrow.left { left: -20px; } .nav-arrow.right { right: -20px; }
+            
+            .slider-track { gap: 20px; }
+            .prod-card { flex: 0 0 calc(33.333% - 13.33px); }
+            .prod-name { font-size: 1.05rem; margin: 10px 15px; height: 45px;}
+            .prod-price { font-size: 1.35rem; }
+            .btn-add { width: 80%; padding: 12px 0; font-size: 0.9rem;}
+        }
+
+        /* --- 7. TIPS PARA CUIDAR TUS PLANTAS (COMPACTO EN MÓVIL) --- */
+        .care-section { background: var(--footer-bg); padding: 60px 20px; text-align: center; color: white; }
+        .care-section h2 { font-family: var(--font-title); font-size: 2.2rem; margin-bottom: 10px; }
+        .care-section > p { font-size: 1rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; color: #A0AAB2; }
+
+        .care-grid { display: flex; flex-direction: column; gap: 15px; max-width: 1000px; margin: 0 auto; }
+        
+        /* Móvil: Diseño horizontal compacto */
+        .care-card { 
+            background: rgba(255,255,255,0.05); border-radius: 16px; padding: 12px; 
+            border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; text-align: left;
+            display: flex; align-items: center; gap: 15px;
+        }
+        .care-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
+        .care-img { width: 85px; height: 85px; border-radius: 12px; object-fit: cover; flex-shrink: 0; }
+        .care-text-wrap { flex: 1; }
+        .care-text-wrap h3 { font-family: var(--font-title); font-size: 1.15rem; margin-bottom: 4px; color: white; }
+        .care-text-wrap p { font-size: 0.85rem; color: #D1D8D4; line-height: 1.3; margin: 0; }
+
+        /* PC: Restaura grilla de 3 columnas */
+        @media (min-width: 768px) { 
+            .care-section { padding: 80px 20px; }
+            .care-section h2 { font-size: 2.8rem; margin-bottom: 15px; }
+            .care-section > p { font-size: 1.1rem; margin-bottom: 50px; }
+            .care-grid { flex-direction: row; gap: 30px; }
+            .care-card { flex-direction: column; padding: 25px; text-align: center; align-items: stretch;}
+            .care-img { width: 100%; height: 180px; margin-bottom: 20px; }
+            .care-text-wrap h3 { font-size: 1.5rem; margin-bottom: 10px; }
+            .care-text-wrap p { font-size: 0.95rem; line-height: 1.5; }
+        }
+
+        /* --- 8. LIGHTBOX --- */
+        .lightbox-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 4000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+        .lightbox-content { position: relative; max-width: 95vw; max-height: 95vh; display: flex; justify-content: center; align-items: center; }
+        .lightbox-content img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        .lightbox-close { position: absolute; top: -40px; right: 0; font-size: 2.5rem; color: white; cursor: pointer; padding: 5px; line-height: 1; transition: 0.3s; font-family: sans-serif; }
+        .lightbox-close:hover { color: var(--accent); transform: scale(1.1); }
+
+        /* --- 9. CART BAR & WSP FLOTANTE --- */
+        .cart-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #eee; z-index: 2000; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; transform: translateY(100%); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 -10px 30px rgba(0,0,0,0.08); }
+        .cart-bar.visible { transform: translateY(0); }
+        .btn-pedir-cart { background: var(--accent); color: white; padding: 12px 25px; border-radius: 50px; font-weight: 800; font-size: 0.9rem; border: none;}
+
+        .wsp-float { position: fixed; bottom: 20px; right: 20px; z-index: 1001; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 5px 20px rgba(37,211,102,0.4); transition: 0.3s; }
+        .wsp-float:hover { transform: scale(1.1); }
+        .wsp-float.shift-up { bottom: 90px; } 
+
+        /* --- 10. FOOTER CLON EXACTO --- */
+        footer { background: var(--footer-bg); color: var(--footer-text); padding: 80px 20px; font-family: var(--font-body); }
+        .footer-grid { display: grid; grid-template-columns: 1fr; max-width: 1100px; margin: 0 auto; gap: 50px; }
+        @media (min-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; align-items: center; gap: 80px; } }
+        
+        .footer-info { text-align: left; }
+        .footer-info h3 { font-family: var(--font-title); font-size: 3.5rem; color: #fff; margin-bottom: 10px; font-weight: 600; }
+        .footer-phrase { color: #A0AAB2; margin-bottom: 40px; font-size: 1.1rem; }
+        
+        .footer-address-block { display: flex; flex-direction: column; gap: 8px; margin-bottom: 40px; color: #D1D8D4; font-size: 1rem; position: relative; padding-left: 25px; }
+        .footer-address-block i { color: var(--accent); font-size: 1.2rem; position: absolute; left: 0; top: 2px; }
+
+        .footer-social-title { font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; color: #A0AAB2; margin-bottom: 15px; text-transform: uppercase; }
+        .social-icons { display: flex; gap: 15px; }
+        .social-icons a { width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.05); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: 0.3s; }
+        .social-icons a:hover { background: var(--accent); transform: translateY(-3px); }
+
+        .map-wrap { width: 100%; display: flex; flex-direction: column; align-items: flex-start; }
+        .map-container { width: 100%; border-radius: 12px; overflow: hidden; height: 300px; background: #eee; margin-bottom: 10px; border: 2px solid rgba(255,255,255,0.1);}
+        .map-container iframe { width: 100%; height: 100%; border: none; }
+        .map-link { color: #A0AAB2; font-size: 0.9rem; text-decoration: underline; transition: 0.3s; }
+        .map-link:hover { color: #fff; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span>MENÚ</span>
+            <div class="close-btn" onclick="toggleSidebar()">×</div>
+        </div>
+        <div class="sidebar-menu" id="sidebarMenuContent">
+            </div>
+    </div>
+
+    <header>
+        <div class="hamburger" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></div>
+        <div class="logo">Floreria Silvia</div>
+        
+        <nav class="desktop-nav" id="desktopNav">
+            </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Detalles que florecen emociones</h1>
+            <p>Ramos, arreglos florales y complementos para sorprender a quien más quieres.</p>
+        </div>
+    </section>
+
+    <section class="custom-order" id="arma-pedido">
+        <h2>Arma tu pedido ideal</h2>
+        <p>Comparte tu idea, lo diseñamos y lo entregamos listo para sorprender.</p>
+        
+        <div class="steps-wrapper">
+            <div class="step-v-card">
+                <div class="step-img-box">
+                    <img src="https://images.unsplash.com/photo-1577908955214-72b1cc162f17?w=600&q=80" alt="Muestra tu referencia" onclick="openLightbox(this.src)">
+                    <div class="step-number">1</div>
+                </div>
+                <div class="step-text">
+                    <h3>Muestra tu referencia</h3>
+                    <p>Comparte una foto o estilo de tu regalo ideal por WhatsApp.</p>
+                </div>
+            </div>
+            <div class="step-v-card">
+                <div class="step-img-box">
+                    <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=600&q=80" alt="Diseño a medida" onclick="openLightbox(this.src)">
+                    <div class="step-number">2</div>
+                </div>
+                <div class="step-text">
+                    <h3>Diseño a medida</h3>
+                    <p>Armamos la propuesta con las flores más frescas y premium.</p>
+                </div>
+            </div>
+            <div class="step-v-card">
+                <div class="step-img-box">
+                    <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600&q=80" alt="Entrega sorpresa" onclick="openLightbox(this.src)">
+                    <div class="step-number">3</div>
+                </div>
+                <div class="step-text">
+                    <h3>Entrega sorpresa</h3>
+                    <p>Recibe tu arreglo listo para emocionar a esa persona especial.</p>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-wsp-pedido" onclick="sendWsp('Hola Florería Silvia, deseo cotizar un pedido personalizado adjuntando algunas referencias.')">
+            <i class="fa-brands fa-whatsapp"></i> COTIZAR POR WHATSAPP
+        </button>
+    </section>
+
+    <main class="catalog-container" id="catalogContainer"></main>
+
+    <section class="care-section" id="cuidados">
+        <h2>Tips para cuidar tus plantas y flores</h2>
+        <p>Sigue estos sencillos consejos para que tu arreglo o plantita luzca fresco por mucho más tiempo.</p>
+        
+        <div class="care-grid">
+            <div class="care-card">
+                <img src="https://images.unsplash.com/photo-1581456495146-65a71b2c8e52?w=500&q=80" class="care-img" alt="Agua Fresca" onclick="openLightbox(this.src)">
+                <div class="care-text-wrap">
+                    <h3>Agua Fresca</h3>
+                    <p>Cambia el agua cada 2 días y limpia el florero. Usa agua a temperatura ambiente.</p>
+                </div>
+            </div>
+            <div class="care-card">
+                <img src="https://images.unsplash.com/photo-1590494951910-1c0eb3b1d7d0?w=500&q=80" class="care-img" alt="Corte Diagonal" onclick="openLightbox(this.src)">
+                <div class="care-text-wrap">
+                    <h3>Corte Diagonal</h3>
+                    <p>Corta 2cm de los tallos en ángulo de 45° al cambiar el agua para mejorar la absorción.</p>
+                </div>
+            </div>
+            <div class="care-card">
+                <img src="https://images.unsplash.com/photo-1416879598555-5c141dbe324c?w=500&q=80" class="care-img" alt="Luz Indirecta" onclick="openLightbox(this.src)">
+                <div class="care-text-wrap">
+                    <h3>Luz Indirecta</h3>
+                    <p>Mantén tus flores en un lugar fresco, lejos de la luz solar directa y fuentes de calor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="visitanos">
+        <div class="footer-grid">
+            <div class="footer-info">
+                <h3>Floreria Silvia</h3>
+                <p class="footer-phrase">"Todos regresan y Cristo bendiga sus vidas"</p>
+                
+                <div class="footer-address-block">
+                    <i class="fa-solid fa-location-dot"></i>
+                    Avenida Los Arquitectos, Ancon<br>
+                    Lima 15122, Peru
+                </div>
+                
+                <div class="footer-social-title">SIGUENOS EN REDES:</div>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="map-wrap">
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3905.3002358037243!2d-77.13259342494251!3d-11.814233288404768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTHCsDQ4JzUxLjIiUyA3N8KwMDcnNDguMSJX!5e0!3m2!1ses-419!2spe!4v1772975067347!5m2!1ses-419!2spe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <a href="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3905.3002358037243!2d-77.13259342494251!3d-11.814233288404768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTHCsDQ4JzUxLjIiUyA3N8KwMDcnNDguMSJX!5e0!3m2!1ses-419!2spe!4v1772975067347!5m2!1ses-419!2spe" target="_blank" class="map-link">Ver ubicacion en Google Maps</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox(event)">
+        <div class="lightbox-content">
+            <div class="lightbox-close" onclick="closeLightbox(null)">×</div>
+            <img src="" id="lightboxImg">
+        </div>
+    </div>
+
+    <a href="javascript:void(0)" onclick="sendWsp('Hola Floreria Silvia, deseo informacion general.')" class="wsp-float" id="wspBtn">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <div class="cart-bar" id="cartBar">
+        <div>
+            <div style="font-size: 0.85rem; color:var(--text-light); font-weight: 700;" id="cartCount">0 items</div>
+            <div style="font-size: 1.3rem; font-weight: 800; color:var(--text-main);" id="cartTotal">S/ 0.00</div>
+        </div>
+        <button class="btn-pedir-cart" onclick="checkoutCart()">PEDIR AHORA</button>
+    </div>
+
+    <script>
+        const PHONE = '51936625197';
+        let cart = [];
+        let allItemsFlat = [];
+        
+        // --- FUNCIÓN PARA FOTOS DE DRIVE POR PROXY ---
+        function getImgUrl(imgStr) {
+            if (imgStr.startsWith('http')) return imgStr;
+            return `https://wsrv.nl/?url=https://drive.google.com/uc?id=${imgStr}&w=600`;
+        }
+
+        // --- ESTRUCTURA DEL MENÚ Y CATÁLOGO ---
+        const menuData = [
+            {
+                macroTitle: 'Flores Principales',
+                categories: [
+                    {
+                        id: 'cat-rosas', title: 'Rosas', bannerImg: '1cpygTwTipo7LVh_e8rVXDl59jclUc0oh',
+                        items: [
+                            { id: 'r1', name: 'Balde Rosas Rojas', price: 150.00, img: '1cpygTwTipo7LVh_e8rVXDl59jclUc0oh' },
+                            { id: 'r2', name: 'Balde Rosas Rosadas', price: 150.00, img: '1kJiv4UlInHYYR0C8NZd_TdI-r583OjYB' },
+                            { id: 'r3', name: 'Balde Rosas Amarillas y Blancas', price: 150.00, img: '1Tm7iw_u75jpwCL-VQIy3NYcRIEUJ94Fn' },
+                            { id: 'r4', name: 'Ramo Rosas y Lluvia', price: 80.00, img: '19ECgXq1X6tnbW9EIwgNq7JXXaxoi0Zt-' },
+                            { id: 'r5', name: 'Ramo Rosas Amarillas y Lilas', price: 85.00, img: '1uW0EpRuqwIxnA8S_6Rqzi4cJD18jFFeX' },
+                            { id: 'r6', name: 'Ramo Rosas y Flores Lilas', price: 85.00, img: '1ZYsq_mi32oeLtZOKVoO1dtTsQyW7bCoQ' }
+                        ]
+                    },
+                    {
+                        id: 'cat-girasoles', title: 'Girasoles', bannerImg: '15wZt35uBTm7FkDrGw7NnmHJwMjJgyU1B',
+                        items: [
+                            { id: 'g1', name: 'Balde de Girasoles', price: 120.00, img: '15wZt35uBTm7FkDrGw7NnmHJwMjJgyU1B' },
+                            { id: 'g2', name: 'Ramo 6 Girasoles', price: 85.00, img: '1LLuo5UKdkxjMuCVNqpEZ41eq7V7M3Pn9' },
+                            { id: 'g3', name: 'Ramo 4 Girasoles y Rosas', price: 105.00, img: '1mAW5MFXsliomPKcmNiU3HcxpDoCNFC1E' },
+                            { id: 'g4', name: 'Ramo 2 Girasoles y Globo', price: 55.00, img: '1fVUvkr5FWyRkSpMC6NGiBAx5TcBcGTZ2' },
+                            { id: 'g5', name: '3 Girasoles y Rosas', price: 95.00, img: '1GsOVRIpO98B-LF-t2dqC3UdLS7wTf_nM' }
+                        ]
+                    },
+                    {
+                        id: 'cat-tulipanes', title: 'Tulipanes', bannerImg: '1RGh5LgoT0MOaoXJLqgtAYgYR1Cj_JNoT',
+                        items: [
+                            { id: 't1', name: 'Tulipanes Rojos Elegantes', price: 95.00, img: 'https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=400&q=80' },
+                            { id: 't2', name: 'Tulipanes Amarillos', price: 95.00, img: 'https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=400&q=80' },
+                            { id: 't3', name: 'Mix de Tulipanes Primavera', price: 110.00, img: 'https://images.unsplash.com/photo-1520764835615-ce1f181f5ea1?w=400&q=80' },
+                            { id: 't4', name: 'Caja de 6 Tulipanes', price: 125.00, img: 'https://images.unsplash.com/photo-1508611440026-6218e76c1dc1?w=400&q=80' }
+                        ]
+                    },
+                    {
+                        id: 'cat-astromelias', title: 'Astromelias', bannerImg: '1Xgtuj2dhCRjQKGgtHKBrsViPozpqHGte',
+                        items: [
+                            { id: 'as1', name: 'Astromelias Rosadas', price: 50.00, img: '1Xgtuj2dhCRjQKGgtHKBrsViPozpqHGte' },
+                            { id: 'as2', name: 'Astromelias Vibrantes', price: 55.00, img: 'https://images.unsplash.com/photo-1587317513904-9844e1320ea9?w=400&q=80' },
+                            { id: 'as3', name: 'Mix Astromelias y Margaritas', price: 65.00, img: '1_Vvz0VRZWivZnwibaFjalSSQUTFMSVsS' },
+                            { id: 'as4', name: 'Ramo de Astromelias Especial', price: 70.00, img: 'https://images.unsplash.com/photo-1542458428-21fb9d5e305e?w=400&q=80' }
+                        ]
+                    },
+                    {
+                        id: 'cat-claveles', title: 'Claveles', bannerImg: '1P95_NYTg6t3AG_n5Zv8dLQSkxIqtlEFm',
+                        items: [
+                            { id: 'cl1', name: 'Claveles Tradicionales', price: 45.00, img: 'https://images.unsplash.com/photo-1568858226462-23c2a63273e9?w=400&q=80' },
+                            { id: 'cl2', name: 'Claveles Blancos Puros', price: 45.00, img: 'https://images.unsplash.com/photo-1507004652431-150fb8b7eb39?w=400&q=80' },
+                            { id: 'cl3', name: 'Mix de Claveles Coloridos', price: 55.00, img: 'https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=400&q=80' },
+                            { id: 'cl4', name: 'Claveles en Balde', price: 65.00, img: 'https://images.unsplash.com/photo-1603415177000-0e104e137190?w=400&q=80' }
+                        ]
+                    },
+                    {
+                        id: 'cat-eternas', title: 'Flores Eternas', bannerImg: '1r5YlC_PLw0mWpwIET0eBVHbMfJ_2HvhB',
+                        items: [
+                            { id: 'et1', name: 'Rosas y Mariposas', price: 65.00, img: '1RntTxM5__stBC_WNU3S9_pidPJbndsfd' },
+                            { id: 'et2', name: 'Rosas Hello Kitty Cumpleaños', price: 75.00, img: '1Ggxk6aLhmGONsPB6zEVomZrOB_oRRk2y' },
+                            { id: 'et3', name: 'Flores Lilas Limpiapipa', price: 45.00, img: '1FNEi4lM8tzdiAE3F9pYgmNjmcp5kMwEA' },
+                            { id: 'et4', name: 'Flores Azules Limpiapipa', price: 45.00, img: '15Iskbw3rFBdr9Auz6Rt3tLvZU02hrFIa' },
+                            { id: 'et5', name: 'Rosas Amarillas Osito', price: 55.00, img: '1INdWcvdVxJWevu8cIeBlw61dS-Y4MXvj' },
+                            { id: 'et6', name: 'Rosa y Orquídea Limpiapipa', price: 50.00, img: '1MAgKRa97GwAEWoCBgWkp_73SbkzSyI-0' }
+                        ]
+                    }
+                ]
+            },
+            {
+                macroTitle: 'Arreglos y Eventos',
+                categories: [
+                    {
+                        id: 'cat-eventos', title: 'Eventos', bannerImg: '1SAbIm7MoNNgn8in17pklvZQ-SKOU77Yg',
+                        items: [
+                            { id: 'ev1', name: 'Rosas y Girasol Premium', price: 85.00, img: '1acovOFVcub7uUic9VmUtBLpvQZMXixOK' },
+                            { id: 'ev2', name: 'Arreglo de Orquídeas y Rosas', price: 110.00, img: '1-sOMv6YM7kE99C8ZguLdeqIIV9alnlvI' },
+                            { id: 'ev3', name: 'Ramo Rosas Blancas y Lilas', price: 90.00, img: '104Qri6U5-UU_UjkvKDhAdOqVjYQExIfy' },
+                            { id: 'ev4', name: 'Arreglo Orquídea Elegante', price: 115.00, img: '1_Tbdcf3o4Kn367Sop6oAWDXoYEoQ17Vw' }
+                        ]
+                    },
+                    {
+                        id: 'cat-adornos', title: 'Adornos de Mesa', bannerImg: 'https://images.unsplash.com/photo-1525316416606-926fb16c8916?w=600&q=80',
+                        items: [
+                            { id: 'ad1', name: 'Centro de Mesa Floral', price: 65.00, img: 'https://images.unsplash.com/photo-1525316416606-926fb16c8916?w=400&q=80' },
+                            { id: 'ad2', name: 'Adorno de Margaritas Blancas', price: 45.00, img: '1BGBpO2uP8SEvdq-WKOnVzaW4nlTcOaJw' },
+                            { id: 'ad3', name: 'Hortensias Moradas de Mesa', price: 60.00, img: '1Kqyz0llJ0T1Ug01hG1QqsMRRRYRK5Pqo' },
+                            { id: 'ad4', name: 'Centro de Gladiolos Naranjas', price: 55.00, img: '1LVfI2pP6SZ3VPdz_IWeHmXntY8g4fQm5' }
+                        ]
+                    }
+                ]
+            },
+            {
+                macroTitle: 'Regalos y Complementos',
+                categories: [
+                    {
+                        id: 'cat-peluches', title: 'Peluches', bannerImg: '1f2gtdRrCZTGvUMRJHUDcsBd2C4ipxrvr',
+                        items: [
+                            { id: 'pl1', name: 'Peluche Lotso Rosa', price: 45.00, img: '1f2gtdRrCZTGvUMRJHUDcsBd2C4ipxrvr' },
+                            { id: 'pl2', name: 'Peluche Elefante Rosa', price: 55.00, img: '1WhIbdIL2CLrORX9nI4pVvEBqRrg9OXEh' },
+                            { id: 'pl3', name: 'Peluche Hello Kitty', price: 50.00, img: '10HQsyG7AX9E-rYVO-ryWBv2F-d2YA5B2' },
+                            { id: 'pl4', name: 'Peluche Stich Rosa', price: 60.00, img: '1LXN2pfzaNRdA_7aYQPxa3XZeys9UAcuZ' },
+                            { id: 'pl5', name: 'Peluche Snoopy', price: 45.00, img: '16VgEFDHc0Eu-WxQUSTQoexWCaniGlZ4t' }
+                        ]
+                    },
+                    {
+                        id: 'cat-globos', title: 'Globos', bannerImg: 'https://images.unsplash.com/photo-1530103862676-de8892bc952f?w=600&q=80',
+                        items: [], consultOnly: true
+                    },
+                    {
+                        id: 'cat-extras', title: 'Extras', bannerImg: '18V7I7XpxXVMyv0QcQlARy52NLXqbXz3P',
+                        items: [], consultOnly: true
+                    }
+                ]
+            },
+            {
+                macroTitle: 'Jardín y Hogar',
+                categories: [
+                    {
+                        id: 'cat-maceteros', title: 'Maceteros', bannerImg: '1cnYTzaPWsRbBdrSYeYqBuL3il2wn9qBn',
+                        items: [
+                            { id: 'mc1', name: 'Mis Maceteros Especiales', price: 35.00, img: '1cnYTzaPWsRbBdrSYeYqBuL3il2wn9qBn' },
+                            { id: 'mc2', name: 'Elefantito de Cerámica', price: 45.00, img: '1431fWnoeGEtZZMKKIJl9RQyCN7_hTmgD' },
+                            { id: 'mc3', name: 'Cisne de Cerámica', price: 50.00, img: '1FMlZ6xL9-JFjjPq4VtsBId8RDRiiFD2v' },
+                            { id: 'mc4', name: 'Macetero Vintage', price: 40.00, img: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&q=80' }
+                        ]
+                    },
+                    {
+                        id: 'cat-plantas', title: 'Plantas Decorativas', bannerImg: '1kQfEx6fypxu5BQSDZiOu0mI_acj0N8_G',
+                        items: [], consultOnly: true
+                    },
+                    {
+                        id: 'cat-semillas', title: 'Semillas', bannerImg: '1VkLp8Ht3hz0u_2_pdBzg_By6FM3IiL4P',
+                        items: [], consultOnly: true
+                    }
+                ]
+            }
+        ];
+
+        function renderSite() {
+            const menuContainer = document.getElementById('sidebarMenuContent');
+            const desktopNavContainer = document.getElementById('desktopNav');
+            const catalogContainer = document.getElementById('catalogContainer');
+            
+            let menuHtml = ''; 
+            let desktopHtml = '';
+            let catalogHtml = '';
+
+            menuData.forEach((macro, index) => {
+                // Color cíclico para el menú móvil (1 al 4)
+                let colorClass = `color-${(index % 4) + 1}`;
+
+                // Menú Lateral Móvil (Acordeón con colores)
+                menuHtml += `
+                    <div class="menu-accordion ${colorClass}">
+                        <button class="accordion-btn" onclick="toggleAccordion(this)">
+                            ${macro.macroTitle} <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                `;
+
+                // Menú Escritorio (Dropdown clickeable)
+                desktopHtml += `
+                    <div class="nav-item" onclick="toggleDesktopDropdown(this, event)">
+                        ${macro.macroTitle} <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; margin-left: 4px;"></i>
+                        <div class="dropdown-menu">
+                `;
+
+                macro.categories.forEach(sec => {
+                    // Enlaces en ambos menús
+                    menuHtml += `<a href="#${sec.id}" onclick="toggleSidebar()">${sec.title}</a>`;
+                    desktopHtml += `<a href="#${sec.id}">${sec.title}</a>`;
+
+                    // Si es categoría de solo consulta (Sin slider de productos)
+                    if(sec.consultOnly) {
+                        catalogHtml += `
+                            <section class="rosatel-section" id="${sec.id}">
+                                <div class="cat-banner-side">
+                                    <img src="${getImgUrl(sec.bannerImg)}" alt="${sec.title}" loading="lazy">
+                                </div>
+                                
+                                <div class="cat-slider-side" style="justify-content: center; flex-direction: column; text-align: center; padding: 20px; background: #fff; border-radius: 20px; border: 1px dashed #f0f0f0;">
+                                    <h3 style="font-family: var(--font-title); font-size: 1.8rem; margin-bottom: 10px; color: var(--text-main);">Descubre nuestras opciones en ${sec.title}</h3>
+                                    <p style="color: var(--text-light); margin-bottom: 25px; font-size: 1rem; max-width: 400px;">Contamos con una gran variedad. Escríbenos para enviarte nuestro catálogo completo y actualizado de esta categoría.</p>
+                                    <button class="btn-wsp-pedido" style="margin-top: 0; font-size: 1rem; padding: 12px 30px;" onclick="sendWsp('Hola Florería Silvia, deseo consultar por sus opciones en ${sec.title}.')">
+                                        <i class="fa-brands fa-whatsapp"></i> CONSULTAR POR WHATSAPP
+                                    </button>
+                                </div>
+                            </section>
+                        `;
+                    } 
+                    // Si es categoría normal (Con slider de productos)
+                    else {
+                        catalogHtml += `
+                            <section class="rosatel-section" id="${sec.id}">
+                                <div class="cat-banner-side">
+                                    <img src="${getImgUrl(sec.bannerImg)}" alt="${sec.title}" loading="lazy">
+                                    <div class="cat-banner-overlay">
+                                        <h2>${sec.title}</h2>
+                                    </div>
+                                </div>
+                                
+                                <div class="cat-slider-side">
+                                    <button class="nav-arrow left" onclick="scrollSlider('slider-${sec.id}', -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                                    
+                                    <div class="slider-track" id="slider-${sec.id}">
+                        `;
+
+                        sec.items.forEach(item => {
+                            allItemsFlat.push(item);
+                            catalogHtml += `
+                                <div class="prod-card">
+                                    <div class="prod-img-wrap">
+                                        <img src="${getImgUrl(item.img)}" alt="${item.name}" loading="lazy" onclick="openLightbox(this.src)">
+                                    </div>
+                                    <div class="prod-name">${item.name}</div>
+                                    <div class="prod-price">S/ ${item.price.toFixed(2)}</div>
+                                    <div class="comprar-txt" onclick="addDirect('${item.id}', this)">Comprar ahora</div>
+                                    <button class="btn-add" onclick="addDirect('${item.id}', this)">Añadir al carrito</button>
+                                </div>
+                            `;
+                        });
+
+                        catalogHtml += `
+                                    </div>
+                                    <button class="nav-arrow right" onclick="scrollSlider('slider-${sec.id}', 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </section>
+                        `;
+                    }
+                });
+
+                menuHtml += `</div></div>`;
+                desktopHtml += `</div></div>`;
+            });
+
+            // Enlaces adicionales móviles
+            menuHtml += `<a href="#arma-pedido" class="direct-link" onclick="toggleSidebar()">Arma tu pedido</a>`;
+            menuHtml += `<a href="#cuidados" class="direct-link" onclick="toggleSidebar()">Cuidados de plantas</a>`;
+            menuHtml += `<a href="#visitanos" class="direct-link" onclick="toggleSidebar()">Visítanos</a>`;
+
+            // Enlace adicional PC
+            desktopHtml += `<a href="#arma-pedido" class="nav-item" style="text-decoration:none;">Arma tu pedido</a>`;
+
+            menuContainer.innerHTML = menuHtml;
+            desktopNavContainer.innerHTML = desktopHtml;
+            catalogContainer.innerHTML = catalogHtml;
+        }
+
+        // --- FUNCIONES DE INTERFAZ ---
+        function toggleSidebar() { 
+            document.getElementById('sidebar').classList.toggle('active'); 
+            document.getElementById('sidebarOverlay').classList.toggle('active'); 
+        }
+
+        function toggleAccordion(btn) {
+            btn.classList.toggle("active");
+            var content = btn.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+
+        // Dropdown en PC por clic
+        function toggleDesktopDropdown(el, e) {
+            if(e.target.tagName !== 'A') {
+                e.preventDefault();
+                // Cerrar los demás primero
+                document.querySelectorAll('.nav-item').forEach(nav => {
+                    if (nav !== el) nav.classList.remove('active');
+                });
+                el.classList.toggle('active');
+            }
+        }
+        
+        // Cerrar menú PC al hacer clic afuera
+        document.addEventListener('click', (e) => {
+            if(!e.target.closest('.desktop-nav')) {
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+            }
+        });
+
+        // Slider Horizontal
+        function scrollSlider(id, direction) {
+            const slider = document.getElementById(id);
+            if (!slider) return;
+            const card = slider.querySelector('.prod-card');
+            if (!card) return;
+            const gap = window.innerWidth >= 992 ? 20 : 15;
+            const scrollAmount = card.offsetWidth + gap;
+            slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+
+        // Lightbox
+        function openLightbox(imgSrc) {
+            document.getElementById('lightboxImg').src = imgSrc;
+            document.getElementById('lightboxOverlay').style.display = 'flex';
+        }
+        function closeLightbox(e) {
+            if(e && e.target !== e.currentTarget && !e.target.classList.contains('lightbox-close')) return;
+            document.getElementById('lightboxOverlay').style.display = 'none';
+        }
+
+        // --- FUNCIONES DE CARRITO ---
+        function addDirect(itemId, element) {
+            const item = allItemsFlat.find(i => i.id === itemId);
+            if(!item) return;
+            const existing = cart.find(c => c.id === item.id);
+            if(existing) existing.qty += 1; 
+            else cart.push({...item, qty: 1});
+            
+            const btn = element.closest('.prod-card').querySelector('.btn-add');
+            if(btn) {
+                const originalText = btn.innerText;
+                btn.innerText = "¡Agregado!";
+                btn.style.background = "var(--accent)";
+                btn.style.color = "white";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = "#fff";
+                    btn.style.color = "var(--accent)";
+                }, 1500);
+            }
+            
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const count = cart.reduce((sum, i) => sum + i.qty, 0);
+            document.getElementById('cartCount').innerText = `${count} items`;
+            document.getElementById('cartTotal').innerText = `S/ ${total.toFixed(2)}`;
+            
+            const bar = document.getElementById('cartBar');
+            const wsp = document.getElementById('wspBtn');
+            if (count > 0) {
+                bar.classList.add('visible'); wsp.classList.add('shift-up');
+            } else {
+                bar.classList.remove('visible'); wsp.classList.remove('shift-up');
+            }
+        }
+
+        function checkoutCart() {
+            if(cart.length === 0) return;
+            let msg = "Hola Floreria Silvia, deseo pedir lo siguiente:\n\n";
+            let sub = 0;
+            cart.forEach(i => {
+                const rowTotal = i.price * i.qty;
+                msg += `- ${i.qty}x ${i.name} (S/ ${rowTotal.toFixed(2)})\n`;
+                sub += rowTotal;
+            });
+            msg += `\nTotal a pagar: S/ ${sub.toFixed(2)}`;
+            sendWsp(msg);
+        }
+
+        function sendWsp(msg) { window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank'); }
+
+        // Iniciar Web
+        renderSite();
+    </script>
+</body>
+</html>
