@@ -1270,6 +1270,417 @@
         .map-link:hover {
             color: #fff;
         }
+
+        /* --- 11. CART SIDEBAR LATERAL --- */
+        .cart-sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(2px);
+        }
+
+        .cart-sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background: #FAFAFA;
+            z-index: 3001;
+            transform: translateX(100%);
+            transition: transform 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-sidebar.active {
+            transform: translateX(0);
+        }
+
+        .cart-sidebar-header {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-sidebar-title {
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-sidebar-title i {
+            color: var(--accent-dark);
+        }
+
+        .cart-close-btn {
+            font-size: 1.5rem;
+            color: #aaa;
+            cursor: pointer;
+            line-height: 1;
+            transition: 0.2s;
+        }
+
+        .cart-close-btn:hover {
+            color: var(--accent);
+        }
+
+        .cart-items-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .cart-item-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            border: 1px solid #eee;
+            position: relative;
+        }
+
+        .cart-item-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-family: var(--font-title);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .cart-item-price {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #8A204C;
+            margin-bottom: 8px;
+        }
+
+        .cart-qty-ctrl {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f5f5f5;
+            border-radius: 50px;
+            padding: 4px 10px;
+            width: fit-content;
+        }
+
+        .cart-qty-btn {
+            font-size: 1.1rem;
+            color: #555;
+            cursor: pointer;
+            padding: 0 5px;
+            user-select: none;
+        }
+
+        .cart-qty-btn:hover {
+            color: var(--accent);
+        }
+
+        .cart-qty-val {
+            font-size: 0.85rem;
+            font-weight: 700;
+            width: 20px;
+            text-align: center;
+        }
+
+        .cart-item-del {
+            color: #ccc;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1.1rem;
+            position: absolute;
+            right: 15px;
+            bottom: 15px;
+        }
+
+        .cart-item-del:hover {
+            color: var(--accent);
+        }
+
+        .cart-sidebar-footer {
+            background: #fff;
+            padding: 20px 25px;
+            border-top: 1px solid #eee;
+        }
+
+        .cart-subtotal-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .cart-subtotal-row span {
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        .cart-subtotal-val {
+            font-weight: 800;
+            font-size: 1.3rem !important;
+            color: #8A204C !important;
+        }
+
+        .btn-checkout-final {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            background: #8A204C;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-checkout-final:hover {
+            background: #6b1739;
+        }
+
+        .btn-empty-cart {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            background: #fff;
+            color: #777;
+            font-weight: 700;
+            font-size: 0.8rem;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-empty-cart:hover {
+            background: #f9f9f9;
+            color: var(--text-main);
+            border-color: #bbb;
+        }
+
+        /* --- 12. CHECKOUT MODAL --- */
+        .checkout-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 4000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(3px);
+            padding: 20px;
+        }
+
+        .checkout-modal {
+            background: #fff;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            max-height: 95vh;
+        }
+
+        .checkout-modal-header {
+            padding: 25px 30px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .checkout-modal-header h2 {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            color: #8A204C;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .checkout-close-btn {
+            font-size: 1.6rem;
+            color: #999;
+            cursor: pointer;
+            line-height: 1;
+            transition: 0.2s;
+            font-family: sans-serif;
+        }
+
+        .checkout-close-btn:hover {
+            color: var(--accent);
+        }
+
+        .checkout-modal-body {
+            padding: 25px 30px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .form-group,
+        .form-group-full {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label,
+        .form-group-full label {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: #222;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group-full input,
+        .form-group-full textarea {
+            background: #FAF8F8;
+            border: 1px solid #FAF8F8;
+            border-radius: 6px;
+            padding: 14px 15px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--text-main);
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-group input::placeholder,
+        .form-group-full input::placeholder,
+        .form-group-full textarea::placeholder {
+            color: #9E9E9E;
+        }
+
+        .form-group input:focus,
+        .form-group-full input:focus,
+        .form-group-full textarea:focus {
+            border-color: #8A204C;
+            background: #fff;
+        }
+
+        .form-group-full textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .checkout-modal-footer {
+            padding: 25px 30px;
+            border-top: 1px solid #eaeaea;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+
+        .btn-cancel-checkout {
+            padding: 12px 25px;
+            border-radius: 50px;
+            background: #fff;
+            color: #111;
+            font-weight: 800;
+            font-size: 0.9rem;
+            border: 1.5px solid #111;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-cancel-checkout:hover {
+            background: #f5f5f5;
+        }
+
+        .btn-confirm-checkout {
+            padding: 12px 25px;
+            border-radius: 50px;
+            background: #8A204C;
+            color: white;
+            font-weight: 800;
+            font-size: 0.9rem;
+            border: 1.5px solid #8A204C;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-confirm-checkout:hover {
+            background: #6b1739;
+            border-color: #6b1739;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .checkout-modal-footer {
+                flex-direction: column-reverse;
+            }
+
+            .btn-cancel-checkout,
+            .btn-confirm-checkout {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 
@@ -1424,12 +1835,78 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
+    <!-- CART SIDEBAR -->
+    <div class="cart-sidebar-overlay" id="cartSidebarOverlay" onclick="toggleCartSidebar()"></div>
+    <div class="cart-sidebar" id="cartSidebarPanel">
+        <div class="cart-sidebar-header">
+            <div class="cart-sidebar-title"><i class="fa-solid fa-cart-shopping"></i> Tu Carrito</div>
+            <div class="cart-close-btn" onclick="toggleCartSidebar()">×</div>
+        </div>
+        <div class="cart-items-container" id="cartSidebarItems">
+            <!-- Items del carrito -->
+        </div>
+        <div class="cart-sidebar-footer">
+            <div class="cart-subtotal-row">
+                <span>Subtotal</span>
+                <span class="cart-subtotal-val" id="cartSidebarTotal">S/ 0.00</span>
+            </div>
+            <button class="btn-checkout-final" onclick="openCheckoutModal()">FINALIZAR COMPRA</button>
+            <button class="btn-empty-cart" onclick="emptyCart()">VACIAR CARRITO</button>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div class="checkout-modal-overlay" id="checkoutModalOverlay" onclick="closeCheckoutModal(event)">
+        <div class="checkout-modal">
+            <div class="checkout-modal-header">
+                <h2>Completar pedido</h2>
+                <div class="checkout-close-btn" onclick="closeCheckoutModal(null)">×</div>
+            </div>
+            <div class="checkout-modal-body">
+                <div class="form-group-full">
+                    <label>NOMBRE COMPLETO</label>
+                    <input type="text" id="orderName" placeholder="Ej. Juan Perez">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>TELÉFONO</label>
+                        <input type="text" id="orderPhone" placeholder="Ej. 987654321">
+                    </div>
+                    <div class="form-group">
+                        <label>FECHA DE ENTREGA</label>
+                        <input type="date" id="orderDate">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>DISTRITO</label>
+                        <input type="text" id="orderDistrict" placeholder="Ej. Miraflores">
+                    </div>
+                    <div class="form-group">
+                        <label>DIRECCIÓN</label>
+                        <input type="text" id="orderAddress" placeholder="Avenida, Calle, Nro.">
+                    </div>
+                </div>
+                <div class="form-group-full">
+                    <label>DEDICATORIA (OPCIONAL)</label>
+                    <textarea id="orderMessage"
+                        placeholder="Escribe un mensaje especial o indicaciones para la entrega..." rows="3"></textarea>
+                </div>
+            </div>
+            <div class="checkout-modal-footer">
+                <button class="btn-cancel-checkout" onclick="closeCheckoutModal(null)">CANCELAR</button>
+                <button class="btn-confirm-checkout" onclick="confirmOrderWsp()"><i class="fa-brands fa-whatsapp"></i>
+                    CONFIRMAR Y ABRIR WHATSAPP</button>
+            </div>
+        </div>
+    </div>
+
     <div class="cart-bar" id="cartBar">
         <div>
             <div style="font-size: 0.85rem; color:var(--text-light); font-weight: 700;" id="cartCount">0 items</div>
             <div style="font-size: 1.3rem; font-weight: 800; color:var(--text-main);" id="cartTotal">S/ 0.00</div>
         </div>
-        <button class="btn-pedir-cart" onclick="checkoutCart()">PEDIR AHORA</button>
+        <button class="btn-pedir-cart" onclick="toggleCartSidebar()">PEDIR AHORA</button>
     </div>
 
     <script>
@@ -1547,11 +2024,21 @@
                     },
                     {
                         id: 'cat-globos', title: 'Globos', bannerImg: '1H1Uz9VjHtLZPn5sWguQmIvUFvTFQw0zn',
-                        items: [], consultOnly: true
+                        items: [
+                            { id: 'gl1', name: 'Globo Metálico Cumpleaños', price: 15.00, img: 'https://images.unsplash.com/photo-1530103862676-de8c9de0f8d9?w=400&q=80' },
+                            { id: 'gl2', name: 'Burbuja Personalizada', price: 35.00, img: 'https://images.unsplash.com/photo-1522273400909-fd1a8f77637e?w=400&q=80' },
+                            { id: 'gl3', name: 'Pack Globos Corazón', price: 20.00, img: 'https://images.unsplash.com/photo-1506806732259-39c2d0f68daf?w=400&q=80' },
+                            { id: 'gl4', name: 'Globo Metálico Amor', price: 18.00, img: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&q=80' }
+                        ]
                     },
                     {
                         id: 'cat-extras', title: 'Extras', bannerImg: '18V7I7XpxXVMyv0QcQlARy52NLXqbXz3P',
-                        items: [], consultOnly: true
+                        items: [
+                            { id: 'ex1', name: 'Chocolates Surtidos', price: 30.00, img: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=400&q=80' },
+                            { id: 'ex2', name: 'Caja Bombones x8', price: 25.00, img: 'https://images.unsplash.com/photo-1511914265872-c40672604a80?w=400&q=80' },
+                            { id: 'ex3', name: 'Topper Feliz Día', price: 15.00, img: 'https://images.unsplash.com/photo-1548843254-24eed50359aa?w=400&q=80' },
+                            { id: 'ex4', name: 'Vino Tinto de Ocasión', price: 45.00, img: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=400&q=80' }
+                        ]
                     }
                 ]
             },
@@ -1569,11 +2056,21 @@
                     },
                     {
                         id: 'cat-plantas', title: 'Plantas Decorativas', bannerImg: '1kQfEx6fypxu5BQSDZiOu0mI_acj0N8_G',
-                        items: [], consultOnly: true
+                        items: [
+                            { id: 'pt1', name: 'Suculenta en Maceta', price: 25.00, img: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&q=80' },
+                            { id: 'pt2', name: 'Helecho Pequeño', price: 35.00, img: 'https://images.unsplash.com/photo-1453904300235-0f2f60b15b5d?w=400&q=80' },
+                            { id: 'pt3', name: 'Bonsai Ficus', price: 45.00, img: 'https://images.unsplash.com/photo-1416879598555-aca725dc39ab?w=400&q=80' },
+                            { id: 'pt4', name: 'Cactus Decorativo', price: 20.00, img: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=400&q=80' }
+                        ]
                     },
                     {
                         id: 'cat-semillas', title: 'Semillas', bannerImg: '1VkLp8Ht3hz0u_2_pdBzg_By6FM3IiL4P',
-                        items: [], consultOnly: true
+                        items: [
+                            { id: 'sm1', name: 'Semillas de Girasol', price: 10.00, img: 'https://images.unsplash.com/photo-1587049352847-4d4b126a11fe?w=400&q=80' },
+                            { id: 'sm2', name: 'Semillas de Margarita', price: 10.00, img: 'https://images.unsplash.com/photo-1596547609652-9cb5d8d76921?w=400&q=80' },
+                            { id: 'sm3', name: 'Pack Huerto Casero', price: 25.00, img: 'https://images.unsplash.com/photo-1530836369250-ef71a3f55ce8?w=400&q=80' },
+                            { id: 'sm4', name: 'Semillas de Tulipán', price: 15.00, img: 'https://images.unsplash.com/photo-1510462006323-add7ff2439d5?w=400&q=80' }
+                        ]
                     }
                 ]
             }
@@ -1613,63 +2110,43 @@
                     menuHtml += `<a href="#${sec.id}" onclick="toggleSidebar()">${sec.title}</a>`;
                     desktopHtml += `<a href="#${sec.id}">${sec.title}</a>`;
 
-                    // Si es categoría de solo consulta (Sin slider de productos)
-                    if (sec.consultOnly) {
-                        catalogHtml += `
-                            <section class="rosatel-section" id="${sec.id}">
-                                <div class="cat-banner-side">
-                                    <img src="${getImgUrl(sec.bannerImg)}" alt="${sec.title}" loading="lazy">
+                    // Renderizado estándar de productos
+                    catalogHtml += `
+                        <section class="rosatel-section" id="${sec.id}">
+                            <div class="cat-banner-side">
+                                <img src="${getImgUrl(sec.bannerImg)}" alt="${sec.title}" loading="lazy">
+                                <div class="cat-banner-overlay">
+                                    <h2>${sec.title}</h2>
                                 </div>
+                            </div>
+                            
+                            <div class="cat-slider-side">
+                                <button class="nav-arrow left" onclick="scrollSlider('slider-${sec.id}', -1)"><i class="fa-solid fa-chevron-left"></i></button>
                                 
-                                <div class="cat-slider-side" style="justify-content: center; flex-direction: column; text-align: center; padding: 20px; background: #fff; border-radius: 20px; border: 1px dashed #f0f0f0;">
-                                    <h3 style="font-family: var(--font-title); font-size: 1.8rem; margin-bottom: 10px; color: var(--text-main);">Descubre nuestras opciones en ${sec.title}</h3>
-                                    <p style="color: var(--text-light); margin-bottom: 25px; font-size: 1rem; max-width: 400px;">Contamos con una gran variedad. Escríbenos para enviarte nuestro catálogo completo y actualizado de esta categoría.</p>
-                                    <button class="btn-wsp-pedido" style="margin-top: 0; font-size: 1rem; padding: 12px 30px;" onclick="sendWsp('Hola Florería Silvia, deseo consultar por sus opciones en ${sec.title}.')">
-                                        <i class="fa-brands fa-whatsapp"></i> CONSULTAR POR WHATSAPP
-                                    </button>
-                                </div>
-                            </section>
-                        `;
-                    }
-                    // Si es categoría normal (Con slider de productos)
-                    else {
-                        catalogHtml += `
-                            <section class="rosatel-section" id="${sec.id}">
-                                <div class="cat-banner-side">
-                                    <img src="${getImgUrl(sec.bannerImg)}" alt="${sec.title}" loading="lazy">
-                                    <div class="cat-banner-overlay">
-                                        <h2>${sec.title}</h2>
-                                    </div>
-                                </div>
-                                
-                                <div class="cat-slider-side">
-                                    <button class="nav-arrow left" onclick="scrollSlider('slider-${sec.id}', -1)"><i class="fa-solid fa-chevron-left"></i></button>
-                                    
-                                    <div class="slider-track" id="slider-${sec.id}">
-                        `;
+                                <div class="slider-track" id="slider-${sec.id}">
+                    `;
 
-                        sec.items.forEach(item => {
-                            allItemsFlat.push(item);
-                            catalogHtml += `
-                                <div class="prod-card">
-                                    <div class="prod-img-wrap">
-                                        <img src="${getImgUrl(item.img)}" alt="${item.name}" loading="lazy" onclick="openLightbox(this.src)">
-                                    </div>
-                                    <div class="prod-name">${item.name}</div>
-                                    <div class="prod-price">S/ ${item.price.toFixed(2)}</div>
-                                    <div class="comprar-txt" onclick="addDirect('${item.id}', this)">Comprar ahora</div>
-                                    <button class="btn-add" onclick="addDirect('${item.id}', this)">Añadir al carrito</button>
-                                </div>
-                            `;
-                        });
-
+                    sec.items.forEach(item => {
+                        allItemsFlat.push(item);
                         catalogHtml += `
-                                    </div>
-                                    <button class="nav-arrow right" onclick="scrollSlider('slider-${sec.id}', 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                            <div class="prod-card">
+                                <div class="prod-img-wrap">
+                                    <img src="${getImgUrl(item.img)}" alt="${item.name}" loading="lazy" onclick="openLightbox(this.src)">
                                 </div>
-                            </section>
+                                <div class="prod-name">${item.name}</div>
+                                <div class="prod-price">S/ ${item.price.toFixed(2)}</div>
+                                <div class="comprar-txt" onclick="addDirect('${item.id}', this)">Comprar ahora</div>
+                                <button class="btn-add" onclick="addDirect('${item.id}', this)">Añadir al carrito</button>
+                            </div>
                         `;
-                    }
+                    });
+
+                    catalogHtml += `
+                                </div>
+                                <button class="nav-arrow right" onclick="scrollSlider('slider-${sec.id}', 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                        </section>
+                    `;
                 });
 
                 menuHtml += `</div></div>`;
@@ -1773,7 +2250,7 @@
             const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
             const count = cart.reduce((sum, i) => sum + i.qty, 0);
             document.getElementById('cartCount').innerText = `${count} items`;
-            document.getElementById('cartTotal').innerText = `S/ ${total.toFixed(2)}`;
+            document.getElementById('cartTotal').innerText = `S / ${total.toFixed(2)} `;
 
             const bar = document.getElementById('cartBar');
             const wsp = document.getElementById('wspBtn');
@@ -1781,20 +2258,110 @@
                 bar.classList.add('visible'); wsp.classList.add('shift-up');
             } else {
                 bar.classList.remove('visible'); wsp.classList.remove('shift-up');
+                document.getElementById('cartSidebarPanel').classList.remove('active');
+                document.getElementById('cartSidebarOverlay').classList.remove('active');
             }
+
+            // Render sidebar items
+            const container = document.getElementById('cartSidebarItems');
+            document.getElementById('cartSidebarTotal').innerText = `S / ${total.toFixed(2)} `;
+            let html = '';
+            cart.forEach(item => {
+                html += `
+                        < div class="cart-item-card" >
+                            <img src="${getImgUrl(item.img)}" alt="${item.name}" class="cart-item-img">
+                                <div class="cart-item-info">
+                                    <div class="cart-item-title">${item.name}</div>
+                                    <div class="cart-item-price">S/ ${item.price.toFixed(2)}</div>
+                                    <div class="cart-qty-ctrl">
+                                        <span class="cart-qty-btn" onclick="updateCartItemQty('${item.id}', -1)">-</span>
+                                        <span class="cart-qty-val">${item.qty}</span>
+                                        <span class="cart-qty-btn" onclick="updateCartItemQty('${item.id}', 1)">+</span>
+                                    </div>
+                                </div>
+                                <i class="fa-regular fa-trash-can cart-item-del" onclick="removeCartItem('${item.id}')"></i>
+                            </div>
+                    `;
+            });
+            container.innerHTML = html;
         }
 
-        function checkoutCart() {
+        function toggleCartSidebar() {
+            document.getElementById('cartSidebarPanel').classList.toggle('active');
+            document.getElementById('cartSidebarOverlay').classList.toggle('active');
+        }
+
+        function openCheckoutModal() {
             if (cart.length === 0) return;
-            let msg = "Hola Floreria Silvia, deseo pedir lo siguiente:\n\n";
+            // Cerrar sidebar del carrito
+            document.getElementById('cartSidebarPanel').classList.remove('active');
+            document.getElementById('cartSidebarOverlay').classList.remove('active');
+
+            // Abrir modal
+            document.getElementById('checkoutModalOverlay').style.display = 'flex';
+        }
+
+        function closeCheckoutModal(e) {
+            if (e && e.target !== e.currentTarget && !e.target.classList.contains('checkout-close-btn') && !e.target.classList.contains('btn-cancel-checkout')) return;
+            document.getElementById('checkoutModalOverlay').style.display = 'none';
+        }
+
+        function emptyCart() {
+            cart = [];
+            updateCartUI();
+        }
+
+        function updateCartItemQty(id, delta) {
+            const item = cart.find(c => c.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(c => c.id !== id);
+            }
+            updateCartUI();
+        }
+
+        function removeCartItem(id) {
+            cart = cart.filter(c => c.id !== id);
+            updateCartUI();
+        }
+
+        function confirmOrderWsp() {
+            if (cart.length === 0) return;
+
+            const name = document.getElementById('orderName').value.trim();
+            const phone = document.getElementById('orderPhone').value.trim();
+            const date = document.getElementById('orderDate').value.trim();
+            const district = document.getElementById('orderDistrict').value.trim();
+            const address = document.getElementById('orderAddress').value.trim();
+            const message = document.getElementById('orderMessage').value.trim();
+
+            if (!name || !phone || !date || !district || !address) {
+                alert("Por favor, completa los datos obligatorios para el envío (nombre, teléfono, fecha, distrito y dirección).");
+                return;
+            }
+
+            let msg = "Hola Floreria Silvia, deseo realizar el siguiente pedido:\n\n";
+            msg += `* DATOS DEL CLIENTE:*\n`;
+            msg += `- Nombre: ${name} \n`;
+            msg += `- Teléfono: ${phone} \n`;
+            msg += `- Fecha de Entrega: ${date} \n`;
+            msg += `- Distrito: ${district} \n`;
+            msg += `- Dirección: ${address} \n`;
+            if (message) msg += `- Dedicatoria / Indicaciones: ${message} \n`;
+
+            msg += `\n * DETALLE DEL PEDIDO:*\n`;
             let sub = 0;
             cart.forEach(i => {
                 const rowTotal = i.price * i.qty;
-                msg += `- ${i.qty}x ${i.name} (S/ ${rowTotal.toFixed(2)})\n`;
+                msg += `- ${i.qty}x ${i.name} (S / ${rowTotal.toFixed(2)}) \n`;
                 sub += rowTotal;
             });
-            msg += `\nTotal a pagar: S/ ${sub.toFixed(2)}`;
+            msg += `\n * Total a pagar: S / ${sub.toFixed(2)}* `;
+
             sendWsp(msg);
+            closeCheckoutModal(null);
+            emptyCart();
         }
 
         function sendWsp(msg) { window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank'); }
