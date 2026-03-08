@@ -1399,7 +1399,876 @@
             return `https://wsrv.nl/?url=https://drive.google.com/uc?id=${imgStr}&w=600`;
         }
         // --- ESTRUCTURA DEL MENÚ Y CATÁLOGO ---
-        const menuData = [{ macroTitle: 'Flores Principales', categories: [{ id: 'cat-rosas', title: 'Rosas', bannerImg: '1cpygTwTipo7LVh_e8rVXDl59jclUc0oh', items: [{ id: 'r1', name: 'Balde Rosas Rojas', price: 150.00, img: '1cpygTwTipo7LVh_e8rVXDl59jclUc0oh' }, { id: 'r2', name: 'Balde Rosas Rosadas', price: 150.00, img: '1kJiv4UlInHYYR0C8NZd_TdI-r583OjYB' }, { id: 'r3', name: 'Balde Rosas Amarillas y Blancas', price: 150.00, img: '1Tm7iw_u75jpwCL-VQIy3NYcRIEUJ94Fn' }, { id: 'r4', name: 'Ramo Rosas y Lluvia', price: 80.00, img: '19ECgXq1X6tnbW9EIwgNq7JXXaxoi0Zt-' }, { id: 'r5', name: 'Ramo Rosas Amarillas y Lilas', price: 85.00, img: '1uW0EpRuqwIxnA8S_6Rqzi4cJD18jFFeX' }, { id: 'r6', name: 'Ramo Rosas y Flores Lilas', price: 85.00, img: '1ZYsq_mi32oeLtZOKVoO1dtTsQyW7bCoQ' }] }, { id: 'cat-girasoles', title: 'Girasoles', bannerImg: '15wZt35uBTm7FkDrGw7NnmHJwMjJgyU1B', items: [{ id: 'g1', name: 'Balde de Girasoles', price: 120.00, img: '15wZt35uBTm7FkDrGw7NnmHJwMjJgyU1B' }, { id: 'g2', name: 'Ramo 6 Girasoles', price: 85.00, img: '1LLuo5UKdkxjMuCVNqpEZ41eq7V7M3Pn9' }, { id: 'g3', name: 'Ramo 4 Girasoles y Rosas', price: 105.00, img: '1mAW5MFXsliomPKcmNiU3HcxpDoCNFC1E' }, { id: 'g4', name: 'Ramo 2 Girasoles y Globo', price: 55.00, img: '1fVUvkr5FWyRkSpMC6NGiBAx5TcBcGTZ2' }, { id: 'g5', name: '3 Girasoles y Rosas', price: 95.00, img: '1GsOVRIpO98B-LF-t2dqC3UdLS7wTf_nM' }] }, { id: 'cat-tulipanes', title: 'Tulipanes', bannerImg: '1RGh5LgoT0MOaoXJLqgtAYgYR1Cj_JNoT', items: [{ id: 't1', name: 'Tulipanes Rojos Elegantes', price: 95.00, img: '1mG4E833M45n7d87sEgpJ2NlVrxhhjfJ-' }, { id: 't2', name: 'Tulipanes Amarillos', price: 95.00, img: 'https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=400&q=80' }, { id: 't3', name: 'Mix de Tulipanes Primavera', price: 110.00, img: '1KBrj0pzLxShvvs9qmC8FDtpOKPmQpOy8' }, { id: 't4', name: 'Caja de 6 Tulipanes', price: 125.00, img: '1KBrro4nuTLI2EfBJ1w6LftGW59yHkRse' }] }, { id: 'cat-astromelias', title: 'Astromelias', bannerImg: '1Xgtuj2dhCRjQKGgtHKBrsViPozpqHGte', items: [{ id: 'as1', name: 'Astromelias Rosadas', price: 50.00, img: '1Xgtuj2dhCRjQKGgtHKBrsViPozpqHGte' }, { id: 'as2', name: 'Astromelias Vibrantes', price: 55.00, img: '1DDCOf_S9iob208Q7jH8WxzMZFPiiePu1' }, { id: 'as3', name: 'Mix Astromelias y Margaritas', price: 65.00, img: '1_Vvz0VRZWivZnwibaFjalSSQUTFMSVsS' }, { id: 'as4', name: 'Ramo de Astromelias Especial', price: 70.00, img: '141pe8ST3BWjMags2S14jSN2GRKqQ5RCK' }] }, { id: 'cat-claveles', title: 'Claveles', bannerImg: '1P95_NYTg6t3AG_n5Zv8dLQSkxIqtlEFm', items: [{ id: 'cl1', name: 'Claveles Tradicionales', price: 45.00, img: '1mqq0lJK-LgNQDi-hJMxbUqtiybYOp5ia' }, { id: 'cl2', name: 'Claveles Blancos Puros', price: 45.00, img: '1nWOuocAOdFJ7rzwE7xpduIbX54PL3WHg' }, { id: 'cl3', name: 'Mix de Claveles Coloridos', price: 55.00, img: 'https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=400&q=80' }, { id: 'cl4', name: 'Claveles en Balde', price: 65.00, img: '1qQGT_C_4PuWo9X791TccWqpNKIehM_zI' }] }, { id: 'cat-eternas', title: 'Flores Eternas', bannerImg: '1r5YlC_PLw0mWpwIET0eBVHbMfJ_2HvhB', items: [{ id: 'et1', name: 'Rosas y Mariposas', price: 65.00, img: '1RntTxM5__stBC_WNU3S9_pidPJbndsfd' }, { id: 'et2', name: 'Rosas Hello Kitty Cumpleaños', price: 75.00, img: '1Ggxk6aLhmGONsPB6zEVomZrOB_oRRk2y' }, { id: 'et3', name: 'Flores Lilas Limpiapipa', price: 45.00, img: '1FNEi4lM8tzdiAE3F9pYgmNjmcp5kMwEA' }, { id: 'et4', name: 'Flores Azules Limpiapipa', price: 45.00, img: '15Iskbw3rFBdr9Auz6Rt3tLvZU02hrFIa' }, { id: 'et5', name: 'Rosas Amarillas Osito', price: 55.00, img: '1INdWcvdVxJWevu8cIeBlw61dS-Y4MXvj' }, { id: 'et6', name: 'Rosa y Orquídea Limpiapipa', price: 50.00, img: '1MAgKRa97GwAEWoCBgWkp_73SbkzSyI-0' }] }] }, { macroTitle: 'Arreglos y Eventos', categories: [{ id: 'cat-eventos', title: 'Eventos', bannerImg: '1SAbIm7MoNNgn8in17pklvZQ-SKOU77Yg', items: [{ id: 'ev1', name: 'Rosas y Girasol Premium', price: 85.00, img: '1acovOFVcub7uUic9VmUtBLpvQZMXixOK' }, { id: 'ev2', name: 'Arreglo de Orquídeas y Rosas', price: 110.00, img: '1-sOMv6YM7kE99C8ZguLdeqIIV9alnlvI' }, { id: 'ev3', name: 'Ramo Rosas Blancas y Lilas', price: 90.00, img: '104Qri6U5-UU_UjkvKDhAdOqVjYQExIfy' }, { id: 'ev4', name: 'Arreglo Orquídea Elegante', price: 115.00, img: '1_Tbdcf3o4Kn367Sop6oAWDXoYEoQ17Vw' }] }, { id: 'cat-adornos', title: 'Adornos de Mesa', bannerImg: '12aY6lKDf6gjwtRdJr87VZjrVwo7sLkgz', items: [{ id: 'ad1', name: 'Centro de Mesa Floral', price: 65.00, img: '1TYETsidwkf48tpg91lfm5SjphiHJiUJg' }, { id: 'ad2', name: 'Adorno de Margaritas Blancas', price: 45.00, img: '1BGBpO2uP8SEvdq-WKOnVzaW4nlTcOaJw' }, { id: 'ad3', name: 'Hortensias Moradas de Mesa', price: 60.00, img: '1Kqyz0llJ0T1Ug01hG1QqsMRRRYRK5Pqo' }, { id: 'ad4', name: 'Centro de Gladiolos Naranjas', price: 55.00, img: '1LVfI2pP6SZ3VPdz_IWeHmXntY8g4fQm5' }] }] }, { macroTitle: 'Regalos y Complementos', categories: [{ id: 'cat-peluches', title: 'Peluches', bannerImg: '1f2gtdRrCZTGvUMRJHUDcsBd2C4ipxrvr', items: [{ id: 'pl1', name: 'Peluche Lotso Rosa', price: 45.00, img: '1f2gtdRrCZTGvUMRJHUDcsBd2C4ipxrvr' }, { id: 'pl2', name: 'Peluche Elefante Rosa', price: 55.00, img: '1WhIbdIL2CLrORX9nI4pVvEBqRrg9OXEh' }, { id: 'pl3', name: 'Peluche Hello Kitty', price: 50.00, img: '10HQsyG7AX9E-rYVO-ryWBv2F-d2YA5B2' }, { id: 'pl4', name: 'Peluche Stich Rosa', price: 60.00, img: '1LXN2pfzaNRdA_7aYQPxa3XZeys9UAcuZ' }, { id: 'pl5', name: 'Peluche Snoopy', price: 45.00, img: '16VgEFDHc0Eu-WxQUSTQoexWCaniGlZ4t' }] }, { id: 'cat-globos', title: 'Globos', bannerImg: '1H1Uz9VjHtLZPn5sWguQmIvUFvTFQw0zn', items: [{ id: 'gl1', name: 'Globo Metálico Cumpleaños', price: 15.00, img: 'https://images.unsplash.com/photo-1530103862676-de8c9de0f8d9?w=400&q=80' }, { id: 'gl2', name: 'Burbuja Personalizada', price: 35.00, img: 'https://images.unsplash.com/photo-1522273400909-fd1a8f77637e?w=400&q=80' }, { id: 'gl3', name: 'Pack Globos Corazón', price: 20.00, img: 'https://images.unsplash.com/photo-1506806732259-39c2d0f68daf?w=400&q=80' }, { id: 'gl4', name: 'Globo Metálico Amor', price: 18.00, img: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&q=80' }] }, { id: 'cat-extras', title: 'Extras', bannerImg: '18V7I7XpxXVMyv0QcQlARy52NLXqbXz3P', items: [{ id: 'ex1', name: 'Chocolates Surtidos', price: 30.00, img: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=400&q=80' }, { id: 'ex2', name: 'Caja Bombones x8', price: 25.00, img: 'https://images.unsplash.com/photo-1511914265872-c40672604a80?w=400&q=80' }, { id: 'ex3', name: 'Topper Feliz Día', price: 15.00, img: 'https://images.unsplash.com/photo-1548843254-24eed50359aa?w=400&q=80' }, { id: 'ex4', name: 'Vino Tinto de Ocasión', price: 45.00, img: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=400&q=80' }] }] }, { macroTitle: 'Jardín y Hogar', categories: [{ id: 'cat-maceteros', title: 'Maceteros', bannerImg: '1cnYTzaPWsRbBdrSYeYqBuL3il2wn9qBn', items: [{ id: 'mc1', name: 'Mis Maceteros Especiales', price: 35.00, img: '1cnYTzaPWsRbBdrSYeYqBuL3il2wn9qBn' }, { id: 'mc2', name: 'Elefantito de Cerámica', price: 45.00, img: '1431fWnoeGEtZZMKKIJl9RQyCN7_hTmgD' }, { id: 'mc3', name: 'Cisne de Cerámica', price: 50.00, img: '1FMlZ6xL9-JFjjPq4VtsBId8RDRiiFD2v' }, { id: 'mc4', name: 'Macetero Vintage', price: 40.00, img: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&q=80' }] }, { id: 'cat-plantas', title: 'Plantas Decorativas', bannerImg: '1kQfEx6fypxu5BQSDZiOu0mI_acj0N8_G', items: [{ id: 'pt1', name: 'Suculenta en Maceta', price: 25.00, img: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&q=80' }, { id: 'pt2', name: 'Helecho Pequeño', price: 35.00, img: 'https://images.unsplash.com/photo-1453904300235-0f2f60b15b5d?w=400&q=80' }, { id: 'pt3', name: 'Bonsai Ficus', price: 45.00, img: 'https://images.unsplash.com/photo-1416879598555-aca725dc39ab?w=400&q=80' }, { id: 'pt4', name: 'Cactus Decorativo', price: 20.00, img: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=400&q=80' }] }, { id: 'cat-semillas', title: 'Semillas', bannerImg: '1VkLp8Ht3hz0u_2_pdBzg_By6FM3IiL4P', items: [{ id: 'sm1', name: 'Semillas de Girasol', price: 10.00, img: 'https://images.unsplash.com/photo-1587049352847-4d4b126a11fe?w=400&q=80' }, { id: 'sm2', name: 'Semillas de Margarita', price: 10.00, img: 'https://images.unsplash.com/photo-1596547609652-9cb5d8d76921?w=400&q=80' }, { id: 'sm3', name: 'Pack Huerto Casero', price: 25.00, img: 'https://images.unsplash.com/photo-1530836369250-ef71a3f55ce8?w=400&q=80' }, { id: 'sm4', name: 'Semillas de Tulipán', price: 15.00, img: 'https://images.unsplash.com/photo-1510462006323-add7ff2439d5?w=400&q=80' }] }] }];
+        const menuData = [
+    {
+        macroTitle: "Flores Principales",
+        categories: [
+            {
+                id: "cat-rosas",
+                title: "Rosas",
+                bannerImg: "1cpygTwTipo7LVh_e8rVXDl59jclUc0oh",
+                items: [
+                    {
+                        id: "r1",
+                        name: "Balde Rosas Rojas",
+                        price: 150,
+                        img: "1cpygTwTipo7LVh_e8rVXDl59jclUc0oh"
+                    },
+                    {
+                        id: "r2",
+                        name: "Balde Rosas Rosadas",
+                        price: 150,
+                        img: "1kJiv4UlInHYYR0C8NZd_TdI-r583OjYB"
+                    },
+                    {
+                        id: "r3",
+                        name: "Balde Rosas Amarillas y Blancas",
+                        price: 150,
+                        img: "1Tm7iw_u75jpwCL-VQIy3NYcRIEUJ94Fn"
+                    },
+                    {
+                        id: "r4",
+                        name: "Ramo Rosas y Lluvia",
+                        price: 80,
+                        img: "19ECgXq1X6tnbW9EIwgNq7JXXaxoi0Zt-"
+                    },
+                    {
+                        id: "r5",
+                        name: "Ramo Rosas Amarillas y Lilas",
+                        price: 85,
+                        img: "1uW0EpRuqwIxnA8S_6Rqzi4cJD18jFFeX"
+                    },
+                    {
+                        id: "r6",
+                        name: "Ramo Rosas y Flores Lilas",
+                        price: 85,
+                        img: "1ZYsq_mi32oeLtZOKVoO1dtTsQyW7bCoQ"
+                    },
+                    {
+                        id: "new_1026",
+                        name: "Ramo elegante de rosas rojas y blancas",
+                        price: 45,
+                        img: "1opGZWkIDhMN1nfSsMOJCOjeR6561pCax"
+                    },
+                    {
+                        id: "new_1027",
+                        name: "Ramo de rosas blancas en cubo metálico",
+                        price: 45,
+                        img: "1YeW3-ah6dcs-_Ab2IqVqtV22pcsw8-QV"
+                    },
+                    {
+                        id: "new_1028",
+                        name: "Ramo de rosas melocotón y blancas",
+                        price: 45,
+                        img: "1K312u4EyVaNB_D8DT35YvIqTRJCfY8Wf"
+                    },
+                    {
+                        id: "new_1029",
+                        name: "Rosas rosadas y lavanda en cubo rústico",
+                        price: 45,
+                        img: "1mwzAXOTeVZ-9VfJ4h3bSPSk2nTuR6wQY"
+                    }
+                ]
+            },
+            {
+                id: "cat-girasoles",
+                title: "Girasoles",
+                bannerImg: "15wZt35uBTm7FkDrGw7NnmHJwMjJgyU1B",
+                items: [
+                    {
+                        id: "g1",
+                        name: "Balde de Girasoles",
+                        price: 120,
+                        img: "15wZt35uBTm7FkDrGw7NnmHJwMjJgyU1B"
+                    },
+                    {
+                        id: "g2",
+                        name: "Ramo 6 Girasoles",
+                        price: 85,
+                        img: "1LLuo5UKdkxjMuCVNqpEZ41eq7V7M3Pn9"
+                    },
+                    {
+                        id: "g3",
+                        name: "Ramo 4 Girasoles y Rosas",
+                        price: 105,
+                        img: "1mAW5MFXsliomPKcmNiU3HcxpDoCNFC1E"
+                    },
+                    {
+                        id: "g4",
+                        name: "Ramo 2 Girasoles y Globo",
+                        price: 55,
+                        img: "1fVUvkr5FWyRkSpMC6NGiBAx5TcBcGTZ2"
+                    },
+                    {
+                        id: "g5",
+                        name: "3 Girasoles y Rosas",
+                        price: 95,
+                        img: "1GsOVRIpO98B-LF-t2dqC3UdLS7wTf_nM"
+                    },
+                    {
+                        id: "new_1021",
+                        name: "Ramo de girasoles en cubo rústico",
+                        price: 45,
+                        img: "1Q-h9V4E2W-0D-X2fRF3JctmLsT6aywkx"
+                    },
+                    {
+                        id: "new_1022",
+                        name: "Ramo de flores con girasoles y lirios",
+                        price: 45,
+                        img: "1bOfcXyK89AEaUnVnHzPSKUP72K6D-rJU"
+                    },
+                    {
+                        id: "new_1023",
+                        name: "Ramo de girasoles y flores variadas",
+                        price: 45,
+                        img: "1vUHRbHpiWgp-UMIFyxspNkpu_eYOcGw_"
+                    },
+                    {
+                        id: "new_1024",
+                        name: "Ramo de girasol con flores delicadas",
+                        price: 45,
+                        img: "1fixGsTixPjNDNnNuTzc6dJuu_XTABKqi"
+                    },
+                    {
+                        id: "new_1025",
+                        name: "Ramo de girasoles con delicados detalles",
+                        price: 45,
+                        img: "1UpDxj4v5XUzFsXJE94kyaI2BtHGLmULy"
+                    }
+                ]
+            },
+            {
+                id: "cat-tulipanes",
+                title: "Tulipanes",
+                bannerImg: "1RGh5LgoT0MOaoXJLqgtAYgYR1Cj_JNoT",
+                items: [
+                    {
+                        id: "t1",
+                        name: "Tulipanes Rojos Elegantes",
+                        price: 95,
+                        img: "1mG4E833M45n7d87sEgpJ2NlVrxhhjfJ-"
+                    },
+                    {
+                        id: "t2",
+                        name: "Tulipanes Amarillos",
+                        price: 95,
+                        img: "https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=400&q=80"
+                    },
+                    {
+                        id: "t3",
+                        name: "Mix de Tulipanes Primavera",
+                        price: 110,
+                        img: "1KBrj0pzLxShvvs9qmC8FDtpOKPmQpOy8"
+                    },
+                    {
+                        id: "t4",
+                        name: "Caja de 6 Tulipanes",
+                        price: 125,
+                        img: "1KBrro4nuTLI2EfBJ1w6LftGW59yHkRse"
+                    },
+                    {
+                        id: "new_1007",
+                        name: "Ramo de flores frescas y vibrantes",
+                        price: 45,
+                        img: "1cXc5TpdyX7yfk762a0R3uCUZ3znaVZnz"
+                    },
+                    {
+                        id: "new_1008",
+                        name: "Ramo de tulipanes y flores delicadas",
+                        price: 45,
+                        img: "109Pki8FtQF-bylUrLAETsQqfkyegIeVc"
+                    },
+                    {
+                        id: "new_1009",
+                        name: "Ramo de tulipanes blancos elegantes",
+                        price: 45,
+                        img: "1CNkZl8x4fAIGVig9DiG3DbKDnJe4MX0C"
+                    },
+                    {
+                        id: "new_1010",
+                        name: "Ramo de tulipanes amarillos y rústico",
+                        price: 45,
+                        img: "1QD-hfvbiTp6rrXrhGrBt5t85BvKVHcQ0"
+                    },
+                    {
+                        id: "new_1011",
+                        name: "Ramo de tulipanes rosados delicado",
+                        price: 45,
+                        img: "1JNhm9ywPWKEym8aHzLx9728SaPHA0oRW"
+                    },
+                    {
+                        id: "new_1012",
+                        name: "Ramo de tulipanes en caja de madera",
+                        price: 45,
+                        img: "1QY9fGTvLqkqRGlk0OiBw-plJfJ2JeBJD"
+                    }
+                ]
+            },
+            {
+                id: "cat-astromelias",
+                title: "Astromelias",
+                bannerImg: "1Xgtuj2dhCRjQKGgtHKBrsViPozpqHGte",
+                items: [
+                    {
+                        id: "as1",
+                        name: "Astromelias Rosadas",
+                        price: 50,
+                        img: "1Xgtuj2dhCRjQKGgtHKBrsViPozpqHGte"
+                    },
+                    {
+                        id: "as2",
+                        name: "Astromelias Vibrantes",
+                        price: 55,
+                        img: "1DDCOf_S9iob208Q7jH8WxzMZFPiiePu1"
+                    },
+                    {
+                        id: "as3",
+                        name: "Mix Astromelias y Margaritas",
+                        price: 65,
+                        img: "1_Vvz0VRZWivZnwibaFjalSSQUTFMSVsS"
+                    },
+                    {
+                        id: "as4",
+                        name: "Ramo de Astromelias Especial",
+                        price: 70,
+                        img: "141pe8ST3BWjMags2S14jSN2GRKqQ5RCK"
+                    },
+                    {
+                        id: "new_1000",
+                        name: "Ramo de Alstroemerias en caja de madera",
+                        price: 45,
+                        img: "1lKVruoTJ7Ha_1tw5AivefeO-s4XF4n5T"
+                    },
+                    {
+                        id: "new_1001",
+                        name: "Ramo vibrante de Alstroemerias en sombrero",
+                        price: 45,
+                        img: "13DVW7uuXIsrsBMtZQmxoBb1Nxj3TNe1l"
+                    },
+                    {
+                        id: "new_1002",
+                        name: "Ramo de Alstroemerias en caja rosa",
+                        price: 45,
+                        img: "15yOLBtyK4PYYQuYrP5kLyeymOjtyzhLL"
+                    },
+                    {
+                        id: "new_1003",
+                        name: "Ramo de Alstroemerias rosa y blanca",
+                        price: 45,
+                        img: "159Sgp02NcnbV9nYanCZqd5z1ZQcgSFMK"
+                    },
+                    {
+                        id: "new_1004",
+                        name: "Ramo de rosas y alstroemerias",
+                        price: 45,
+                        img: "1s3wC5qIoTgbyvyl4yB7qb-tr_lvA_cLZ"
+                    },
+                    {
+                        id: "new_1005",
+                        name: "Ramo de Alstroemerias en cubo rústico",
+                        price: 45,
+                        img: "1qaWzqNLz4vC-Wg6YTcjrmfJCK9rdd8Ry"
+                    },
+                    {
+                        id: "new_1006",
+                        name: "Ramo de alstroemerias en tonos vibrantes",
+                        price: 45,
+                        img: "18qy7qGMagNT8Lzx71BzjudNe6lip0GwZ"
+                    }
+                ]
+            },
+            {
+                id: "cat-claveles",
+                title: "Claveles",
+                bannerImg: "1P95_NYTg6t3AG_n5Zv8dLQSkxIqtlEFm",
+                items: [
+                    {
+                        id: "cl1",
+                        name: "Claveles Tradicionales",
+                        price: 45,
+                        img: "1mqq0lJK-LgNQDi-hJMxbUqtiybYOp5ia"
+                    },
+                    {
+                        id: "cl2",
+                        name: "Claveles Blancos Puros",
+                        price: 45,
+                        img: "1nWOuocAOdFJ7rzwE7xpduIbX54PL3WHg"
+                    },
+                    {
+                        id: "cl3",
+                        name: "Mix de Claveles Coloridos",
+                        price: 55,
+                        img: "https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=400&q=80"
+                    },
+                    {
+                        id: "cl4",
+                        name: "Claveles en Balde",
+                        price: 65,
+                        img: "1qQGT_C_4PuWo9X791TccWqpNKIehM_zI"
+                    },
+                    {
+                        id: "new_1013",
+                        name: "Ramo de claveles con rosas y astromelia",
+                        price: 45,
+                        img: "1cIhPi0eyNmHXTcEk8akTWXpXOM8qL69F"
+                    },
+                    {
+                        id: "new_1014",
+                        name: "Ramo de claveles rosa y dorados",
+                        price: 45,
+                        img: "1-f06Xao1KldIRwU7wQn9oWlwI6v1ONdy"
+                    },
+                    {
+                        id: "new_1015",
+                        name: "Ramo de claveles rosados en papel kraft",
+                        price: 45,
+                        img: "1tlMAQnw1JZTEy3kd8IqHTOs_-tCIP0-V"
+                    },
+                    {
+                        id: "new_1016",
+                        name: "Ramo de claveles en cubo rústico",
+                        price: 45,
+                        img: "1zv_F74x12pads6Z4S_49d_an3u40FOYi"
+                    },
+                    {
+                        id: "new_1017",
+                        name: "Ramo de claveles rojos vibrantes",
+                        price: 45,
+                        img: "10KAmR0TeAuwlU1hUFuhd7QxjFrMKlcuU"
+                    },
+                    {
+                        id: "new_1018",
+                        name: "Ramo de claveles coloridos",
+                        price: 45,
+                        img: "1v80bjwNR4F_qgi0-40CHG7oV9VeRmYEF"
+                    },
+                    {
+                        id: "new_1019",
+                        name: "Ramo de claveles coloridos en cubo",
+                        price: 45,
+                        img: "14wcSCmN9qzvHHkL8pUyl3tOctyefa1FP"
+                    },
+                    {
+                        id: "new_1020",
+                        name: "Ramo de claveles en canasta de mimbre",
+                        price: 45,
+                        img: "171tJeugE-3VW_rlyH7qXb2YwOJG9VPig"
+                    }
+                ]
+            },
+            {
+                id: "cat-eternas",
+                title: "Flores Eternas",
+                bannerImg: "1r5YlC_PLw0mWpwIET0eBVHbMfJ_2HvhB",
+                items: [
+                    {
+                        id: "et1",
+                        name: "Rosas y Mariposas",
+                        price: 65,
+                        img: "1RntTxM5__stBC_WNU3S9_pidPJbndsfd"
+                    },
+                    {
+                        id: "et2",
+                        name: "Rosas Hello Kitty Cumpleaños",
+                        price: 75,
+                        img: "1Ggxk6aLhmGONsPB6zEVomZrOB_oRRk2y"
+                    },
+                    {
+                        id: "et3",
+                        name: "Flores Lilas Limpiapipa",
+                        price: 45,
+                        img: "1FNEi4lM8tzdiAE3F9pYgmNjmcp5kMwEA"
+                    },
+                    {
+                        id: "et4",
+                        name: "Flores Azules Limpiapipa",
+                        price: 45,
+                        img: "15Iskbw3rFBdr9Auz6Rt3tLvZU02hrFIa"
+                    },
+                    {
+                        id: "et5",
+                        name: "Rosas Amarillas Osito",
+                        price: 55,
+                        img: "1INdWcvdVxJWevu8cIeBlw61dS-Y4MXvj"
+                    },
+                    {
+                        id: "et6",
+                        name: "Rosa y Orquídea Limpiapipa",
+                        price: 50,
+                        img: "1MAgKRa97GwAEWoCBgWkp_73SbkzSyI-0"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        macroTitle: "Arreglos y Eventos",
+        categories: [
+            {
+                id: "cat-eventos",
+                title: "Eventos",
+                bannerImg: "1SAbIm7MoNNgn8in17pklvZQ-SKOU77Yg",
+                items: [
+                    {
+                        id: "ev1",
+                        name: "Rosas y Girasol Premium",
+                        price: 85,
+                        img: "1acovOFVcub7uUic9VmUtBLpvQZMXixOK"
+                    },
+                    {
+                        id: "ev2",
+                        name: "Arreglo de Orquídeas y Rosas",
+                        price: 110,
+                        img: "1-sOMv6YM7kE99C8ZguLdeqIIV9alnlvI"
+                    },
+                    {
+                        id: "ev3",
+                        name: "Ramo Rosas Blancas y Lilas",
+                        price: 90,
+                        img: "104Qri6U5-UU_UjkvKDhAdOqVjYQExIfy"
+                    },
+                    {
+                        id: "ev4",
+                        name: "Arreglo Orquídea Elegante",
+                        price: 115,
+                        img: "1_Tbdcf3o4Kn367Sop6oAWDXoYEoQ17Vw"
+                    }
+                ]
+            },
+            {
+                id: "cat-adornos",
+                title: "Adornos de Mesa",
+                bannerImg: "12aY6lKDf6gjwtRdJr87VZjrVwo7sLkgz",
+                items: [
+                    {
+                        id: "ad1",
+                        name: "Centro de Mesa Floral",
+                        price: 65,
+                        img: "1TYETsidwkf48tpg91lfm5SjphiHJiUJg"
+                    },
+                    {
+                        id: "ad2",
+                        name: "Adorno de Margaritas Blancas",
+                        price: 45,
+                        img: "1BGBpO2uP8SEvdq-WKOnVzaW4nlTcOaJw"
+                    },
+                    {
+                        id: "ad3",
+                        name: "Hortensias Moradas de Mesa",
+                        price: 60,
+                        img: "1Kqyz0llJ0T1Ug01hG1QqsMRRRYRK5Pqo"
+                    },
+                    {
+                        id: "ad4",
+                        name: "Centro de Gladiolos Naranjas",
+                        price: 55,
+                        img: "1LVfI2pP6SZ3VPdz_IWeHmXntY8g4fQm5"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        macroTitle: "Regalos y Complementos",
+        categories: [
+            {
+                id: "cat-peluches",
+                title: "Peluches",
+                bannerImg: "1f2gtdRrCZTGvUMRJHUDcsBd2C4ipxrvr",
+                items: [
+                    {
+                        id: "pl1",
+                        name: "Peluche Lotso Rosa",
+                        price: 45,
+                        img: "1f2gtdRrCZTGvUMRJHUDcsBd2C4ipxrvr"
+                    },
+                    {
+                        id: "pl2",
+                        name: "Peluche Elefante Rosa",
+                        price: 55,
+                        img: "1WhIbdIL2CLrORX9nI4pVvEBqRrg9OXEh"
+                    },
+                    {
+                        id: "pl3",
+                        name: "Peluche Hello Kitty",
+                        price: 50,
+                        img: "10HQsyG7AX9E-rYVO-ryWBv2F-d2YA5B2"
+                    },
+                    {
+                        id: "pl4",
+                        name: "Peluche Stich Rosa",
+                        price: 60,
+                        img: "1LXN2pfzaNRdA_7aYQPxa3XZeys9UAcuZ"
+                    },
+                    {
+                        id: "pl5",
+                        name: "Peluche Snoopy",
+                        price: 45,
+                        img: "16VgEFDHc0Eu-WxQUSTQoexWCaniGlZ4t"
+                    }
+                ]
+            },
+            {
+                id: "cat-globos",
+                title: "Globos",
+                bannerImg: "1H1Uz9VjHtLZPn5sWguQmIvUFvTFQw0zn",
+                items: [
+                    {
+                        id: "gl1",
+                        name: "Globo Metálico Cumpleaños",
+                        price: 15,
+                        img: "https://images.unsplash.com/photo-1530103862676-de8c9de0f8d9?w=400&q=80"
+                    },
+                    {
+                        id: "gl2",
+                        name: "Burbuja Personalizada",
+                        price: 35,
+                        img: "https://images.unsplash.com/photo-1522273400909-fd1a8f77637e?w=400&q=80"
+                    },
+                    {
+                        id: "gl3",
+                        name: "Pack Globos Corazón",
+                        price: 20,
+                        img: "https://images.unsplash.com/photo-1506806732259-39c2d0f68daf?w=400&q=80"
+                    },
+                    {
+                        id: "gl4",
+                        name: "Globo Metálico Amor",
+                        price: 18,
+                        img: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&q=80"
+                    },
+                    {
+                        id: "new_1035",
+                        name: "Estrella",
+                        price: 45,
+                        img: "1r9qe50hDOOzR5KZApkyL23UioZaTikQC"
+                    },
+                    {
+                        id: "new_1036",
+                        name: "Varios",
+                        price: 45,
+                        img: "1yLfiYnpuIeFkW0OyC8-HLJRjLjR3F2bA"
+                    },
+                    {
+                        id: "new_1037",
+                        name: "TeAmo1",
+                        price: 45,
+                        img: "1umN8dCbS0LrOQl3PDcCGebQcSpfF-pl3"
+                    },
+                    {
+                        id: "new_1038",
+                        name: "TeAmo2",
+                        price: 45,
+                        img: "1HcEsjR3qPzUwmOeNX1qeYDUHtk9j2Jed"
+                    },
+                    {
+                        id: "new_1039",
+                        name: "happybirthday",
+                        price: 45,
+                        img: "1Ou662AloQ9XPmXreWCMOMhpnh5hY0ULi"
+                    }
+                ]
+            },
+            {
+                id: "cat-extras",
+                title: "Extras",
+                bannerImg: "18V7I7XpxXVMyv0QcQlARy52NLXqbXz3P",
+                items: [
+                    {
+                        id: "ex1",
+                        name: "Chocolates Surtidos",
+                        price: 30,
+                        img: "https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=400&q=80"
+                    },
+                    {
+                        id: "ex2",
+                        name: "Caja Bombones x8",
+                        price: 25,
+                        img: "https://images.unsplash.com/photo-1511914265872-c40672604a80?w=400&q=80"
+                    },
+                    {
+                        id: "ex3",
+                        name: "Topper Feliz Día",
+                        price: 15,
+                        img: "https://images.unsplash.com/photo-1548843254-24eed50359aa?w=400&q=80"
+                    },
+                    {
+                        id: "ex4",
+                        name: "Vino Tinto de Ocasión",
+                        price: 45,
+                        img: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=400&q=80"
+                    },
+                    {
+                        id: "new_1030",
+                        name: "cajaFerrero8",
+                        price: 45,
+                        img: "1smXVxR8KKu8aeBOB901EvDbopwijcaLY"
+                    },
+                    {
+                        id: "new_1031",
+                        name: "Chocolatekissme",
+                        price: 45,
+                        img: "1AmIt6ZnkKxlf7gkRkp0IRyT945ag30p6"
+                    },
+                    {
+                        id: "new_1032",
+                        name: "ChocolateFerreroRocher",
+                        price: 45,
+                        img: "1nP2isWpMsddDREFWyde2lBO9irU8vVu5"
+                    },
+                    {
+                        id: "new_1033",
+                        name: "ChocolateVizzio",
+                        price: 45,
+                        img: "191oZX2-DPAhwOJSJOGeNGuUN8dOJxJCB"
+                    },
+                    {
+                        id: "new_1034",
+                        name: "CarritosHotwheels",
+                        price: 45,
+                        img: "1j8JYcxDeGdffphltIN1kt41gD7pTp8nH"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        macroTitle: "Jardín y Hogar",
+        categories: [
+            {
+                id: "cat-maceteros",
+                title: "Maceteros",
+                bannerImg: "1cnYTzaPWsRbBdrSYeYqBuL3il2wn9qBn",
+                items: [
+                    {
+                        id: "mc1",
+                        name: "Mis Maceteros Especiales",
+                        price: 35,
+                        img: "1cnYTzaPWsRbBdrSYeYqBuL3il2wn9qBn"
+                    },
+                    {
+                        id: "mc2",
+                        name: "Elefantito de Cerámica",
+                        price: 45,
+                        img: "1431fWnoeGEtZZMKKIJl9RQyCN7_hTmgD"
+                    },
+                    {
+                        id: "mc3",
+                        name: "Cisne de Cerámica",
+                        price: 50,
+                        img: "1FMlZ6xL9-JFjjPq4VtsBId8RDRiiFD2v"
+                    },
+                    {
+                        id: "mc4",
+                        name: "Macetero Vintage",
+                        price: 40,
+                        img: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&q=80"
+                    }
+                ]
+            },
+            {
+                id: "cat-plantas",
+                title: "Plantas Decorativas",
+                bannerImg: "1kQfEx6fypxu5BQSDZiOu0mI_acj0N8_G",
+                items: [
+                    {
+                        id: "pt1",
+                        name: "Suculenta en Maceta",
+                        price: 25,
+                        img: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&q=80"
+                    },
+                    {
+                        id: "pt2",
+                        name: "Helecho Pequeño",
+                        price: 35,
+                        img: "https://images.unsplash.com/photo-1453904300235-0f2f60b15b5d?w=400&q=80"
+                    },
+                    {
+                        id: "pt3",
+                        name: "Bonsai Ficus",
+                        price: 45,
+                        img: "https://images.unsplash.com/photo-1416879598555-aca725dc39ab?w=400&q=80"
+                    },
+                    {
+                        id: "pt4",
+                        name: "Cactus Decorativo",
+                        price: 20,
+                        img: "https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=400&q=80"
+                    },
+                    {
+                        id: "new_1040",
+                        name: "Drácena",
+                        price: 45,
+                        img: "1oQyr5qkmcRP3IWoWtfO9-tMrFpnexjxr"
+                    },
+                    {
+                        id: "new_1041",
+                        name: "Helechos",
+                        price: 45,
+                        img: "1MRf1edwD0IkcEwpBVkoCvG9B3mMlWJD8"
+                    },
+                    {
+                        id: "new_1042",
+                        name: "PinoLimón",
+                        price: 45,
+                        img: "1cQA9YkVHdpw47cC9GPyDOH9HHP3rUFFV"
+                    },
+                    {
+                        id: "new_1043",
+                        name: "Romero",
+                        price: 45,
+                        img: "1mic8C_p7ZNMSM1FKbSh2I2HeMB-a9iMx"
+                    },
+                    {
+                        id: "new_1044",
+                        name: "Diplanemias",
+                        price: 45,
+                        img: "1x2NP6uE3aPAMAZC1AlRI-nf2LnayWgwa"
+                    },
+                    {
+                        id: "new_1045",
+                        name: "Echeverias",
+                        price: 45,
+                        img: "1r2LvBYPbHt7UViOKyJjorVnOGK29ING7"
+                    },
+                    {
+                        id: "new_1046",
+                        name: "ÁrbolDeAbundancia",
+                        price: 45,
+                        img: "17JUswUrfAEt8r-qwOXoOvxX-qmWjB0LN"
+                    },
+                    {
+                        id: "new_1047",
+                        name: "OrejaDeElefante",
+                        price: 45,
+                        img: "1u8o1bS7eG-Xx8ksaGsBh3Mjg_TY4LLFE"
+                    },
+                    {
+                        id: "new_1048",
+                        name: "LenguaDeSuegra",
+                        price: 45,
+                        img: "1y7mNMjo0EWx1ZDbNJZVXXzbz6L6zp4xk"
+                    }
+                ]
+            },
+            {
+                id: "cat-semillas",
+                title: "Semillas",
+                bannerImg: "1VkLp8Ht3hz0u_2_pdBzg_By6FM3IiL4P",
+                items: [
+                    {
+                        id: "sm1",
+                        name: "Semillas de Girasol",
+                        price: 10,
+                        img: "https://images.unsplash.com/photo-1587049352847-4d4b126a11fe?w=400&q=80"
+                    },
+                    {
+                        id: "sm2",
+                        name: "Semillas de Margarita",
+                        price: 10,
+                        img: "https://images.unsplash.com/photo-1596547609652-9cb5d8d76921?w=400&q=80"
+                    },
+                    {
+                        id: "sm3",
+                        name: "Pack Huerto Casero",
+                        price: 25,
+                        img: "https://images.unsplash.com/photo-1530836369250-ef71a3f55ce8?w=400&q=80"
+                    },
+                    {
+                        id: "sm4",
+                        name: "Semillas de Tulipán",
+                        price: 15,
+                        img: "https://images.unsplash.com/photo-1510462006323-add7ff2439d5?w=400&q=80"
+                    },
+                    {
+                        id: "new_1049",
+                        name: "MargaritaAfricana",
+                        price: 45,
+                        img: "1sRjbKzCfyHDbW8bL2xQcNLYVJmrQJ1RH"
+                    },
+                    {
+                        id: "new_1050",
+                        name: "Cosmos",
+                        price: 45,
+                        img: "1qRGjZI2iAk_K8YeidUYU8ACzB_0OVv94"
+                    },
+                    {
+                        id: "new_1051",
+                        name: "Girasol",
+                        price: 45,
+                        img: "1bfCyhYkQKpUZKtxcCB2WGzp4i0qlNet4"
+                    },
+                    {
+                        id: "new_1052",
+                        name: "CebollaChina",
+                        price: 45,
+                        img: "1pDdinVawTRpgxW0YYTHPCf32tYq1Hlca"
+                    },
+                    {
+                        id: "new_1053",
+                        name: "Maracuya",
+                        price: 45,
+                        img: "1OMUiNJ8JgO3oYVa4NYPAsf12gRkzfSLU"
+                    },
+                    {
+                        id: "new_1054",
+                        name: "Paico",
+                        price: 45,
+                        img: "1R_pQ1xxbebTh4vJFM2VH3VVFbUe17l3d"
+                    },
+                    {
+                        id: "new_1055",
+                        name: "Espinaca",
+                        price: 45,
+                        img: "1ZO_MurqVyYDwEUxGu1djCnvcukL_Lpgb"
+                    },
+                    {
+                        id: "new_1056",
+                        name: "LechugaSeda",
+                        price: 45,
+                        img: "1-_nlaYLrNo7pOiYgfl06B_FOBPC-MMkL"
+                    },
+                    {
+                        id: "new_1057",
+                        name: "Papaya",
+                        price: 45,
+                        img: "1Apyp10vFv0P7dJXK1Xm4nhYkEvnyv6nD"
+                    },
+                    {
+                        id: "new_1058",
+                        name: "Albahaca",
+                        price: 45,
+                        img: "17jBp5w8OReWwqte8U1xIbHpwT80eoi5C"
+                    },
+                    {
+                        id: "new_1059",
+                        name: "Pimiento",
+                        price: 45,
+                        img: "1mDA5QIvZQBcqWH--e8hoMsqTy9XSMPme"
+                    },
+                    {
+                        id: "new_1060",
+                        name: "Rabanito",
+                        price: 45,
+                        img: "19S9eEesDVNuq4hirsNRAO4qm2GNHXnJT"
+                    },
+                    {
+                        id: "new_1061",
+                        name: "Zanahoria",
+                        price: 45,
+                        img: "1wYu10acGDGDRMp3BEsm8uJjptankDlfJ"
+                    },
+                    {
+                        id: "new_1062",
+                        name: "Cebolla",
+                        price: 45,
+                        img: "17_hKY1p1nQR2QdKtgmDuj0N_SgPGB3b8"
+                    }
+                ]
+            }
+        ]
+    }
+];
         function renderSite() {
             const menuContainer = document.getElementById('sidebarMenuContent');
             const desktopNavContainer = document.getElementById('desktopNav');
