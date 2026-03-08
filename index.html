@@ -16,1672 +16,238 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- 1. VARIABLES DE DISEÑO (TONOS ROSA) --- */
-        :root {
-            --bg-color: #FAFAFA;
-            --header-bg: #FFF0F5;
-            /* Rosita pastel elegante */
-            --text-main: #111111;
-            --text-light: #666666;
-
-            --primary: #FAD4DF;
-            --accent: #FF4D85;
-            /* Rosa vibrante principal */
-            --accent-dark: #D81B60;
-            /* Rosa oscuro para hover */
-
-            --footer-bg: #112a1e;
-            /* Verde oscuro del footer */
-            --footer-text: #E8EBE9;
-
-            --border-radius: 16px;
-            --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.06);
-            --transition: all 0.3s ease;
-            --font-title: 'Playfair Display', serif;
-            --font-body: 'Nunito', sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            font-family: var(--font-body);
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding-bottom: 90px;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        img {
-            display: block;
-            max-width: 100%;
-            object-fit: cover;
-            cursor: pointer;
-        }
-
-        button {
-            border: none;
-            outline: none;
-            background: none;
-            font-family: inherit;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        /* --- 2. HEADER Y NAVEGACIÓN PC --- */
-        header {
-            background: var(--header-bg);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            height: 75px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .logo {
-            font-family: var(--font-title);
-            font-size: clamp(1.5rem, 4vw, 2.2rem);
-            font-weight: 700;
-            color: var(--text-main);
-            text-align: center;
-            flex: 1;
-            letter-spacing: 0.5px;
-        }
-
-        .hamburger {
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 10px;
-            color: var(--text-main);
-        }
-
-        /* Navegación Exclusiva PC */
-        .desktop-nav {
-            display: none;
-        }
-
-        @media (min-width: 992px) {
-            .hamburger {
-                display: none;
-            }
-
-            .logo {
-                text-align: left;
-                flex: 0 0 auto;
-                color: var(--accent-dark);
-            }
-
-            .desktop-nav {
-                display: flex;
-                gap: 25px;
-                align-items: center;
-            }
-
-            .nav-item {
-                position: relative;
-                cursor: pointer;
-                font-weight: 700;
-                color: var(--text-main);
-                font-family: var(--font-title);
-                font-size: 1.15rem;
-                transition: color 0.3s;
-            }
-
-            .nav-item:hover,
-            .nav-item.active {
-                color: var(--accent);
-            }
-
-            .dropdown-menu {
-                display: none;
-                position: absolute;
-                top: 40px;
-                left: 0;
-                background: #fff;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-                border-radius: 12px;
-                min-width: 240px;
-                padding: 10px 0;
-                z-index: 1000;
-                flex-direction: column;
-                border: 1px solid #f0f0f0;
-            }
-
-            .nav-item.active .dropdown-menu {
-                display: flex;
-                animation: slideDownNav 0.3s ease forwards;
-            }
-
-            .dropdown-menu a {
-                padding: 12px 20px;
-                font-family: var(--font-body);
-                font-weight: 600;
-                font-size: 0.95rem;
-                color: var(--text-light);
-                transition: 0.2s;
-            }
-
-            .dropdown-menu a:hover {
-                background: #fafafa;
-                color: var(--accent);
-                padding-left: 25px;
-            }
-
-            @keyframes slideDownNav {
-                from {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        }
-
-        /* --- 3. MENÚ LATERAL MÓVIL (CON COLORES) --- */
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            backdrop-filter: blur(2px);
-        }
-
-        .sidebar-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 300px;
-            background: #fff;
-            z-index: 2001;
-            transform: translateX(-100%);
-            transition: transform 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-        }
-
-        .sidebar.active {
-            transform: translateX(0);
-        }
-
-        .sidebar-header {
-            padding: 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            background: var(--header-bg);
-        }
-
-        .sidebar-header span {
-            font-family: var(--font-title);
-            font-weight: 700;
-            font-size: 1.5rem;
-            letter-spacing: 1px;
-            color: var(--accent-dark);
-        }
-
-        .close-btn {
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: var(--text-main);
-            line-height: 1;
-        }
-
-        .sidebar-menu {
-            padding: 10px 0;
-        }
-
-        .menu-accordion {
-            width: 100%;
-            border-bottom: 1px solid #f5f5f5;
-        }
-
-        .accordion-btn {
-            width: 100%;
-            text-align: left;
-            padding: 18px 25px;
-            font-family: var(--font-title);
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-main);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.3s;
-        }
-
-        /* Colores Pastel en Móvil */
-        .color-1 .accordion-btn {
-            background-color: #FFF0F4;
-            border-left: 5px solid #FF9EAA;
-        }
-
-        .color-2 .accordion-btn {
-            background-color: #F0F8FF;
-            border-left: 5px solid #8EA9FF;
-        }
-
-        .color-3 .accordion-btn {
-            background-color: #FFF9E6;
-            border-left: 5px solid #FFD700;
-        }
-
-        .color-4 .accordion-btn {
-            background-color: #F0FFF0;
-            border-left: 5px solid #98FB98;
-        }
-
-        .accordion-btn i {
-            transition: 0.3s;
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        .accordion-btn.active i {
-            transform: rotate(180deg);
-            color: var(--accent);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: #fafafa;
-        }
-
-        .accordion-content a {
-            display: block;
-            padding: 12px 25px 12px 40px;
-            font-size: 0.95rem;
-            color: var(--text-light);
-            font-weight: 600;
-            border-top: 1px solid #eee;
-        }
-
-        .accordion-content a:hover {
-            color: var(--accent);
-            padding-left: 45px;
-            background: #fff;
-        }
-
-        .direct-link {
-            display: block;
-            padding: 15px 25px;
-            font-family: var(--font-title);
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-main);
-            border-bottom: 1px solid #f5f5f5;
-        }
-
-        /* --- 4. HERO SECTION --- */
-        .hero {
-            position: relative;
-            height: 65vh;
-            background: url('https://wsrv.nl/?url=https://drive.google.com/uc?id=1XylhTEu2T7G_a5U62x0iaTaIW3R3RoiB&w=1600') center/cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-        }
-
-        @media (min-width: 768px) {
-            .hero {
-                height: 85vh;
-            }
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            padding: 20px;
-            max-width: 900px;
-        }
-
-        .hero h1 {
-            font-family: var(--font-title);
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            line-height: 1.1;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: clamp(1.1rem, 2vw, 1.3rem);
-            font-weight: 400;
-            max-width: 600px;
-            margin: 0 auto;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
-        }
-
-        /* --- 5. ARMA TU PEDIDO IDEAL (COMPACTO Y ANIMADO) --- */
-        .custom-order {
-            padding: 40px 15px 60px;
-            text-align: center;
-            background: #fff;
-            border-bottom: 1px solid #f0f0f0;
-            overflow: hidden;
-        }
-
-        .custom-order h2 {
-            font-family: var(--font-title);
-            font-size: clamp(2rem, 5vw, 2.8rem);
-            margin-bottom: 5px;
-            color: var(--text-main);
-        }
-
-        .custom-order>p {
-            font-size: 1rem;
-            margin-bottom: 30px;
-            color: var(--text-light);
-        }
-
-        .steps-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        /* Diseño Móvil: Horizontal, compacto y flotante */
-        .step-v-card {
-            background: #fafafa;
-            border-radius: 16px;
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-align: left;
-            border: 1px solid #eee;
-            position: relative;
-            animation: floatStepMobile 4s ease-in-out infinite;
-        }
-
-        .step-v-card:nth-child(2) {
-            animation-delay: 1.2s;
-        }
-
-        .step-v-card:nth-child(3) {
-            animation-delay: 2.4s;
-        }
-
-        @keyframes floatStepMobile {
-
-            0%,
-            100% {
-                transform: translateY(0);
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
-            }
-
-            50% {
-                transform: translateY(-4px);
-                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
-            }
-        }
-
-        .step-img-box {
-            width: 85px;
-            height: 85px;
-            flex-shrink: 0;
-            border-radius: 12px;
-            position: relative;
-        }
-
-        .step-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 12px;
-        }
-
-        .step-number {
-            position: absolute;
-            top: -8px;
-            left: -8px;
-            width: 30px;
-            height: 30px;
-            background: var(--accent);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-body);
-            font-weight: 900;
-            font-size: 0.95rem;
-            border: 2px solid #fff;
-            z-index: 2;
-            animation: pulsePink 2s infinite;
-        }
-
-        @keyframes pulsePink {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(255, 77, 133, 0.4);
-            }
-
-            70% {
-                transform: scale(1.05);
-                box-shadow: 0 0 0 8px rgba(255, 77, 133, 0);
-            }
-
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(255, 77, 133, 0);
-            }
-        }
-
-        .step-text {
-            flex: 1;
-        }
-
-        .step-text h3 {
-            font-family: var(--font-title);
-            font-size: 1.15rem;
-            color: var(--text-main);
-            margin-bottom: 2px;
-        }
-
-        .step-text p {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            line-height: 1.3;
-            margin: 0;
-        }
-
-        .btn-wsp-pedido {
-            margin-top: 30px;
-            background: #25D366;
-            color: white;
-            padding: 14px 30px;
-            border-radius: 50px;
-            border: none;
-            font-family: var(--font-body);
-            font-weight: 800;
-            font-size: 1.05rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
-
-        .btn-wsp-pedido:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
-        }
-
-        /* Diseño PC: Vuelve a ser 3 columnas, pero animado */
-        @media (min-width: 768px) {
-            .custom-order {
-                padding: 60px 20px 80px;
-            }
-
-            .steps-wrapper {
-                flex-direction: row;
-                gap: 30px;
-            }
-
-            .step-v-card {
-                flex-direction: column;
-                text-align: center;
-                padding: 25px;
-                padding-bottom: 35px;
-                animation: floatStepPC 5s ease-in-out infinite;
-            }
-
-            .step-v-card:nth-child(2) {
-                animation-delay: 1.5s;
-            }
-
-            .step-v-card:nth-child(3) {
-                animation-delay: 3s;
-            }
-
-            @keyframes floatStepPC {
-
-                0%,
-                100% {
-                    transform: translateY(0);
-                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
-                }
-
-                50% {
-                    transform: translateY(-10px);
-                    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-                }
-            }
-
-            .step-img-box {
-                width: 100%;
-                height: 200px;
-                margin-bottom: 25px;
-                border-radius: 16px;
-                overflow: visible;
-            }
-
-            .step-img-box img {
-                border-radius: 16px;
-            }
-
-            .step-number {
-                top: auto;
-                bottom: -20px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 50px;
-                height: 50px;
-                font-size: 1.4rem;
-                border: 4px solid #fff;
-            }
-
-            @keyframes pulsePink {
-                0% {
-                    transform: translateX(-50%) scale(1);
-                    box-shadow: 0 0 0 0 rgba(255, 77, 133, 0.4);
-                }
-
-                70% {
-                    transform: translateX(-50%) scale(1.1);
-                    box-shadow: 0 0 0 12px rgba(255, 77, 133, 0);
-                }
-
-                100% {
-                    transform: translateX(-50%) scale(1);
-                    box-shadow: 0 0 0 0 rgba(255, 77, 133, 0);
-                }
-            }
-
-            .step-text h3 {
-                font-size: 1.6rem;
-                margin-bottom: 8px;
-            }
-
-            .step-text p {
-                font-size: 0.95rem;
-            }
-
-            .btn-wsp-pedido {
-                margin-top: 40px;
-                font-size: 1.15rem;
-                padding: 16px 40px;
-            }
-        }
-
-        /* --- 6. CATÁLOGO ESTILO ROSATEL --- */
-        .catalog-container {
-            padding: 60px 15px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .rosatel-section {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 60px;
-            gap: 15px;
-        }
-
-        .cat-banner-side {
-            width: 100%;
-            height: 250px;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: var(--shadow-card);
-            background: #f0f0f0;
-            flex-shrink: 0;
-        }
-
-        .cat-banner-side img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .cat-banner-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding-bottom: 30px;
-        }
-
-        .cat-banner-overlay h2 {
-            color: white;
-            font-family: var(--font-title);
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
-            text-transform: uppercase;
-            text-align: center;
-        }
-
-        .cat-slider-side {
-            width: 100%;
-            position: relative;
-            display: flex;
-            align-items: center;
-            padding: 10px 0;
-            min-width: 0;
-        }
-
-        .slider-track {
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 15px;
-            padding: 15px 5px;
-            flex: 1;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            scroll-behavior: smooth;
-        }
-
-        .slider-track::-webkit-scrollbar {
-            display: none;
-        }
-
-        .nav-arrow {
-            background: white;
-            color: var(--accent);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            z-index: 10;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            font-size: 1.1rem;
-            border: none;
-            cursor: pointer;
-        }
-
-        .nav-arrow.left {
-            left: -10px;
-        }
-
-        .nav-arrow.right {
-            right: -10px;
-        }
-
-        .nav-arrow:hover {
-            background: var(--accent);
-            color: white;
-        }
-
-        /* --- TARJETAS DE PRODUCTO (2 MÓVIL / 3 PC) --- */
-        .prod-card {
-            flex: 0 0 calc(50% - 7.5px);
-            scroll-snap-align: start;
-            background: #fff;
-            border-radius: var(--border-radius);
-            border: 1px solid #f0f0f0;
-            padding: 0 0 20px 0;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            box-shadow: var(--shadow-card);
-            transition: var(--transition);
-        }
-
-        .prod-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .prod-img-wrap {
-            width: 100%;
-            aspect-ratio: 4/5;
-            background: #fafafa;
-            border-radius: 16px 16px 0 0;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .prod-img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .prod-img-wrap:hover img {
-            transform: scale(1.08);
-        }
-
-        .prod-name {
-            font-family: var(--font-body);
-            font-weight: 800;
-            font-size: 0.95rem;
-            margin: 10px;
-            color: var(--text-main);
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1.2;
-            overflow: hidden;
-        }
-
-        .prod-price {
-            color: var(--accent);
-            font-weight: 900;
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-
-        .comprar-txt {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .comprar-txt:hover {
-            color: var(--text-main);
-            text-decoration: underline;
-        }
-
-        .btn-add {
-            margin: auto auto 0;
-            width: 85%;
-            padding: 10px 0;
-            border: 1.5px solid var(--accent);
-            color: var(--accent);
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 0.85rem;
-            background: #fff;
-            transition: 0.3s;
-        }
-
-        .btn-add:hover {
-            background: var(--accent);
-            color: white;
-        }
-
-        @media (min-width: 992px) {
-            .rosatel-section {
-                flex-direction: row;
-                align-items: stretch;
-                height: 460px;
-                gap: 30px;
-                margin-bottom: 120px;
-            }
-
-            .rosatel-section:nth-child(even) {
-                flex-direction: row-reverse;
-            }
-
-            .cat-banner-side {
-                width: 35%;
-                height: auto;
-            }
-
-            .cat-slider-side {
-                width: 65%;
-            }
-
-            .cat-banner-overlay {
-                align-items: center;
-                padding-bottom: 0;
-                background: rgba(0, 0, 0, 0.3);
-            }
-
-            .nav-arrow.left {
-                left: -20px;
-            }
-
-            .nav-arrow.right {
-                right: -20px;
-            }
-
-            .slider-track {
-                gap: 20px;
-            }
-
-            .prod-card {
-                flex: 0 0 calc(33.333% - 13.33px);
-            }
-
-            .prod-name {
-                font-size: 1.05rem;
-                margin: 10px 15px;
-                height: 45px;
-            }
-
-            .prod-price {
-                font-size: 1.35rem;
-            }
-
-            .btn-add {
-                width: 80%;
-                padding: 12px 0;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* --- 7. TIPS PARA CUIDAR TUS PLANTAS (COMPACTO EN MÓVIL) --- */
-        .care-section {
-            background: var(--footer-bg);
-            padding: 60px 20px;
-            text-align: center;
-            color: white;
-        }
-
-        .care-section h2 {
-            font-family: var(--font-title);
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-
-        .care-section>p {
-            font-size: 1rem;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            color: #A0AAB2;
-        }
-
-        .care-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        /* Móvil: Diseño horizontal compacto */
-        .care-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: 0.3s;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .care-card:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-4px);
-        }
-
-        .care-img {
-            width: 85px;
-            height: 85px;
-            border-radius: 12px;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-
-        .care-text-wrap {
-            flex: 1;
-        }
-
-        .care-text-wrap h3 {
-            font-family: var(--font-title);
-            font-size: 1.15rem;
-            margin-bottom: 4px;
-            color: white;
-        }
-
-        .care-text-wrap p {
-            font-size: 0.85rem;
-            color: #D1D8D4;
-            line-height: 1.3;
-            margin: 0;
-        }
-
-        /* PC: Restaura grilla de 3 columnas */
-        @media (min-width: 768px) {
-            .care-section {
-                padding: 80px 20px;
-            }
-
-            .care-section h2 {
-                font-size: 2.8rem;
-                margin-bottom: 15px;
-            }
-
-            .care-section>p {
-                font-size: 1.1rem;
-                margin-bottom: 50px;
-            }
-
-            .care-grid {
-                flex-direction: row;
-                gap: 30px;
-            }
-
-            .care-card {
-                flex-direction: column;
-                padding: 25px;
-                text-align: center;
-                align-items: stretch;
-            }
-
-            .care-img {
-                width: 100%;
-                height: 180px;
-                margin-bottom: 20px;
-            }
-
-            .care-text-wrap h3 {
-                font-size: 1.5rem;
-                margin-bottom: 10px;
-            }
-
-            .care-text-wrap p {
-                font-size: 0.95rem;
-                line-height: 1.5;
-            }
-        }
-
-        /* --- 8. LIGHTBOX --- */
-        .lightbox-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 4000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .lightbox-content {
-            position: relative;
-            max-width: 95vw;
-            max-height: 95vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .lightbox-content img {
-            max-width: 100%;
-            max-height: 90vh;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            font-size: 2.5rem;
-            color: white;
-            cursor: pointer;
-            padding: 5px;
-            line-height: 1;
-            transition: 0.3s;
-            font-family: sans-serif;
-        }
-
-        .lightbox-close:hover {
-            color: var(--accent);
-            transform: scale(1.1);
-        }
-
-        /* --- 9. CART BAR & WSP FLOTANTE --- */
-        .cart-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: white;
-            border-top: 1px solid #eee;
-            z-index: 2000;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transform: translateY(100%);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.08);
-        }
-
-        .cart-bar.visible {
-            transform: translateY(0);
-        }
-
-        .btn-pedir-cart {
-            background: var(--accent);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 0.9rem;
-            border: none;
-        }
-
-        .wsp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1001;
-            background: #25D366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
-            transition: 0.3s;
-        }
-
-        .wsp-float:hover {
-            transform: scale(1.1);
-        }
-
-        .wsp-float.shift-up {
-            bottom: 90px;
-        }
-
-        /* --- 10. FOOTER CLON EXACTO --- */
-        footer {
-            background: var(--footer-bg);
-            color: var(--footer-text);
-            padding: 80px 20px;
-            font-family: var(--font-body);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            max-width: 1100px;
-            margin: 0 auto;
-            gap: 50px;
-        }
-
-        @media (min-width: 768px) {
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                align-items: center;
-                gap: 80px;
-            }
-        }
-
-        .footer-info {
-            text-align: left;
-        }
-
-        .footer-info h3 {
-            font-family: var(--font-title);
-            font-size: 3.5rem;
-            color: #fff;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .footer-phrase {
-            color: #A0AAB2;
-            margin-bottom: 40px;
-            font-size: 1.1rem;
-        }
-
-        .footer-address-block {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 40px;
-            color: #D1D8D4;
-            font-size: 1rem;
-            position: relative;
-            padding-left: 25px;
-        }
-
-        .footer-address-block i {
-            color: var(--accent);
-            font-size: 1.2rem;
-            position: absolute;
-            left: 0;
-            top: 2px;
-        }
-
-        .footer-social-title {
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #A0AAB2;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-icons a {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: 0.3s;
-        }
-
-        .social-icons a:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        .map-wrap {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .map-container {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            height: 300px;
-            background: #eee;
-            margin-bottom: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .map-link {
-            color: #A0AAB2;
-            font-size: 0.9rem;
-            text-decoration: underline;
-            transition: 0.3s;
-        }
-
-        .map-link:hover {
-            color: #fff;
-        }
-
-        /* --- 11. CART SIDEBAR LATERAL --- */
-        .cart-sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 3000;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            backdrop-filter: blur(2px);
-        }
-
-        .cart-sidebar-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .cart-sidebar {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            max-width: 400px;
-            height: 100%;
-            background: #FAFAFA;
-            z-index: 3001;
-            transform: translateX(100%);
-            transition: transform 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .cart-sidebar.active {
-            transform: translateX(0);
-        }
-
-        .cart-sidebar-header {
-            padding: 20px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #fff;
-            border-bottom: 1px solid #eee;
-        }
-
-        .cart-sidebar-title {
-            font-family: var(--font-title);
-            font-weight: 700;
-            font-size: 1.4rem;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .cart-sidebar-title i {
-            color: var(--accent-dark);
-        }
-
-        .cart-close-btn {
-            font-size: 1.5rem;
-            color: #aaa;
-            cursor: pointer;
-            line-height: 1;
-            transition: 0.2s;
-        }
-
-        .cart-close-btn:hover {
-            color: var(--accent);
-        }
-
-        .cart-items-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .cart-item-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 12px;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            border: 1px solid #eee;
-            position: relative;
-        }
-
-        .cart-item-img {
-            width: 70px;
-            height: 70px;
-            border-radius: 8px;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-
-        .cart-item-info {
-            flex: 1;
-        }
-
-        .cart-item-title {
-            font-family: var(--font-title);
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 2px;
-        }
-
-        .cart-item-price {
-            font-size: 0.85rem;
-            font-weight: 800;
-            color: #8A204C;
-            margin-bottom: 8px;
-        }
-
-        .cart-qty-ctrl {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #f5f5f5;
-            border-radius: 50px;
-            padding: 4px 10px;
-            width: fit-content;
-        }
-
-        .cart-qty-btn {
-            font-size: 1.1rem;
-            color: #555;
-            cursor: pointer;
-            padding: 0 5px;
-            user-select: none;
-        }
-
-        .cart-qty-btn:hover {
-            color: var(--accent);
-        }
-
-        .cart-qty-val {
-            font-size: 0.85rem;
-            font-weight: 700;
-            width: 20px;
-            text-align: center;
-        }
-
-        .cart-item-del {
-            color: #ccc;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 1.1rem;
-            position: absolute;
-            right: 15px;
-            bottom: 15px;
-        }
-
-        .cart-item-del:hover {
-            color: var(--accent);
-        }
-
-        .cart-sidebar-footer {
-            background: #fff;
-            padding: 20px 25px;
-            border-top: 1px solid #eee;
-        }
-
-        .cart-subtotal-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .cart-subtotal-row span {
-            font-weight: 600;
-            color: var(--text-main);
-            font-size: 1rem;
-        }
-
-        .cart-subtotal-val {
-            font-weight: 800;
-            font-size: 1.3rem !important;
-            color: #8A204C !important;
-        }
-
-        .btn-checkout-final {
-            width: 100%;
-            padding: 14px;
-            border-radius: 8px;
-            background: #8A204C;
-            color: white;
-            font-weight: 700;
-            font-size: 0.9rem;
-            border: none;
-            cursor: pointer;
-            margin-bottom: 10px;
-            transition: 0.3s;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-checkout-final:hover {
-            background: #6b1739;
-        }
-
-        .btn-empty-cart {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            background: #fff;
-            color: #777;
-            font-weight: 700;
-            font-size: 0.8rem;
-            border: 1px solid #ddd;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-empty-cart:hover {
-            background: #f9f9f9;
-            color: var(--text-main);
-            border-color: #bbb;
-        }
-
-        /* --- 12. CHECKOUT MODAL --- */
-        .checkout-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 4000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(3px);
-            padding: 20px;
-        }
-
-        .checkout-modal {
-            background: #fff;
-            width: 100%;
-            max-width: 600px;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            max-height: 95vh;
-        }
-
-        .checkout-modal-header {
-            padding: 25px 30px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eaeaea;
-        }
-
-        .checkout-modal-header h2 {
-            font-family: var(--font-title);
-            font-size: 1.8rem;
-            color: #8A204C;
-            margin: 0;
-            font-weight: 700;
-        }
-
-        .checkout-close-btn {
-            font-size: 1.6rem;
-            color: #999;
-            cursor: pointer;
-            line-height: 1;
-            transition: 0.2s;
-            font-family: sans-serif;
-        }
-
-        .checkout-close-btn:hover {
-            color: var(--accent);
-        }
-
-        .checkout-modal-body {
-            padding: 25px 30px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 20px;
-        }
-
-        .form-row .form-group {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .form-group,
-        .form-group-full {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .form-group label,
-        .form-group-full label {
-            font-size: 0.8rem;
-            font-weight: 800;
-            color: #222;
-            letter-spacing: 0.5px;
-        }
-
-        .form-group input,
-        .form-group-full input,
-        .form-group-full textarea {
-            background: #FAF8F8;
-            border: 1px solid #FAF8F8;
-            border-radius: 6px;
-            padding: 14px 15px;
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            color: var(--text-main);
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .form-group input::placeholder,
-        .form-group-full input::placeholder,
-        .form-group-full textarea::placeholder {
-            color: #9E9E9E;
-        }
-
-        .form-group input:focus,
-        .form-group-full input:focus,
-        .form-group-full textarea:focus {
-            border-color: #8A204C;
-            background: #fff;
-        }
-
-        .form-group-full textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .checkout-modal-footer {
-            padding: 25px 30px;
-            border-top: 1px solid #eaeaea;
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-        }
-
-        .btn-cancel-checkout {
-            padding: 12px 25px;
-            border-radius: 50px;
-            background: #fff;
-            color: #111;
-            font-weight: 800;
-            font-size: 0.9rem;
-            border: 1.5px solid #111;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-cancel-checkout:hover {
-            background: #f5f5f5;
-        }
-
-        .btn-confirm-checkout {
-            padding: 12px 25px;
-            border-radius: 50px;
-            background: #8A204C;
-            color: white;
-            font-weight: 800;
-            font-size: 0.9rem;
-            border: 1.5px solid #8A204C;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-confirm-checkout:hover {
-            background: #6b1739;
-            border-color: #6b1739;
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 768px) {
-            .form-row {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .checkout-modal-footer {
-                flex-direction: column-reverse;
-            }
-
-            .btn-cancel-checkout,
-            .btn-confirm-checkout {
-                width: 100%;
-                justify-content: center;
-            }
+        :root{--bg-color:#FAFAFA;--header-bg:#FFF0F5;--text-main:#111111;--text-light:#666666;--primary:#FAD4DF;--accent:#FF4D85;--accent-dark:#D81B60;--footer-bg:#112a1e;--footer-text:#E8EBE9;--border-radius:16px;--shadow-card:0 4px 15px rgba(0,0,0,0.06);--transition:all 0.3s ease;--font-title:'Playfair Display',serif;--font-body:'Nunito',sans-serif}
+        *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+        body{font-family:var(--font-body);background-color:var(--bg-color);color:var(--text-main);line-height:1.6;padding-bottom:90px;overflow-x:hidden;scroll-behavior:smooth}
+        a{text-decoration:none;color:inherit;transition:var(--transition)}
+        ul{list-style:none}
+        img{display:block;max-width:100%;object-fit:cover;cursor:pointer}
+        button{border:none;outline:none;background:none;font-family:inherit;cursor:pointer;transition:var(--transition)}
+        header{background:var(--header-bg);position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:75px;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+        .logo{font-family:var(--font-title);font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;color:var(--text-main);text-align:center;flex:1;letter-spacing:0.5px}
+        .hamburger{font-size:1.5rem;cursor:pointer;padding:10px;color:var(--text-main)}
+        .desktop-nav{display:none}
+        @media (min-width:992px){.hamburger{display:none}
+        .logo{text-align:left;flex:0 0 auto;color:var(--accent-dark)}
+        .desktop-nav{display:flex;gap:25px;align-items:center}
+        .nav-item{position:relative;cursor:pointer;font-weight:700;color:var(--text-main);font-family:var(--font-title);font-size:1.15rem;transition:color 0.3s}
+        .nav-item:hover,.nav-item.active{color:var(--accent)}
+        .dropdown-menu{display:none;position:absolute;top:40px;left:0;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,0.1);border-radius:12px;min-width:240px;padding:10px 0;z-index:1000;flex-direction:column;border:1px solid #f0f0f0}
+        .nav-item.active .dropdown-menu{display:flex;animation:slideDownNav 0.3s ease forwards}
+        .dropdown-menu a{padding:12px 20px;font-family:var(--font-body);font-weight:600;font-size:0.95rem;color:var(--text-light);transition:0.2s}
+        .dropdown-menu a:hover{background:#fafafa;color:var(--accent);padding-left:25px}
+        @keyframes slideDownNav{from{opacity:0;transform:translateY(-10px)}
+        to{opacity:1;transform:translateY(0)}
+        }
+        }
+        .sidebar-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:2000;opacity:0;visibility:hidden;transition:var(--transition);backdrop-filter:blur(2px)}
+        .sidebar-overlay.active{opacity:1;visibility:visible}
+        .sidebar{position:fixed;top:0;left:0;height:100%;width:300px;background:#fff;z-index:2001;transform:translateX(-100%);transition:transform 0.4s ease;display:flex;flex-direction:column;overflow-y:auto}
+        .sidebar.active{transform:translateX(0)}
+        .sidebar-header{padding:25px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;background:var(--header-bg)}
+        .sidebar-header span{font-family:var(--font-title);font-weight:700;font-size:1.5rem;letter-spacing:1px;color:var(--accent-dark)}
+        .close-btn{font-size:1.8rem;cursor:pointer;color:var(--text-main);line-height:1}
+        .sidebar-menu{padding:10px 0}
+        .menu-accordion{width:100%;border-bottom:1px solid #f5f5f5}
+        .accordion-btn{width:100%;text-align:left;padding:18px 25px;font-family:var(--font-title);font-size:1.2rem;font-weight:700;color:var(--text-main);display:flex;justify-content:space-between;align-items:center;transition:0.3s}
+        .color-1 .accordion-btn{background-color:#FFF0F4;border-left:5px solid #FF9EAA}
+        .color-2 .accordion-btn{background-color:#F0F8FF;border-left:5px solid #8EA9FF}
+        .color-3 .accordion-btn{background-color:#FFF9E6;border-left:5px solid #FFD700}
+        .color-4 .accordion-btn{background-color:#F0FFF0;border-left:5px solid #98FB98}
+        .accordion-btn i{transition:0.3s;font-size:0.9rem;color:var(--text-light)}
+        .accordion-btn.active i{transform:rotate(180deg);color:var(--accent)}
+        .accordion-content{max-height:0;overflow:hidden;transition:max-height 0.3s ease;background:#fafafa}
+        .accordion-content a{display:block;padding:12px 25px 12px 40px;font-size:0.95rem;color:var(--text-light);font-weight:600;border-top:1px solid #eee}
+        .accordion-content a:hover{color:var(--accent);padding-left:45px;background:#fff}
+        .direct-link{display:block;padding:15px 25px;font-family:var(--font-title);font-size:1.2rem;font-weight:700;color:var(--text-main);border-bottom:1px solid #f5f5f5}
+        .hero{position:relative;height:65vh;background:url('https://wsrv.nl/?url=https://drive.google.com/uc?id=1XylhTEu2T7G_a5U62x0iaTaIW3R3RoiB&w=1600') center/cover;display:flex;align-items:center;justify-content:center;text-align:center;color:white}
+        @media (min-width:768px){.hero{height:85vh}
+        }
+        .hero-overlay{position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.6))}
+        .hero-content{position:relative;z-index:2;padding:20px;max-width:900px}
+        .hero h1{font-family:var(--font-title);font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.1;margin-bottom:15px;text-shadow:2px 2px 10px rgba(0,0,0,0.5)}
+        .hero p{font-size:clamp(1.1rem,2vw,1.3rem);font-weight:400;max-width:600px;margin:0 auto;text-shadow:1px 1px 5px rgba(0,0,0,0.6)}
+        .custom-order{padding:40px 15px 60px;text-align:center;background:#fff;border-bottom:1px solid #f0f0f0;overflow:hidden}
+        .custom-order h2{font-family:var(--font-title);font-size:clamp(2rem,5vw,2.8rem);margin-bottom:5px;color:var(--text-main)}
+        .custom-order>p{font-size:1rem;margin-bottom:30px;color:var(--text-light)}
+        .steps-wrapper{display:flex;flex-direction:column;gap:15px;max-width:1000px;margin:0 auto}
+        .step-v-card{background:#fafafa;border-radius:16px;padding:12px;display:flex;align-items:center;gap:15px;text-align:left;border:1px solid #eee;position:relative;animation:floatStepMobile 4s ease-in-out infinite}
+        .step-v-card:nth-child(2){animation-delay:1.2s}
+        .step-v-card:nth-child(3){animation-delay:2.4s}
+        @keyframes floatStepMobile{0%,100%{transform:translateY(0);box-shadow:0 2px 5px rgba(0,0,0,0.02)}
+        50%{transform:translateY(-4px);box-shadow:0 8px 15px rgba(0,0,0,0.06)}
+        }
+        .step-img-box{width:85px;height:85px;flex-shrink:0;border-radius:12px;position:relative}
+        .step-img-box img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+        .step-number{position:absolute;top:-8px;left:-8px;width:30px;height:30px;background:var(--accent);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:900;font-size:0.95rem;border:2px solid #fff;z-index:2;animation:pulsePink 2s infinite}
+        @keyframes pulsePink{0%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,77,133,0.4)}
+        70%{transform:scale(1.05);box-shadow:0 0 0 8px rgba(255,77,133,0)}
+        100%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,77,133,0)}
+        }
+        .step-text{flex:1}
+        .step-text h3{font-family:var(--font-title);font-size:1.15rem;color:var(--text-main);margin-bottom:2px}
+        .step-text p{font-size:0.85rem;color:var(--text-light);line-height:1.3;margin:0}
+        .btn-wsp-pedido{margin-top:30px;background:#25D366;color:white;padding:14px 30px;border-radius:50px;border:none;font-family:var(--font-body);font-weight:800;font-size:1.05rem;display:inline-flex;align-items:center;gap:10px;box-shadow:0 5px 15px rgba(37,211,102,0.3);transition:transform 0.3s;cursor:pointer}
+        .btn-wsp-pedido:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(37,211,102,0.4)}
+        @media (min-width:768px){.custom-order{padding:60px 20px 80px}
+        .steps-wrapper{flex-direction:row;gap:30px}
+        .step-v-card{flex-direction:column;text-align:center;padding:25px;padding-bottom:35px;animation:floatStepPC 5s ease-in-out infinite}
+        .step-v-card:nth-child(2){animation-delay:1.5s}
+        .step-v-card:nth-child(3){animation-delay:3s}
+        @keyframes floatStepPC{0%,100%{transform:translateY(0);box-shadow:0 5px 15px rgba(0,0,0,0.03)}
+        50%{transform:translateY(-10px);box-shadow:0 15px 30px rgba(0,0,0,0.08)}
+        }
+        .step-img-box{width:100%;height:200px;margin-bottom:25px;border-radius:16px;overflow:visible}
+        .step-img-box img{border-radius:16px}
+        .step-number{top:auto;bottom:-20px;left:50%;transform:translateX(-50%);width:50px;height:50px;font-size:1.4rem;border:4px solid #fff}
+        @keyframes pulsePink{0%{transform:translateX(-50%) scale(1);box-shadow:0 0 0 0 rgba(255,77,133,0.4)}
+        70%{transform:translateX(-50%) scale(1.1);box-shadow:0 0 0 12px rgba(255,77,133,0)}
+        100%{transform:translateX(-50%) scale(1);box-shadow:0 0 0 0 rgba(255,77,133,0)}
+        }
+        .step-text h3{font-size:1.6rem;margin-bottom:8px}
+        .step-text p{font-size:0.95rem}
+        .btn-wsp-pedido{margin-top:40px;font-size:1.15rem;padding:16px 40px}
+        }
+        .catalog-container{padding:60px 15px;max-width:1400px;margin:0 auto}
+        .rosatel-section{display:flex;flex-direction:column;margin-bottom:60px;gap:15px}
+        .cat-banner-side{width:100%;height:250px;border-radius:20px;overflow:hidden;position:relative;box-shadow:var(--shadow-card);background:#f0f0f0;flex-shrink:0}
+        .cat-banner-side img{width:100%;height:100%;object-fit:cover}
+        .cat-banner-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to top,rgba(0,0,0,0.5),transparent);display:flex;align-items:flex-end;justify-content:center;padding-bottom:30px}
+        .cat-banner-overlay h2{color:white;font-family:var(--font-title);font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:2px;text-shadow:2px 2px 8px rgba(0,0,0,0.4);text-transform:uppercase;text-align:center}
+        .cat-slider-side{width:100%;position:relative;display:flex;align-items:center;padding:10px 0;min-width:0}
+        .slider-track{display:flex;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;gap:15px;padding:15px 5px;flex:1;scrollbar-width:none;-ms-overflow-style:none;scroll-behavior:smooth}
+        .slider-track::-webkit-scrollbar{display:none}
+        .nav-arrow{background:white;color:var(--accent);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:absolute;z-index:10;box-shadow:0 4px 10px rgba(0,0,0,0.15);font-size:1.1rem;border:none;cursor:pointer}
+        .nav-arrow.left{left:-10px}
+        .nav-arrow.right{right:-10px}
+        .nav-arrow:hover{background:var(--accent);color:white}
+        .prod-card{flex:0 0 calc(50% - 7.5px);scroll-snap-align:start;background:#fff;border-radius:var(--border-radius);border:1px solid #f0f0f0;padding:0 0 20px 0;text-align:center;display:flex;flex-direction:column;box-shadow:var(--shadow-card);transition:var(--transition)}
+        .prod-card:hover{transform:translateY(-5px);box-shadow:0 8px 25px rgba(0,0,0,0.1)}
+        .prod-img-wrap{width:100%;aspect-ratio:4/5;background:#fafafa;border-radius:16px 16px 0 0;overflow:hidden;position:relative}
+        .prod-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+        .prod-img-wrap:hover img{transform:scale(1.08)}
+        .prod-name{font-family:var(--font-body);font-weight:800;font-size:0.95rem;margin:10px;color:var(--text-main);height:40px;display:flex;align-items:center;justify-content:center;line-height:1.2;overflow:hidden}
+        .prod-price{color:var(--accent);font-weight:900;font-size:1.2rem;margin-bottom:5px}
+        .comprar-txt{font-size:0.85rem;color:var(--text-light);margin-bottom:12px;cursor:pointer;transition:0.2s}
+        .comprar-txt:hover{color:var(--text-main);text-decoration:underline}
+        .btn-add{margin:auto auto 0;width:85%;padding:10px 0;border:1.5px solid var(--accent);color:var(--accent);border-radius:50px;font-weight:800;font-size:0.85rem;background:#fff;transition:0.3s}
+        .btn-add:hover{background:var(--accent);color:white}
+        @media (min-width:992px){.rosatel-section{flex-direction:row;align-items:stretch;height:460px;gap:30px;margin-bottom:120px}
+        .rosatel-section:nth-child(even){flex-direction:row-reverse}
+        .cat-banner-side{width:35%;height:auto}
+        .cat-slider-side{width:65%}
+        .cat-banner-overlay{align-items:center;padding-bottom:0;background:rgba(0,0,0,0.3)}
+        .nav-arrow.left{left:-20px}
+        .nav-arrow.right{right:-20px}
+        .slider-track{gap:20px}
+        .prod-card{flex:0 0 calc(33.333% - 13.33px)}
+        .prod-name{font-size:1.05rem;margin:10px 15px;height:45px}
+        .prod-price{font-size:1.35rem}
+        .btn-add{width:80%;padding:12px 0;font-size:0.9rem}
+        }
+        .care-section{background:var(--footer-bg);padding:60px 20px;text-align:center;color:white}
+        .care-section h2{font-family:var(--font-title);font-size:2.2rem;margin-bottom:10px}
+        .care-section>p{font-size:1rem;margin-bottom:30px;max-width:600px;margin-left:auto;margin-right:auto;color:#A0AAB2}
+        .care-grid{display:flex;flex-direction:column;gap:15px;max-width:1000px;margin:0 auto}
+        .care-card{background:rgba(255,255,255,0.05);border-radius:16px;padding:12px;border:1px solid rgba(255,255,255,0.1);transition:0.3s;text-align:left;display:flex;align-items:center;gap:15px}
+        .care-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-4px)}
+        .care-img{width:85px;height:85px;border-radius:12px;object-fit:cover;flex-shrink:0}
+        .care-text-wrap{flex:1}
+        .care-text-wrap h3{font-family:var(--font-title);font-size:1.15rem;margin-bottom:4px;color:white}
+        .care-text-wrap p{font-size:0.85rem;color:#D1D8D4;line-height:1.3;margin:0}
+        @media (min-width:768px){.care-section{padding:80px 20px}
+        .care-section h2{font-size:2.8rem;margin-bottom:15px}
+        .care-section>p{font-size:1.1rem;margin-bottom:50px}
+        .care-grid{flex-direction:row;gap:30px}
+        .care-card{flex-direction:column;padding:25px;text-align:center;align-items:stretch}
+        .care-img{width:100%;height:180px;margin-bottom:20px}
+        .care-text-wrap h3{font-size:1.5rem;margin-bottom:10px}
+        .care-text-wrap p{font-size:0.95rem;line-height:1.5}
+        }
+        .lightbox-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:4000;display:none;justify-content:center;align-items:center;backdrop-filter:blur(5px)}
+        .lightbox-content{position:relative;max-width:95vw;max-height:95vh;display:flex;justify-content:center;align-items:center}
+        .lightbox-content img{max-width:100%;max-height:90vh;object-fit:contain;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,0.5)}
+        .lightbox-close{position:absolute;top:-40px;right:0;font-size:2.5rem;color:white;cursor:pointer;padding:5px;line-height:1;transition:0.3s;font-family:sans-serif}
+        .lightbox-close:hover{color:var(--accent);transform:scale(1.1)}
+        .cart-bar{position:fixed;bottom:0;left:0;width:100%;background:white;border-top:1px solid #eee;z-index:2000;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;transform:translateY(100%);transition:0.4s cubic-bezier(0.175,0.885,0.32,1.275);box-shadow:0 -10px 30px rgba(0,0,0,0.08)}
+        .cart-bar.visible{transform:translateY(0)}
+        .btn-pedir-cart{background:var(--accent);color:white;padding:12px 25px;border-radius:50px;font-weight:800;font-size:0.9rem;border:none}
+        .wsp-float{position:fixed;bottom:20px;right:20px;z-index:1001;background:#25D366;color:white;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 5px 20px rgba(37,211,102,0.4);transition:0.3s}
+        .wsp-float:hover{transform:scale(1.1)}
+        .wsp-float.shift-up{bottom:90px}
+        footer{background:var(--footer-bg);color:var(--footer-text);padding:80px 20px;font-family:var(--font-body)}
+        .footer-grid{display:grid;grid-template-columns:1fr;max-width:1100px;margin:0 auto;gap:50px}
+        @media (min-width:768px){.footer-grid{grid-template-columns:1fr 1fr;align-items:center;gap:80px}
+        }
+        .footer-info{text-align:left}
+        .footer-info h3{font-family:var(--font-title);font-size:3.5rem;color:#fff;margin-bottom:10px;font-weight:600}
+        .footer-phrase{color:#A0AAB2;margin-bottom:40px;font-size:1.1rem}
+        .footer-address-block{display:flex;flex-direction:column;gap:8px;margin-bottom:40px;color:#D1D8D4;font-size:1rem;position:relative;padding-left:25px}
+        .footer-address-block i{color:var(--accent);font-size:1.2rem;position:absolute;left:0;top:2px}
+        .footer-social-title{font-size:0.85rem;font-weight:700;letter-spacing:1px;color:#A0AAB2;margin-bottom:15px;text-transform:uppercase}
+        .social-icons{display:flex;gap:15px}
+        .social-icons a{width:45px;height:45px;border-radius:50%;background:rgba(255,255,255,0.05);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:0.3s}
+        .social-icons a:hover{background:var(--accent);transform:translateY(-3px)}
+        .map-wrap{width:100%;display:flex;flex-direction:column;align-items:flex-start}
+        .map-container{width:100%;border-radius:12px;overflow:hidden;height:300px;background:#eee;margin-bottom:10px;border:2px solid rgba(255,255,255,0.1)}
+        .map-container iframe{width:100%;height:100%;border:none}
+        .map-link{color:#A0AAB2;font-size:0.9rem;text-decoration:underline;transition:0.3s}
+        .map-link:hover{color:#fff}
+        .cart-sidebar-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:3000;opacity:0;visibility:hidden;transition:var(--transition);backdrop-filter:blur(2px)}
+        .cart-sidebar-overlay.active{opacity:1;visibility:visible}
+        .cart-sidebar{position:fixed;top:0;right:0;width:100%;max-width:400px;height:100%;background:#FAFAFA;z-index:3001;transform:translateX(100%);transition:transform 0.4s ease;display:flex;flex-direction:column;box-shadow:-5px 0 20px rgba(0,0,0,0.1)}
+        .cart-sidebar.active{transform:translateX(0)}
+        .cart-sidebar-header{padding:20px 25px;display:flex;justify-content:space-between;align-items:center;background:#fff;border-bottom:1px solid #eee}
+        .cart-sidebar-title{font-family:var(--font-title);font-weight:700;font-size:1.4rem;color:var(--text-main);display:flex;align-items:center;gap:10px}
+        .cart-sidebar-title i{color:var(--accent-dark)}
+        .cart-close-btn{font-size:1.5rem;color:#aaa;cursor:pointer;line-height:1;transition:0.2s}
+        .cart-close-btn:hover{color:var(--accent)}
+        .cart-items-container{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:15px}
+        .cart-item-card{background:#fff;border-radius:12px;padding:12px;display:flex;gap:15px;align-items:center;border:1px solid #eee;position:relative}
+        .cart-item-img{width:70px;height:70px;border-radius:8px;object-fit:cover;flex-shrink:0}
+        .cart-item-info{flex:1}
+        .cart-item-title{font-family:var(--font-title);font-size:0.95rem;font-weight:700;color:var(--text-main);margin-bottom:2px}
+        .cart-item-price{font-size:0.85rem;font-weight:800;color:#8A204C;margin-bottom:8px}
+        .cart-qty-ctrl{display:flex;align-items:center;gap:10px;background:#f5f5f5;border-radius:50px;padding:4px 10px;width:fit-content}
+        .cart-qty-btn{font-size:1.1rem;color:#555;cursor:pointer;padding:0 5px;user-select:none}
+        .cart-qty-btn:hover{color:var(--accent)}
+        .cart-qty-val{font-size:0.85rem;font-weight:700;width:20px;text-align:center}
+        .cart-item-del{color:#ccc;cursor:pointer;transition:0.2s;font-size:1.1rem;position:absolute;right:15px;bottom:15px}
+        .cart-item-del:hover{color:var(--accent)}
+        .cart-sidebar-footer{background:#fff;padding:20px 25px;border-top:1px solid #eee}
+        .cart-subtotal-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+        .cart-subtotal-row span{font-weight:600;color:var(--text-main);font-size:1rem}
+        .cart-subtotal-val{font-weight:800;font-size:1.3rem !important;color:#8A204C !important}
+        .btn-checkout-final{width:100%;padding:14px;border-radius:8px;background:#8A204C;color:white;font-weight:700;font-size:0.9rem;border:none;cursor:pointer;margin-bottom:10px;transition:0.3s;letter-spacing:0.5px}
+        .btn-checkout-final:hover{background:#6b1739}
+        .btn-empty-cart{width:100%;padding:12px;border-radius:8px;background:#fff;color:#777;font-weight:700;font-size:0.8rem;border:1px solid #ddd;cursor:pointer;transition:0.3s}
+        .btn-empty-cart:hover{background:#f9f9f9;color:var(--text-main);border-color:#bbb}
+        .checkout-modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:4000;display:none;justify-content:center;align-items:center;backdrop-filter:blur(3px);padding:20px}
+        .checkout-modal{background:#fff;width:100%;max-width:600px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.2);display:flex;flex-direction:column;max-height:95vh}
+        .checkout-modal-header{padding:25px 30px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eaeaea}
+        .checkout-modal-header h2{font-family:var(--font-title);font-size:1.8rem;color:#8A204C;margin:0;font-weight:700}
+        .checkout-close-btn{font-size:1.6rem;color:#999;cursor:pointer;line-height:1;transition:0.2s;font-family:sans-serif}
+        .checkout-close-btn:hover{color:var(--accent)}
+        .checkout-modal-body{padding:25px 30px;overflow-y:auto;display:flex;flex-direction:column;gap:20px}
+        .form-row{display:flex;gap:20px}
+        .form-row .form-group{flex:1;min-width:0}
+        .form-group,.form-group-full{display:flex;flex-direction:column;gap:8px}
+        .form-group label,.form-group-full label{font-size:0.8rem;font-weight:800;color:#222;letter-spacing:0.5px}
+        .form-group input,.form-group-full input,.form-group-full textarea{background:#FAF8F8;border:1px solid #FAF8F8;border-radius:6px;padding:14px 15px;font-family:var(--font-body);font-size:0.95rem;color:var(--text-main);outline:none;transition:0.3s}
+        .form-group input::placeholder,.form-group-full input::placeholder,.form-group-full textarea::placeholder{color:#9E9E9E}
+        .form-group input:focus,.form-group-full input:focus,.form-group-full textarea:focus{border-color:#8A204C;background:#fff}
+        .form-group-full textarea{resize:vertical;min-height:80px}
+        .checkout-modal-footer{padding:25px 30px;border-top:1px solid #eaeaea;display:flex;justify-content:flex-end;gap:15px}
+        .btn-cancel-checkout{padding:12px 25px;border-radius:50px;background:#fff;color:#111;font-weight:800;font-size:0.9rem;border:1.5px solid #111;cursor:pointer;transition:0.3s}
+        .btn-cancel-checkout:hover{background:#f5f5f5}
+        .btn-confirm-checkout{padding:12px 25px;border-radius:50px;background:#8A204C;color:white;font-weight:800;font-size:0.9rem;border:1.5px solid #8A204C;cursor:pointer;transition:0.3s;display:flex;align-items:center;gap:8px}
+        .btn-confirm-checkout:hover{background:#6b1739;border-color:#6b1739;transform:translateY(-2px)}
+        @media (max-width:768px){.form-row{flex-direction:column;gap:20px}
+        .checkout-modal-footer{flex-direction:column-reverse}
+        .btn-cancel-checkout,.btn-confirm-checkout{width:100%;justify-content:center}
         }
     </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -1921,160 +487,7 @@
         }
 
         // --- ESTRUCTURA DEL MENÚ Y CATÁLOGO ---
-        const menuData = [
-            {
-                macroTitle: 'Flores Principales',
-                categories: [
-                    {
-                        id: 'cat-rosas', title: 'Rosas', bannerImg: '1cpygTwTipo7LVh_e8rVXDl59jclUc0oh',
-                        items: [
-                            { id: 'r1', name: 'Balde Rosas Rojas', price: 150.00, img: '1cpygTwTipo7LVh_e8rVXDl59jclUc0oh' },
-                            { id: 'r2', name: 'Balde Rosas Rosadas', price: 150.00, img: '1kJiv4UlInHYYR0C8NZd_TdI-r583OjYB' },
-                            { id: 'r3', name: 'Balde Rosas Amarillas y Blancas', price: 150.00, img: '1Tm7iw_u75jpwCL-VQIy3NYcRIEUJ94Fn' },
-                            { id: 'r4', name: 'Ramo Rosas y Lluvia', price: 80.00, img: '19ECgXq1X6tnbW9EIwgNq7JXXaxoi0Zt-' },
-                            { id: 'r5', name: 'Ramo Rosas Amarillas y Lilas', price: 85.00, img: '1uW0EpRuqwIxnA8S_6Rqzi4cJD18jFFeX' },
-                            { id: 'r6', name: 'Ramo Rosas y Flores Lilas', price: 85.00, img: '1ZYsq_mi32oeLtZOKVoO1dtTsQyW7bCoQ' }
-                        ]
-                    },
-                    {
-                        id: 'cat-girasoles', title: 'Girasoles', bannerImg: '15wZt35uBTm7FkDrGw7NnmHJwMjJgyU1B',
-                        items: [
-                            { id: 'g1', name: 'Balde de Girasoles', price: 120.00, img: '15wZt35uBTm7FkDrGw7NnmHJwMjJgyU1B' },
-                            { id: 'g2', name: 'Ramo 6 Girasoles', price: 85.00, img: '1LLuo5UKdkxjMuCVNqpEZ41eq7V7M3Pn9' },
-                            { id: 'g3', name: 'Ramo 4 Girasoles y Rosas', price: 105.00, img: '1mAW5MFXsliomPKcmNiU3HcxpDoCNFC1E' },
-                            { id: 'g4', name: 'Ramo 2 Girasoles y Globo', price: 55.00, img: '1fVUvkr5FWyRkSpMC6NGiBAx5TcBcGTZ2' },
-                            { id: 'g5', name: '3 Girasoles y Rosas', price: 95.00, img: '1GsOVRIpO98B-LF-t2dqC3UdLS7wTf_nM' }
-                        ]
-                    },
-                    {
-                        id: 'cat-tulipanes', title: 'Tulipanes', bannerImg: '1RGh5LgoT0MOaoXJLqgtAYgYR1Cj_JNoT',
-                        items: [
-                            { id: 't1', name: 'Tulipanes Rojos Elegantes', price: 95.00, img: '1mG4E833M45n7d87sEgpJ2NlVrxhhjfJ-' },
-                            { id: 't2', name: 'Tulipanes Amarillos', price: 95.00, img: 'https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=400&q=80' },
-                            { id: 't3', name: 'Mix de Tulipanes Primavera', price: 110.00, img: '1KBrj0pzLxShvvs9qmC8FDtpOKPmQpOy8' },
-                            { id: 't4', name: 'Caja de 6 Tulipanes', price: 125.00, img: '1KBrro4nuTLI2EfBJ1w6LftGW59yHkRse' }
-                        ]
-                    },
-                    {
-                        id: 'cat-astromelias', title: 'Astromelias', bannerImg: '1Xgtuj2dhCRjQKGgtHKBrsViPozpqHGte',
-                        items: [
-                            { id: 'as1', name: 'Astromelias Rosadas', price: 50.00, img: '1Xgtuj2dhCRjQKGgtHKBrsViPozpqHGte' },
-                            { id: 'as2', name: 'Astromelias Vibrantes', price: 55.00, img: '1DDCOf_S9iob208Q7jH8WxzMZFPiiePu1' },
-                            { id: 'as3', name: 'Mix Astromelias y Margaritas', price: 65.00, img: '1_Vvz0VRZWivZnwibaFjalSSQUTFMSVsS' },
-                            { id: 'as4', name: 'Ramo de Astromelias Especial', price: 70.00, img: '141pe8ST3BWjMags2S14jSN2GRKqQ5RCK' }
-                        ]
-                    },
-                    {
-                        id: 'cat-claveles', title: 'Claveles', bannerImg: '1P95_NYTg6t3AG_n5Zv8dLQSkxIqtlEFm',
-                        items: [
-                            { id: 'cl1', name: 'Claveles Tradicionales', price: 45.00, img: '1mqq0lJK-LgNQDi-hJMxbUqtiybYOp5ia' },
-                            { id: 'cl2', name: 'Claveles Blancos Puros', price: 45.00, img: '1nWOuocAOdFJ7rzwE7xpduIbX54PL3WHg' },
-                            { id: 'cl3', name: 'Mix de Claveles Coloridos', price: 55.00, img: 'https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=400&q=80' },
-                            { id: 'cl4', name: 'Claveles en Balde', price: 65.00, img: '1qQGT_C_4PuWo9X791TccWqpNKIehM_zI' }
-                        ]
-                    },
-                    {
-                        id: 'cat-eternas', title: 'Flores Eternas', bannerImg: '1r5YlC_PLw0mWpwIET0eBVHbMfJ_2HvhB',
-                        items: [
-                            { id: 'et1', name: 'Rosas y Mariposas', price: 65.00, img: '1RntTxM5__stBC_WNU3S9_pidPJbndsfd' },
-                            { id: 'et2', name: 'Rosas Hello Kitty Cumpleaños', price: 75.00, img: '1Ggxk6aLhmGONsPB6zEVomZrOB_oRRk2y' },
-                            { id: 'et3', name: 'Flores Lilas Limpiapipa', price: 45.00, img: '1FNEi4lM8tzdiAE3F9pYgmNjmcp5kMwEA' },
-                            { id: 'et4', name: 'Flores Azules Limpiapipa', price: 45.00, img: '15Iskbw3rFBdr9Auz6Rt3tLvZU02hrFIa' },
-                            { id: 'et5', name: 'Rosas Amarillas Osito', price: 55.00, img: '1INdWcvdVxJWevu8cIeBlw61dS-Y4MXvj' },
-                            { id: 'et6', name: 'Rosa y Orquídea Limpiapipa', price: 50.00, img: '1MAgKRa97GwAEWoCBgWkp_73SbkzSyI-0' }
-                        ]
-                    }
-                ]
-            },
-            {
-                macroTitle: 'Arreglos y Eventos',
-                categories: [
-                    {
-                        id: 'cat-eventos', title: 'Eventos', bannerImg: '1SAbIm7MoNNgn8in17pklvZQ-SKOU77Yg',
-                        items: [
-                            { id: 'ev1', name: 'Rosas y Girasol Premium', price: 85.00, img: '1acovOFVcub7uUic9VmUtBLpvQZMXixOK' },
-                            { id: 'ev2', name: 'Arreglo de Orquídeas y Rosas', price: 110.00, img: '1-sOMv6YM7kE99C8ZguLdeqIIV9alnlvI' },
-                            { id: 'ev3', name: 'Ramo Rosas Blancas y Lilas', price: 90.00, img: '104Qri6U5-UU_UjkvKDhAdOqVjYQExIfy' },
-                            { id: 'ev4', name: 'Arreglo Orquídea Elegante', price: 115.00, img: '1_Tbdcf3o4Kn367Sop6oAWDXoYEoQ17Vw' }
-                        ]
-                    },
-                    {
-                        id: 'cat-adornos', title: 'Adornos de Mesa', bannerImg: '12aY6lKDf6gjwtRdJr87VZjrVwo7sLkgz',
-                        items: [
-                            { id: 'ad1', name: 'Centro de Mesa Floral', price: 65.00, img: '1TYETsidwkf48tpg91lfm5SjphiHJiUJg' },
-                            { id: 'ad2', name: 'Adorno de Margaritas Blancas', price: 45.00, img: '1BGBpO2uP8SEvdq-WKOnVzaW4nlTcOaJw' },
-                            { id: 'ad3', name: 'Hortensias Moradas de Mesa', price: 60.00, img: '1Kqyz0llJ0T1Ug01hG1QqsMRRRYRK5Pqo' },
-                            { id: 'ad4', name: 'Centro de Gladiolos Naranjas', price: 55.00, img: '1LVfI2pP6SZ3VPdz_IWeHmXntY8g4fQm5' }
-                        ]
-                    }
-                ]
-            },
-            {
-                macroTitle: 'Regalos y Complementos',
-                categories: [
-                    {
-                        id: 'cat-peluches', title: 'Peluches', bannerImg: '1f2gtdRrCZTGvUMRJHUDcsBd2C4ipxrvr',
-                        items: [
-                            { id: 'pl1', name: 'Peluche Lotso Rosa', price: 45.00, img: '1f2gtdRrCZTGvUMRJHUDcsBd2C4ipxrvr' },
-                            { id: 'pl2', name: 'Peluche Elefante Rosa', price: 55.00, img: '1WhIbdIL2CLrORX9nI4pVvEBqRrg9OXEh' },
-                            { id: 'pl3', name: 'Peluche Hello Kitty', price: 50.00, img: '10HQsyG7AX9E-rYVO-ryWBv2F-d2YA5B2' },
-                            { id: 'pl4', name: 'Peluche Stich Rosa', price: 60.00, img: '1LXN2pfzaNRdA_7aYQPxa3XZeys9UAcuZ' },
-                            { id: 'pl5', name: 'Peluche Snoopy', price: 45.00, img: '16VgEFDHc0Eu-WxQUSTQoexWCaniGlZ4t' }
-                        ]
-                    },
-                    {
-                        id: 'cat-globos', title: 'Globos', bannerImg: '1H1Uz9VjHtLZPn5sWguQmIvUFvTFQw0zn',
-                        items: [
-                            { id: 'gl1', name: 'Globo Metálico Cumpleaños', price: 15.00, img: 'https://images.unsplash.com/photo-1530103862676-de8c9de0f8d9?w=400&q=80' },
-                            { id: 'gl2', name: 'Burbuja Personalizada', price: 35.00, img: 'https://images.unsplash.com/photo-1522273400909-fd1a8f77637e?w=400&q=80' },
-                            { id: 'gl3', name: 'Pack Globos Corazón', price: 20.00, img: 'https://images.unsplash.com/photo-1506806732259-39c2d0f68daf?w=400&q=80' },
-                            { id: 'gl4', name: 'Globo Metálico Amor', price: 18.00, img: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&q=80' }
-                        ]
-                    },
-                    {
-                        id: 'cat-extras', title: 'Extras', bannerImg: '18V7I7XpxXVMyv0QcQlARy52NLXqbXz3P',
-                        items: [
-                            { id: 'ex1', name: 'Chocolates Surtidos', price: 30.00, img: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=400&q=80' },
-                            { id: 'ex2', name: 'Caja Bombones x8', price: 25.00, img: 'https://images.unsplash.com/photo-1511914265872-c40672604a80?w=400&q=80' },
-                            { id: 'ex3', name: 'Topper Feliz Día', price: 15.00, img: 'https://images.unsplash.com/photo-1548843254-24eed50359aa?w=400&q=80' },
-                            { id: 'ex4', name: 'Vino Tinto de Ocasión', price: 45.00, img: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=400&q=80' }
-                        ]
-                    }
-                ]
-            },
-            {
-                macroTitle: 'Jardín y Hogar',
-                categories: [
-                    {
-                        id: 'cat-maceteros', title: 'Maceteros', bannerImg: '1cnYTzaPWsRbBdrSYeYqBuL3il2wn9qBn',
-                        items: [
-                            { id: 'mc1', name: 'Mis Maceteros Especiales', price: 35.00, img: '1cnYTzaPWsRbBdrSYeYqBuL3il2wn9qBn' },
-                            { id: 'mc2', name: 'Elefantito de Cerámica', price: 45.00, img: '1431fWnoeGEtZZMKKIJl9RQyCN7_hTmgD' },
-                            { id: 'mc3', name: 'Cisne de Cerámica', price: 50.00, img: '1FMlZ6xL9-JFjjPq4VtsBId8RDRiiFD2v' },
-                            { id: 'mc4', name: 'Macetero Vintage', price: 40.00, img: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&q=80' }
-                        ]
-                    },
-                    {
-                        id: 'cat-plantas', title: 'Plantas Decorativas', bannerImg: '1kQfEx6fypxu5BQSDZiOu0mI_acj0N8_G',
-                        items: [
-                            { id: 'pt1', name: 'Suculenta en Maceta', price: 25.00, img: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&q=80' },
-                            { id: 'pt2', name: 'Helecho Pequeño', price: 35.00, img: 'https://images.unsplash.com/photo-1453904300235-0f2f60b15b5d?w=400&q=80' },
-                            { id: 'pt3', name: 'Bonsai Ficus', price: 45.00, img: 'https://images.unsplash.com/photo-1416879598555-aca725dc39ab?w=400&q=80' },
-                            { id: 'pt4', name: 'Cactus Decorativo', price: 20.00, img: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=400&q=80' }
-                        ]
-                    },
-                    {
-                        id: 'cat-semillas', title: 'Semillas', bannerImg: '1VkLp8Ht3hz0u_2_pdBzg_By6FM3IiL4P',
-                        items: [
-                            { id: 'sm1', name: 'Semillas de Girasol', price: 10.00, img: 'https://images.unsplash.com/photo-1587049352847-4d4b126a11fe?w=400&q=80' },
-                            { id: 'sm2', name: 'Semillas de Margarita', price: 10.00, img: 'https://images.unsplash.com/photo-1596547609652-9cb5d8d76921?w=400&q=80' },
-                            { id: 'sm3', name: 'Pack Huerto Casero', price: 25.00, img: 'https://images.unsplash.com/photo-1530836369250-ef71a3f55ce8?w=400&q=80' },
-                            { id: 'sm4', name: 'Semillas de Tulipán', price: 15.00, img: 'https://images.unsplash.com/photo-1510462006323-add7ff2439d5?w=400&q=80' }
-                        ]
-                    }
-                ]
-            }
-        ];
+        const menuData = [{macroTitle:'Flores Principales',categories:[{id:'cat-rosas',title:'Rosas',bannerImg:'1cpygTwTipo7LVh_e8rVXDl59jclUc0oh',items:[{id:'r1',name:'Balde Rosas Rojas',price:150.00,img:'1cpygTwTipo7LVh_e8rVXDl59jclUc0oh'},{id:'r2',name:'Balde Rosas Rosadas',price:150.00,img:'1kJiv4UlInHYYR0C8NZd_TdI-r583OjYB'},{id:'r3',name:'Balde Rosas Amarillas y Blancas',price:150.00,img:'1Tm7iw_u75jpwCL-VQIy3NYcRIEUJ94Fn'},{id:'r4',name:'Ramo Rosas y Lluvia',price:80.00,img:'19ECgXq1X6tnbW9EIwgNq7JXXaxoi0Zt-'},{id:'r5',name:'Ramo Rosas Amarillas y Lilas',price:85.00,img:'1uW0EpRuqwIxnA8S_6Rqzi4cJD18jFFeX'},{id:'r6',name:'Ramo Rosas y Flores Lilas',price:85.00,img:'1ZYsq_mi32oeLtZOKVoO1dtTsQyW7bCoQ'}]},{id:'cat-girasoles',title:'Girasoles',bannerImg:'15wZt35uBTm7FkDrGw7NnmHJwMjJgyU1B',items:[{id:'g1',name:'Balde de Girasoles',price:120.00,img:'15wZt35uBTm7FkDrGw7NnmHJwMjJgyU1B'},{id:'g2',name:'Ramo 6 Girasoles',price:85.00,img:'1LLuo5UKdkxjMuCVNqpEZ41eq7V7M3Pn9'},{id:'g3',name:'Ramo 4 Girasoles y Rosas',price:105.00,img:'1mAW5MFXsliomPKcmNiU3HcxpDoCNFC1E'},{id:'g4',name:'Ramo 2 Girasoles y Globo',price:55.00,img:'1fVUvkr5FWyRkSpMC6NGiBAx5TcBcGTZ2'},{id:'g5',name:'3 Girasoles y Rosas',price:95.00,img:'1GsOVRIpO98B-LF-t2dqC3UdLS7wTf_nM'}]},{id:'cat-tulipanes',title:'Tulipanes',bannerImg:'1RGh5LgoT0MOaoXJLqgtAYgYR1Cj_JNoT',items:[{id:'t1',name:'Tulipanes Rojos Elegantes',price:95.00,img:'1mG4E833M45n7d87sEgpJ2NlVrxhhjfJ-'},{id:'t2',name:'Tulipanes Amarillos',price:95.00,img:'https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=400&q=80'},{id:'t3',name:'Mix de Tulipanes Primavera',price:110.00,img:'1KBrj0pzLxShvvs9qmC8FDtpOKPmQpOy8'},{id:'t4',name:'Caja de 6 Tulipanes',price:125.00,img:'1KBrro4nuTLI2EfBJ1w6LftGW59yHkRse'}]},{id:'cat-astromelias',title:'Astromelias',bannerImg:'1Xgtuj2dhCRjQKGgtHKBrsViPozpqHGte',items:[{id:'as1',name:'Astromelias Rosadas',price:50.00,img:'1Xgtuj2dhCRjQKGgtHKBrsViPozpqHGte'},{id:'as2',name:'Astromelias Vibrantes',price:55.00,img:'1DDCOf_S9iob208Q7jH8WxzMZFPiiePu1'},{id:'as3',name:'Mix Astromelias y Margaritas',price:65.00,img:'1_Vvz0VRZWivZnwibaFjalSSQUTFMSVsS'},{id:'as4',name:'Ramo de Astromelias Especial',price:70.00,img:'141pe8ST3BWjMags2S14jSN2GRKqQ5RCK'}]},{id:'cat-claveles',title:'Claveles',bannerImg:'1P95_NYTg6t3AG_n5Zv8dLQSkxIqtlEFm',items:[{id:'cl1',name:'Claveles Tradicionales',price:45.00,img:'1mqq0lJK-LgNQDi-hJMxbUqtiybYOp5ia'},{id:'cl2',name:'Claveles Blancos Puros',price:45.00,img:'1nWOuocAOdFJ7rzwE7xpduIbX54PL3WHg'},{id:'cl3',name:'Mix de Claveles Coloridos',price:55.00,img:'https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=400&q=80'},{id:'cl4',name:'Claveles en Balde',price:65.00,img:'1qQGT_C_4PuWo9X791TccWqpNKIehM_zI'}]},{id:'cat-eternas',title:'Flores Eternas',bannerImg:'1r5YlC_PLw0mWpwIET0eBVHbMfJ_2HvhB',items:[{id:'et1',name:'Rosas y Mariposas',price:65.00,img:'1RntTxM5__stBC_WNU3S9_pidPJbndsfd'},{id:'et2',name:'Rosas Hello Kitty Cumpleaños',price:75.00,img:'1Ggxk6aLhmGONsPB6zEVomZrOB_oRRk2y'},{id:'et3',name:'Flores Lilas Limpiapipa',price:45.00,img:'1FNEi4lM8tzdiAE3F9pYgmNjmcp5kMwEA'},{id:'et4',name:'Flores Azules Limpiapipa',price:45.00,img:'15Iskbw3rFBdr9Auz6Rt3tLvZU02hrFIa'},{id:'et5',name:'Rosas Amarillas Osito',price:55.00,img:'1INdWcvdVxJWevu8cIeBlw61dS-Y4MXvj'},{id:'et6',name:'Rosa y Orquídea Limpiapipa',price:50.00,img:'1MAgKRa97GwAEWoCBgWkp_73SbkzSyI-0'}]}]},{macroTitle:'Arreglos y Eventos',categories:[{id:'cat-eventos',title:'Eventos',bannerImg:'1SAbIm7MoNNgn8in17pklvZQ-SKOU77Yg',items:[{id:'ev1',name:'Rosas y Girasol Premium',price:85.00,img:'1acovOFVcub7uUic9VmUtBLpvQZMXixOK'},{id:'ev2',name:'Arreglo de Orquídeas y Rosas',price:110.00,img:'1-sOMv6YM7kE99C8ZguLdeqIIV9alnlvI'},{id:'ev3',name:'Ramo Rosas Blancas y Lilas',price:90.00,img:'104Qri6U5-UU_UjkvKDhAdOqVjYQExIfy'},{id:'ev4',name:'Arreglo Orquídea Elegante',price:115.00,img:'1_Tbdcf3o4Kn367Sop6oAWDXoYEoQ17Vw'}]},{id:'cat-adornos',title:'Adornos de Mesa',bannerImg:'12aY6lKDf6gjwtRdJr87VZjrVwo7sLkgz',items:[{id:'ad1',name:'Centro de Mesa Floral',price:65.00,img:'1TYETsidwkf48tpg91lfm5SjphiHJiUJg'},{id:'ad2',name:'Adorno de Margaritas Blancas',price:45.00,img:'1BGBpO2uP8SEvdq-WKOnVzaW4nlTcOaJw'},{id:'ad3',name:'Hortensias Moradas de Mesa',price:60.00,img:'1Kqyz0llJ0T1Ug01hG1QqsMRRRYRK5Pqo'},{id:'ad4',name:'Centro de Gladiolos Naranjas',price:55.00,img:'1LVfI2pP6SZ3VPdz_IWeHmXntY8g4fQm5'}]}]},{macroTitle:'Regalos y Complementos',categories:[{id:'cat-peluches',title:'Peluches',bannerImg:'1f2gtdRrCZTGvUMRJHUDcsBd2C4ipxrvr',items:[{id:'pl1',name:'Peluche Lotso Rosa',price:45.00,img:'1f2gtdRrCZTGvUMRJHUDcsBd2C4ipxrvr'},{id:'pl2',name:'Peluche Elefante Rosa',price:55.00,img:'1WhIbdIL2CLrORX9nI4pVvEBqRrg9OXEh'},{id:'pl3',name:'Peluche Hello Kitty',price:50.00,img:'10HQsyG7AX9E-rYVO-ryWBv2F-d2YA5B2'},{id:'pl4',name:'Peluche Stich Rosa',price:60.00,img:'1LXN2pfzaNRdA_7aYQPxa3XZeys9UAcuZ'},{id:'pl5',name:'Peluche Snoopy',price:45.00,img:'16VgEFDHc0Eu-WxQUSTQoexWCaniGlZ4t'}]},{id:'cat-globos',title:'Globos',bannerImg:'1H1Uz9VjHtLZPn5sWguQmIvUFvTFQw0zn',items:[{id:'gl1',name:'Globo Metálico Cumpleaños',price:15.00,img:'https://images.unsplash.com/photo-1530103862676-de8c9de0f8d9?w=400&q=80'},{id:'gl2',name:'Burbuja Personalizada',price:35.00,img:'https://images.unsplash.com/photo-1522273400909-fd1a8f77637e?w=400&q=80'},{id:'gl3',name:'Pack Globos Corazón',price:20.00,img:'https://images.unsplash.com/photo-1506806732259-39c2d0f68daf?w=400&q=80'},{id:'gl4',name:'Globo Metálico Amor',price:18.00,img:'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&q=80'}]},{id:'cat-extras',title:'Extras',bannerImg:'18V7I7XpxXVMyv0QcQlARy52NLXqbXz3P',items:[{id:'ex1',name:'Chocolates Surtidos',price:30.00,img:'https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=400&q=80'},{id:'ex2',name:'Caja Bombones x8',price:25.00,img:'https://images.unsplash.com/photo-1511914265872-c40672604a80?w=400&q=80'},{id:'ex3',name:'Topper Feliz Día',price:15.00,img:'https://images.unsplash.com/photo-1548843254-24eed50359aa?w=400&q=80'},{id:'ex4',name:'Vino Tinto de Ocasión',price:45.00,img:'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=400&q=80'}]}]},{macroTitle:'Jardín y Hogar',categories:[{id:'cat-maceteros',title:'Maceteros',bannerImg:'1cnYTzaPWsRbBdrSYeYqBuL3il2wn9qBn',items:[{id:'mc1',name:'Mis Maceteros Especiales',price:35.00,img:'1cnYTzaPWsRbBdrSYeYqBuL3il2wn9qBn'},{id:'mc2',name:'Elefantito de Cerámica',price:45.00,img:'1431fWnoeGEtZZMKKIJl9RQyCN7_hTmgD'},{id:'mc3',name:'Cisne de Cerámica',price:50.00,img:'1FMlZ6xL9-JFjjPq4VtsBId8RDRiiFD2v'},{id:'mc4',name:'Macetero Vintage',price:40.00,img:'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&q=80'}]},{id:'cat-plantas',title:'Plantas Decorativas',bannerImg:'1kQfEx6fypxu5BQSDZiOu0mI_acj0N8_G',items:[{id:'pt1',name:'Suculenta en Maceta',price:25.00,img:'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&q=80'},{id:'pt2',name:'Helecho Pequeño',price:35.00,img:'https://images.unsplash.com/photo-1453904300235-0f2f60b15b5d?w=400&q=80'},{id:'pt3',name:'Bonsai Ficus',price:45.00,img:'https://images.unsplash.com/photo-1416879598555-aca725dc39ab?w=400&q=80'},{id:'pt4',name:'Cactus Decorativo',price:20.00,img:'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=400&q=80'}]},{id:'cat-semillas',title:'Semillas',bannerImg:'1VkLp8Ht3hz0u_2_pdBzg_By6FM3IiL4P',items:[{id:'sm1',name:'Semillas de Girasol',price:10.00,img:'https://images.unsplash.com/photo-1587049352847-4d4b126a11fe?w=400&q=80'},{id:'sm2',name:'Semillas de Margarita',price:10.00,img:'https://images.unsplash.com/photo-1596547609652-9cb5d8d76921?w=400&q=80'},{id:'sm3',name:'Pack Huerto Casero',price:25.00,img:'https://images.unsplash.com/photo-1530836369250-ef71a3f55ce8?w=400&q=80'},{id:'sm4',name:'Semillas de Tulipán',price:15.00,img:'https://images.unsplash.com/photo-1510462006323-add7ff2439d5?w=400&q=80'}]}]}];
 
         function renderSite() {
             const menuContainer = document.getElementById('sidebarMenuContent');
