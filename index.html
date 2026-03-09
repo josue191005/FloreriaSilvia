@@ -1469,7 +1469,7 @@
                 return {
                     id: 'cat-' + catName.replace(/\s+/g, '-').toLowerCase(),
                     title: catName,
-                    bannerImg: categoriesMap[catName][0].img, // Usa la primera foto de la carpeta como banner
+                    bannerImg: categoriesMap[catName][categoriesMap[catName].length - 1].img, // Usa la primera foto de la carpeta como banner
                     items: categoriesMap[catName]
                 }
             });
