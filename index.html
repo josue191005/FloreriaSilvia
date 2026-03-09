@@ -14,15 +14,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style type="text/tailwindcss">
         :root {
-    --bg-color:#FAFAFA;
-    --header-bg:#FFF0F5;
-    --text-main:#111111;
-    --text-light:#666666;
-    --primary:#FAD4DF;
-    --accent:#FF4D85;
-    --accent-dark:#D81B60;
-    --footer-bg:#112a1e;
-    --footer-text:#E8EBE9;
+    --bg-color: #FAFAFA;
+    --header-bg: #FFF0F5;
+    --text-main: #111111;
+    --text-light: #666666;
+    --primary: #FAD4DF;
+    --accent: #FF4D85;
+    --accent-dark: #D81B60;
+    --footer-bg: #9d3b57;;
+    --footer-text: #E8EBE9;
     --border-radius:16px;
     --shadow-card:0 4px 15px rgba(0,0,0,0.06);
     --transition:all 0.3s ease;
@@ -140,7 +140,12 @@
     overflow-y:auto}
         .sidebar.active {
     transform:translateX(0)}
-        .sidebar-
+        .sidebar-header {
+    padding:25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #f0f0f0}
         .sidebar-header span {
     font-family:var(--font-title);
     font-weight:700;
@@ -417,10 +422,11 @@
     left:0;
     width:100%;
     height:100%;
-    background:linear-gradient(to top,rgba(0,0,0,0.5),transparent);
+    background:linear-gradient(to top,rgba(0,0,0,0.6),transparent);
     display:flex;
-    align-items:flex-end;
-    justify-content:center;
+    flex-direction: column;
+    align-items:center;
+    justify-content:flex-end;
     padding-bottom:30px}
         .cat-banner-overlay h2 {
     color:white;
@@ -429,7 +435,17 @@
     letter-spacing:2px;
     text-shadow:2px 2px 8px rgba(0,0,0,0.4);
     text-transform:uppercase;
-    text-align:center}
+    text-align:center;
+    margin-bottom: 5px;
+    }
+        .cat-banner-overlay p {
+    color: var(--primary);
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+    margin: 0;
+    }
         .cat-slider-side {
     width:100%;
     position:relative;
@@ -505,28 +521,15 @@
     font-family:var(--font-body);
     font-weight:800;
     font-size:0.95rem;
-    margin:10px;
+    margin:15px 10px;
     color:var(--text-main);
-    height:40px;
     display:flex;
     align-items:center;
     justify-content:center;
     line-height:1.2;
-    overflow:hidden}
-        .prod-price {
-    color:var(--accent);
-    font-weight:900;
-    font-size:1.2rem;
-    margin-bottom:5px}
-        .comprar-txt {
-    font-size:0.85rem;
-    color:var(--text-light);
-    margin-bottom:12px;
-    cursor:pointer;
-    transition:0.2s}
-        .comprar-txt:hover {
-    color:var(--text-main);
-    text-decoration:underline}
+    overflow:hidden;
+    flex: 1; /* Para que empuje el botón hacia abajo */
+    }
         .btn-add {
     margin:auto auto 0;
     width:85%;
@@ -556,9 +559,8 @@
         .cat-slider-side {
     width:65%}
         .cat-banner-overlay {
-    align-items:center;
-    padding-bottom:0;
-    background:rgba(0,0,0,0.3)}
+    padding-bottom: 40px;
+    background:rgba(0,0,0,0.4)}
         .nav-arrow.left {
     left:-20px}
         .nav-arrow.right {
@@ -569,10 +571,7 @@
     flex:0 0 calc(33.333% - 13.33px)}
         .prod-name {
     font-size:1.05rem;
-    margin:10px 15px;
-    height:45px}
-        .prod-price {
-    font-size:1.35rem}
+    margin:15px 15px;}
         .btn-add {
     width:80%;
     padding:12px 0;
@@ -866,7 +865,13 @@
     box-shadow:-5px 0 20px rgba(0,0,0,0.1)}
         .cart-sidebar.active {
     transform:translateX(0)}
-        .cart-sidebar-
+        .cart-sidebar-header {
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #eee;
+    background:#fff}
         .cart-sidebar-title {
     font-family:var(--font-title);
     font-weight:700;
@@ -915,11 +920,7 @@
     font-weight:700;
     color:var(--text-main);
     margin-bottom:2px}
-        .cart-item-price {
-    font-size:0.85rem;
-    font-weight:800;
-    color:#8A204C;
-    margin-bottom:8px}
+        /* Eliminada la clase .cart-item-price para que no se vea en el carrito */
         .cart-qty-ctrl {
     display:flex;
     align-items:center;
@@ -927,7 +928,8 @@
     background:#f5f5f5;
     border-radius:50px;
     padding:4px 10px;
-    width:fit-content}
+    width:fit-content;
+    margin-top: 5px;}
         .cart-qty-btn {
     font-size:1.1rem;
     color:#555;
@@ -1020,7 +1022,12 @@
     display:flex;
     flex-direction:column;
     max-height:95vh}
-        .checkout-modal-
+        .checkout-modal-header {
+    padding:20px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #eaeaea}
         .checkout-modal-header h2 {
     font-family:var(--font-title);
     font-size:1.8rem;
@@ -1322,30 +1329,27 @@
         id="wspBtn">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
-    <!-- CART SIDEBAR -->
     <div class="cart-sidebar-overlay" id="cartSidebarOverlay" onclick="toggleCartSidebar()"></div>
     <div class="cart-sidebar" id="cartSidebarPanel">
         <div class="cart-sidebar-header">
-            <div class="cart-sidebar-title"><i class="fa-solid fa-cart-shopping"></i> Tu Carrito</div>
+            <div class="cart-sidebar-title"><i class="fa-solid fa-list-check"></i> Tu Cotización</div>
             <div class="cart-close-btn" onclick="toggleCartSidebar()">×</div>
         </div>
         <div class="cart-items-container" id="cartSidebarItems">
-            <!-- Items del carrito -->
-        </div>
+            </div>
         <div class="cart-sidebar-footer">
             <div class="cart-subtotal-row">
-                <span>Subtotal</span>
-                <span class="cart-subtotal-val" id="cartSidebarTotal">S/ 0.00</span>
+                <span>Estado:</span>
+                <span class="cart-subtotal-val" style="font-size: 1rem !important; color: #666 !important;">Por Cotizar</span>
             </div>
-            <button class="btn-checkout-final" onclick="openCheckoutModal()">FINALIZAR COMPRA</button>
-            <button class="btn-empty-cart" onclick="emptyCart()">VACIAR CARRITO</button>
+            <button class="btn-checkout-final" onclick="openCheckoutModal()">SOLICITAR COTIZACIÓN</button>
+            <button class="btn-empty-cart" onclick="emptyCart()">VACIAR LISTA</button>
         </div>
     </div>
-    <!-- CHECKOUT MODAL -->
     <div class="checkout-modal-overlay animate-fadeIn" id="checkoutModalOverlay" onclick="closeCheckoutModal(event)">
         <div class="checkout-modal animate-fadeInUp" style="animation-duration: 0.4s;">
             <div class="checkout-modal-header">
-                <h2>Completar pedido</h2>
+                <h2>Datos para Cotizar</h2>
                 <div class="checkout-close-btn" onclick="closeCheckoutModal(null)">×</div>
             </div>
             <div class="checkout-modal-body">
@@ -1359,7 +1363,7 @@
                         <input type="text" id="orderPhone" placeholder="Ej. 987654321">
                     </div>
                     <div class="form-group">
-                        <label>FECHA DE ENTREGA</label>
+                        <label>FECHA DE ENTREGA APROX.</label>
                         <input type="date" id="orderDate">
                     </div>
                 </div>
@@ -1374,809 +1378,115 @@
                     </div>
                 </div>
                 <div class="form-group-full">
-                    <label>DEDICATORIA (OPCIONAL)</label>
+                    <label>DETALLES ADICIONALES</label>
                     <textarea id="orderMessage"
-                        placeholder="Escribe un mensaje especial o indicaciones para la entrega..." rows="3"></textarea>
+                        placeholder="Indícanos si quieres cambiar colores, tipo de flores o agregar algo especial..." rows="3"></textarea>
                 </div>
             </div>
             <div class="checkout-modal-footer">
                 <button class="btn-cancel-checkout" onclick="closeCheckoutModal(null)">CANCELAR</button>
                 <button class="btn-confirm-checkout" onclick="confirmOrderWsp()"><i class="fa-brands fa-whatsapp"></i>
-                    CONFIRMAR Y ABRIR WHATSAPP</button>
+                    ENVIAR A WHATSAPP</button>
             </div>
         </div>
     </div>
     <div class="cart-bar" id="cartBar">
         <div>
             <div style="font-size: 0.85rem; color:var(--text-light); font-weight: 700;" id="cartCount">0 items</div>
-            <div style="font-size: 1.3rem; font-weight: 800; color:var(--text-main);" id="cartTotal">S/ 0.00</div>
+            <div style="font-size: 1.1rem; font-weight: 800; color:var(--text-main);">Por Cotizar</div>
         </div>
-        <button class="btn-pedir-cart" onclick="toggleCartSidebar()">PEDIR AHORA</button>
+        <button class="btn-pedir-cart" onclick="toggleCartSidebar()">VER LISTA</button>
     </div>
     <script>
+        // --- 1. CONFIGURACIÓN DEL SHEETS ---
+        // ⚠️ IMPORTANTE: REEMPLAZA ESTE LINK POR EL DE TU NUEVO SHEETS (debe terminar en pub?output=csv)
+        
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQziHqjXImLCjHwqBqSEVWKU1AFPK2pQm83INGPkJyLhLluR1E8dzsxX4iOUucu_ruWNp9RxtEfSIrx/pub?output=csv';
         const PHONE = '51936625197';
+        
         let cart = [];
         let allItemsFlat = [];
-        // --- FUNCIÓN PARA FOTOS DE DRIVE POR PROXY ---
-        function getImgUrl(imgStr) {
-            if (imgStr.startsWith('http')) return imgStr;
-            return `https://wsrv.nl/?url=https://drive.google.com/uc?id=${imgStr}&w=600`;
+        let menuData = []; // Ahora empieza vacío y se llena solo
+
+        // --- 2. INICIO Y CONEXIÓN AL SHEETS ---
+        async function init() {
+            try {
+                // El Date.now() evita que Google nos dé una versión vieja (caché)
+                const res = await fetch(SHEET_URL + '&t=' + Date.now());
+                if (!res.ok) throw new Error("Error conectando con el catálogo.");
+                
+                const text = await res.text();
+                const rawProducts = parseCSV(text);
+                
+                // Construimos la estructura agrupando por "Carpeta Contenedora"
+                menuData = buildDynamicMenu(rawProducts);
+                
+                // Ocultamos el loader y pintamos la web
+                const loader = document.getElementById('loader');
+                if(loader) loader.style.display = 'none';
+                
+                renderSite();
+            } catch (err) {
+                console.error(err);
+                alert("Hubo un problema cargando los productos. Revisa el enlace del Sheets o tu conexión a internet.");
+            }
         }
-        // --- ESTRUCTURA DEL MENÚ Y CATÁLOGO ---
-        const menuData = [
-    {
-        macroTitle: "Flores Principales",
-        categories: [
-            {
-                id: "cat-rosas",
-                title: "Rosas",
-                bannerImg: "1cpygTwTipo7LVh_e8rVXDl59jclUc0oh",
-                items: [
-                    {
-                        id: "r1",
-                        name: "Balde Rosas Rojas",
-                        price: 150,
-                        img: "1cpygTwTipo7LVh_e8rVXDl59jclUc0oh"
-                    },
-                    {
-                        id: "r2",
-                        name: "Balde Rosas Rosadas",
-                        price: 150,
-                        img: "1kJiv4UlInHYYR0C8NZd_TdI-r583OjYB"
-                    },
-                    {
-                        id: "r3",
-                        name: "Balde Rosas Amarillas y Blancas",
-                        price: 150,
-                        img: "1Tm7iw_u75jpwCL-VQIy3NYcRIEUJ94Fn"
-                    },
-                    {
-                        id: "r4",
-                        name: "Ramo Rosas y Lluvia",
-                        price: 80,
-                        img: "19ECgXq1X6tnbW9EIwgNq7JXXaxoi0Zt-"
-                    },
-                    {
-                        id: "r5",
-                        name: "Ramo Rosas Amarillas y Lilas",
-                        price: 85,
-                        img: "1uW0EpRuqwIxnA8S_6Rqzi4cJD18jFFeX"
-                    },
-                    {
-                        id: "r6",
-                        name: "Ramo Rosas y Flores Lilas",
-                        price: 85,
-                        img: "1ZYsq_mi32oeLtZOKVoO1dtTsQyW7bCoQ"
-                    },
-                    {
-                        id: "new_1026",
-                        name: "Ramo elegante de rosas rojas y blancas",
-                        price: 45,
-                        img: "1opGZWkIDhMN1nfSsMOJCOjeR6561pCax"
-                    },
-                    {
-                        id: "new_1027",
-                        name: "Ramo de rosas blancas en cubo metálico",
-                        price: 45,
-                        img: "1YeW3-ah6dcs-_Ab2IqVqtV22pcsw8-QV"
-                    },
-                    {
-                        id: "new_1028",
-                        name: "Ramo de rosas melocotón y blancas",
-                        price: 45,
-                        img: "1K312u4EyVaNB_D8DT35YvIqTRJCfY8Wf"
-                    },
-                    {
-                        id: "new_1029",
-                        name: "Rosas rosadas y lavanda en cubo rústico",
-                        price: 45,
-                        img: "1mwzAXOTeVZ-9VfJ4h3bSPSk2nTuR6wQY"
-                    }
-                ]
-            },
-            {
-                id: "cat-girasoles",
-                title: "Girasoles",
-                bannerImg: "15wZt35uBTm7FkDrGw7NnmHJwMjJgyU1B",
-                items: [
-                    {
-                        id: "g1",
-                        name: "Balde de Girasoles",
-                        price: 120,
-                        img: "15wZt35uBTm7FkDrGw7NnmHJwMjJgyU1B"
-                    },
-                    {
-                        id: "g2",
-                        name: "Ramo 6 Girasoles",
-                        price: 85,
-                        img: "1LLuo5UKdkxjMuCVNqpEZ41eq7V7M3Pn9"
-                    },
-                    {
-                        id: "g3",
-                        name: "Ramo 4 Girasoles y Rosas",
-                        price: 105,
-                        img: "1mAW5MFXsliomPKcmNiU3HcxpDoCNFC1E"
-                    },
-                    {
-                        id: "g4",
-                        name: "Ramo 2 Girasoles y Globo",
-                        price: 55,
-                        img: "1fVUvkr5FWyRkSpMC6NGiBAx5TcBcGTZ2"
-                    },
-                    {
-                        id: "g5",
-                        name: "3 Girasoles y Rosas",
-                        price: 95,
-                        img: "1GsOVRIpO98B-LF-t2dqC3UdLS7wTf_nM"
-                    },
-                    {
-                        id: "new_1021",
-                        name: "Ramo de girasoles en cubo rústico",
-                        price: 45,
-                        img: "1Q-h9V4E2W-0D-X2fRF3JctmLsT6aywkx"
-                    },
-                    {
-                        id: "new_1022",
-                        name: "Ramo de flores con girasoles y lirios",
-                        price: 45,
-                        img: "1bOfcXyK89AEaUnVnHzPSKUP72K6D-rJU"
-                    },
-                    {
-                        id: "new_1023",
-                        name: "Ramo de girasoles y flores variadas",
-                        price: 45,
-                        img: "1vUHRbHpiWgp-UMIFyxspNkpu_eYOcGw_"
-                    },
-                    {
-                        id: "new_1024",
-                        name: "Ramo de girasol con flores delicadas",
-                        price: 45,
-                        img: "1fixGsTixPjNDNnNuTzc6dJuu_XTABKqi"
-                    },
-                    {
-                        id: "new_1025",
-                        name: "Ramo de girasoles con delicados detalles",
-                        price: 45,
-                        img: "1UpDxj4v5XUzFsXJE94kyaI2BtHGLmULy"
-                    }
-                ]
-            },
-            {
-                id: "cat-tulipanes",
-                title: "Tulipanes",
-                bannerImg: "1RGh5LgoT0MOaoXJLqgtAYgYR1Cj_JNoT",
-                items: [
-                    {
-                        id: "t1",
-                        name: "Tulipanes Rojos Elegantes",
-                        price: 95,
-                        img: "1mG4E833M45n7d87sEgpJ2NlVrxhhjfJ-"
-                    },
-                    
-                    {
-                        id: "t2",
-                        name: "Mix de Tulipanes Primavera",
-                        price: 110,
-                        img: "1KBrj0pzLxShvvs9qmC8FDtpOKPmQpOy8"
-                    },
-                    {
-                        id: "t3",
-                        name: "Caja de 6 Tulipanes",
-                        price: 125,
-                        img: "1KBrro4nuTLI2EfBJ1w6LftGW59yHkRse"
-                    },
-                    {
-                        id: "new_1007",
-                        name: "Ramo de flores frescas y vibrantes",
-                        price: 45,
-                        img: "1cXc5TpdyX7yfk762a0R3uCUZ3znaVZnz"
-                    },
-                    {
-                        id: "new_1008",
-                        name: "Ramo de tulipanes y flores delicadas",
-                        price: 45,
-                        img: "109Pki8FtQF-bylUrLAETsQqfkyegIeVc"
-                    },
-                    {
-                        id: "new_1009",
-                        name: "Ramo de tulipanes blancos elegantes",
-                        price: 45,
-                        img: "1CNkZl8x4fAIGVig9DiG3DbKDnJe4MX0C"
-                    },
-                    {
-                        id: "new_1010",
-                        name: "Ramo de tulipanes amarillos y rústico",
-                        price: 45,
-                        img: "1QD-hfvbiTp6rrXrhGrBt5t85BvKVHcQ0"
-                    },
-                    {
-                        id: "new_1011",
-                        name: "Ramo de tulipanes rosados delicado",
-                        price: 45,
-                        img: "1JNhm9ywPWKEym8aHzLx9728SaPHA0oRW"
-                    },
-                    {
-                        id: "new_1012",
-                        name: "Ramo de tulipanes en caja de madera",
-                        price: 45,
-                        img: "1QY9fGTvLqkqRGlk0OiBw-plJfJ2JeBJD"
-                    }
-                ]
-            },
-            {
-                id: "cat-astromelias",
-                title: "Astromelias",
-                bannerImg: "1Xgtuj2dhCRjQKGgtHKBrsViPozpqHGte",
-                items: [
-                    {
-                        id: "as1",
-                        name: "Astromelias Rosadas",
-                        price: 50,
-                        img: "1Xgtuj2dhCRjQKGgtHKBrsViPozpqHGte"
-                    },
-                    {
-                        id: "as2",
-                        name: "Astromelias Vibrantes",
-                        price: 55,
-                        img: "1DDCOf_S9iob208Q7jH8WxzMZFPiiePu1"
-                    },
-                    {
-                        id: "as3",
-                        name: "Mix Astromelias y Margaritas",
-                        price: 65,
-                        img: "1_Vvz0VRZWivZnwibaFjalSSQUTFMSVsS"
-                    },
-                    {
-                        id: "as4",
-                        name: "Ramo de Astromelias Especial",
-                        price: 70,
-                        img: "141pe8ST3BWjMags2S14jSN2GRKqQ5RCK"
-                    },
-                    {
-                        id: "new_1000",
-                        name: "Ramo de Alstroemerias en caja de madera",
-                        price: 45,
-                        img: "1lKVruoTJ7Ha_1tw5AivefeO-s4XF4n5T"
-                    },
-                    {
-                        id: "new_1001",
-                        name: "Ramo vibrante de Alstroemerias en sombrero",
-                        price: 45,
-                        img: "13DVW7uuXIsrsBMtZQmxoBb1Nxj3TNe1l"
-                    },
-                    {
-                        id: "new_1002",
-                        name: "Ramo de Alstroemerias en caja rosa",
-                        price: 45,
-                        img: "15yOLBtyK4PYYQuYrP5kLyeymOjtyzhLL"
-                    },
-                    {
-                        id: "new_1003",
-                        name: "Ramo de Alstroemerias rosa y blanca",
-                        price: 45,
-                        img: "159Sgp02NcnbV9nYanCZqd5z1ZQcgSFMK"
-                    },
-                    {
-                        id: "new_1004",
-                        name: "Ramo de rosas y alstroemerias",
-                        price: 45,
-                        img: "1s3wC5qIoTgbyvyl4yB7qb-tr_lvA_cLZ"
-                    },
-                    {
-                        id: "new_1005",
-                        name: "Ramo de Alstroemerias en cubo rústico",
-                        price: 45,
-                        img: "1qaWzqNLz4vC-Wg6YTcjrmfJCK9rdd8Ry"
-                    },
-                    {
-                        id: "new_1006",
-                        name: "Ramo de alstroemerias en tonos vibrantes",
-                        price: 45,
-                        img: "18qy7qGMagNT8Lzx71BzjudNe6lip0GwZ"
-                    }
-                ]
-            },
-            {
-                id: "cat-claveles",
-                title: "Claveles",
-                bannerImg: "1P95_NYTg6t3AG_n5Zv8dLQSkxIqtlEFm",
-                items: [
-                    {
-                        id: "cl1",
-                        name: "Claveles Tradicionales",
-                        price: 45,
-                        img: "1mqq0lJK-LgNQDi-hJMxbUqtiybYOp5ia"
-                    },
-                    {
-                        id: "cl2",
-                        name: "Claveles Blancos Puros",
-                        price: 45,
-                        img: "1nWOuocAOdFJ7rzwE7xpduIbX54PL3WHg"
-                    },
-                    
-                    {
-                        id: "cl3",
-                        name: "Claveles en Balde",
-                        price: 65,
-                        img: "1qQGT_C_4PuWo9X791TccWqpNKIehM_zI"
-                    },
-                    {
-                        id: "new_1013",
-                        name: "Ramo de claveles con rosas y astromelia",
-                        price: 45,
-                        img: "1cIhPi0eyNmHXTcEk8akTWXpXOM8qL69F"
-                    },
-                    {
-                        id: "new_1014",
-                        name: "Ramo de claveles rosa",
-                        price: 45,
-                        img: "1-f06Xao1KldIRwU7wQn9oWlwI6v1ONdy"
-                    },
-                    {
-                        id: "new_1015",
-                        name: "Ramo de claveles rosados en papel kraft",
-                        price: 45,
-                        img: "1tlMAQnw1JZTEy3kd8IqHTOs_-tCIP0-V"
-                    },
-                    {
-                        id: "new_1016",
-                        name: "Ramo de claveles en cubo rústico",
-                        price: 45,
-                        img: "1zv_F74x12pads6Z4S_49d_an3u40FOYi"
-                    },
-                    {
-                        id: "new_1017",
-                        name: "Ramo de claveles rojos vibrantes",
-                        price: 45,
-                        img: "10KAmR0TeAuwlU1hUFuhd7QxjFrMKlcuU"
-                    },
-                    {
-                        id: "new_1018",
-                        name: "Ramo de claveles coloridos",
-                        price: 45,
-                        img: "1v80bjwNR4F_qgi0-40CHG7oV9VeRmYEF"
-                    },
-                    {
-                        id: "new_1019",
-                        name: "Ramo de claveles coloridos en cubo",
-                        price: 45,
-                        img: "14wcSCmN9qzvHHkL8pUyl3tOctyefa1FP"
-                    },
-                    {
-                        id: "new_1020",
-                        name: "Ramo de claveles en canasta de mimbre",
-                        price: 45,
-                        img: "171tJeugE-3VW_rlyH7qXb2YwOJG9VPig"
-                    }
-                ]
-            },
-            {
-                id: "cat-eternas",
-                title: "Flores Eternas",
-                bannerImg: "1r5YlC_PLw0mWpwIET0eBVHbMfJ_2HvhB",
-                items: [
-                    {
-                        id: "et1",
-                        name: "Rosas y Mariposas",
-                        price: 65,
-                        img: "1RntTxM5__stBC_WNU3S9_pidPJbndsfd"
-                    },
-                    {
-                        id: "et2",
-                        name: "Rosas Hello Kitty Cumpleaños",
-                        price: 75,
-                        img: "1Ggxk6aLhmGONsPB6zEVomZrOB_oRRk2y"
-                    },
-                    {
-                        id: "et3",
-                        name: "Flores Lilas Limpiapipa",
-                        price: 45,
-                        img: "1FNEi4lM8tzdiAE3F9pYgmNjmcp5kMwEA"
-                    },
-                    {
-                        id: "et4",
-                        name: "Flores Azules Limpiapipa",
-                        price: 45,
-                        img: "15Iskbw3rFBdr9Auz6Rt3tLvZU02hrFIa"
-                    },
-                    {
-                        id: "et5",
-                        name: "Rosas Amarillas Osito",
-                        price: 55,
-                        img: "1INdWcvdVxJWevu8cIeBlw61dS-Y4MXvj"
-                    },
-                    {
-                        id: "et6",
-                        name: "Rosa y Orquídea Limpiapipa",
-                        price: 50,
-                        img: "1MAgKRa97GwAEWoCBgWkp_73SbkzSyI-0"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        macroTitle: "Arreglos y Eventos",
-        categories: [
-            {
-                id: "cat-eventos",
-                title: "Eventos",
-                bannerImg: "1SAbIm7MoNNgn8in17pklvZQ-SKOU77Yg",
-                items: [
-                    {
-                        id: "ev1",
-                        name: "Rosas y Girasol Premium",
-                        price: 85,
-                        img: "1acovOFVcub7uUic9VmUtBLpvQZMXixOK"
-                    },
-                    {
-                        id: "ev2",
-                        name: "Arreglo de Orquídeas y Rosas",
-                        price: 110,
-                        img: "1-sOMv6YM7kE99C8ZguLdeqIIV9alnlvI"
-                    },
-                    {
-                        id: "ev3",
-                        name: "Ramo Rosas Blancas y Lilas",
-                        price: 90,
-                        img: "104Qri6U5-UU_UjkvKDhAdOqVjYQExIfy"
-                    },
-                    {
-                        id: "ev4",
-                        name: "Arreglo Orquídea Elegante",
-                        price: 115,
-                        img: "1_Tbdcf3o4Kn367Sop6oAWDXoYEoQ17Vw"
-                    }
-                ]
-            },
-            {
-                id: "cat-adornos",
-                title: "Adornos de Mesa",
-                bannerImg: "12aY6lKDf6gjwtRdJr87VZjrVwo7sLkgz",
-                items: [
-                    {
-                        id: "ad1",
-                        name: "Centro de Mesa Floral",
-                        price: 65,
-                        img: "1TYETsidwkf48tpg91lfm5SjphiHJiUJg"
-                    },
-                    {
-                        id: "ad2",
-                        name: "Adorno de Margaritas Blancas",
-                        price: 45,
-                        img: "1BGBpO2uP8SEvdq-WKOnVzaW4nlTcOaJw"
-                    },
-                    {
-                        id: "ad3",
-                        name: "Hortensias Moradas de Mesa",
-                        price: 60,
-                        img: "1Kqyz0llJ0T1Ug01hG1QqsMRRRYRK5Pqo"
-                    },
-                    {
-                        id: "ad4",
-                        name: "Centro de Gladiolos Naranjas",
-                        price: 55,
-                        img: "1LVfI2pP6SZ3VPdz_IWeHmXntY8g4fQm5"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        macroTitle: "Regalos y Complementos",
-        categories: [
-            {
-                id: "cat-peluches",
-                title: "Peluches",
-                bannerImg: "1f2gtdRrCZTGvUMRJHUDcsBd2C4ipxrvr",
-                items: [
-                    {
-                        id: "pl1",
-                        name: "Peluche Lotso Rosa",
-                        price: 45,
-                        img: "1f2gtdRrCZTGvUMRJHUDcsBd2C4ipxrvr"
-                    },
-                    {
-                        id: "pl2",
-                        name: "Peluche Elefante Rosa",
-                        price: 55,
-                        img: "1WhIbdIL2CLrORX9nI4pVvEBqRrg9OXEh"
-                    },
-                    {
-                        id: "pl3",
-                        name: "Peluche Hello Kitty",
-                        price: 50,
-                        img: "10HQsyG7AX9E-rYVO-ryWBv2F-d2YA5B2"
-                    },
-                    {
-                        id: "pl4",
-                        name: "Peluche Stich Rosa",
-                        price: 60,
-                        img: "1LXN2pfzaNRdA_7aYQPxa3XZeys9UAcuZ"
-                    },
-                    {
-                        id: "pl5",
-                        name: "Peluche Snoopy",
-                        price: 45,
-                        img: "16VgEFDHc0Eu-WxQUSTQoexWCaniGlZ4t"
-                    }
-                ]
-            },
-            {
-                id: "cat-globos",
-                title: "Globos",
-                bannerImg: "1H1Uz9VjHtLZPn5sWguQmIvUFvTFQw0zn",
-                items: [
-                    {
-                        id: "new_1035",
-                        name: "Estrella",
-                        price: 45,
-                        img: "1r9qe50hDOOzR5KZApkyL23UioZaTikQC"
-                    },
-                    {
-                        id: "new_1036",
-                        name: "Varios",
-                        price: 45,
-                        img: "1yLfiYnpuIeFkW0OyC8-HLJRjLjR3F2bA"
-                    },
-                    {
-                        id: "new_1037",
-                        name: "TeAmo1",
-                        price: 45,
-                        img: "1umN8dCbS0LrOQl3PDcCGebQcSpfF-pl3"
-                    },
-                    {
-                        id: "new_1038",
-                        name: "TeAmo2",
-                        price: 45,
-                        img: "1HcEsjR3qPzUwmOeNX1qeYDUHtk9j2Jed"
-                    },
-                    {
-                        id: "new_1039",
-                        name: "happybirthday",
-                        price: 45,
-                        img: "1Ou662AloQ9XPmXreWCMOMhpnh5hY0ULi"
-                    }
-                ]
-            },
-            {
-                id: "cat-extras",
-                title: "Extras",
-                bannerImg: "18V7I7XpxXVMyv0QcQlARy52NLXqbXz3P",
-                items: [
-                    {
-                        id: "new_1030",
-                        name: "cajaFerrero 8",
-                        price: 45,
-                        img: "1smXVxR8KKu8aeBOB901EvDbopwijcaLY"
-                    },
-                    {
-                        id: "new_1031",
-                        name: "Chocolate kiss me",
-                        price: 45,
-                        img: "1AmIt6ZnkKxlf7gkRkp0IRyT945ag30p6"
-                    },
-                    {
-                        id: "new_1032",
-                        name: "Chocolate Ferrero Rocher",
-                        price: 45,
-                        img: "1nP2isWpMsddDREFWyde2lBO9irU8vVu5"
-                    },
-                    {
-                        id: "new_1033",
-                        name: "Chocolate Vizzio",
-                        price: 45,
-                        img: "191oZX2-DPAhwOJSJOGeNGuUN8dOJxJCB"
-                    },
-                    {
-                        id: "new_1034",
-                        name: "Carritos Hot wheels",
-                        price: 45,
-                        img: "1j8JYcxDeGdffphltIN1kt41gD7pTp8nH"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        macroTitle: "Jardín y Hogar",
-        categories: [
-            {
-                id: "cat-maceteros",
-                title: "Maceteros",
-                bannerImg: "1cnYTzaPWsRbBdrSYeYqBuL3il2wn9qBn",
-                items: [
-                    {
-                        id: "mc1",
-                        name: "Maceteros Especiales",
-                        price: 35,
-                        img: "1cnYTzaPWsRbBdrSYeYqBuL3il2wn9qBn"
-                    },
-                    {
-                        id: "mc2",
-                        name: "Elefantito de Cerámica",
-                        price: 45,
-                        img: "1431fWnoeGEtZZMKKIJl9RQyCN7_hTmgD"
-                    },
-                    {
-                        id: "mc3",
-                        name: "Cisne de Cerámica",
-                        price: 50,
-                        img: "1FMlZ6xL9-JFjjPq4VtsBId8RDRiiFD2v"
-                    },
-                    
-                ]
-            },
-            {
-                id: "cat-plantas",
-                title: "Plantas Decorativas",
-                bannerImg: "1kQfEx6fypxu5BQSDZiOu0mI_acj0N8_G",
-                items: [
-                    {
-                        id: "pt1",
-                        name: "Suculenta en Maceta",
-                        price: 25,
-                        img: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&q=80"
-                    },
-                    {
-                        id: "pt2",
-                        name: "Helecho Pequeño",
-                        price: 35,
-                        img: "https://images.unsplash.com/photo-1453904300235-0f2f60b15b5d?w=400&q=80"
-                    },
-                    
-                    {
-                        id: "new_1040",
-                        name: "Drácena",
-                        price: 45,
-                        img: "1oQyr5qkmcRP3IWoWtfO9-tMrFpnexjxr"
-                    },
-                    {
-                        id: "new_1041",
-                        name: "Helechos",
-                        price: 45,
-                        img: "1MRf1edwD0IkcEwpBVkoCvG9B3mMlWJD8"
-                    },
-                    {
-                        id: "new_1042",
-                        name: "Pino Limón",
-                        price: 45,
-                        img: "1cQA9YkVHdpw47cC9GPyDOH9HHP3rUFFV"
-                    },
-                    {
-                        id: "new_1043",
-                        name: "Romero",
-                        price: 45,
-                        img: "1mic8C_p7ZNMSM1FKbSh2I2HeMB-a9iMx"
-                    },
-                    {
-                        id: "new_1044",
-                        name: "Diplanemias",
-                        price: 45,
-                        img: "1x2NP6uE3aPAMAZC1AlRI-nf2LnayWgwa"
-                    },
-                    {
-                        id: "new_1045",
-                        name: "Echeverias",
-                        price: 45,
-                        img: "1r2LvBYPbHt7UViOKyJjorVnOGK29ING7"
-                    },
-                    {
-                        id: "new_1046",
-                        name: "Árbol De Abundancia",
-                        price: 45,
-                        img: "17JUswUrfAEt8r-qwOXoOvxX-qmWjB0LN"
-                    },
-                    {
-                        id: "new_1047",
-                        name: "Oreja De Elefante",
-                        price: 45,
-                        img: "1u8o1bS7eG-Xx8ksaGsBh3Mjg_TY4LLFE"
-                    },
-                    {
-                        id: "new_1048",
-                        name: "Lengua De Suegra",
-                        price: 45,
-                        img: "1y7mNMjo0EWx1ZDbNJZVXXzbz6L6zp4xk"
-                    }
-                ]
-            },
-            {
-                id: "cat-semillas",
-                title: "Semillas",
-                bannerImg: "1VkLp8Ht3hz0u_2_pdBzg_By6FM3IiL4P",
-                items: [
-                    
-                   
-                    {
-                        id: "new_1049",
-                        name: "Margarita Africana",
-                        price: 45,
-                        img: "1sRjbKzCfyHDbW8bL2xQcNLYVJmrQJ1RH"
-                    },
-                    {
-                        id: "new_1050",
-                        name: "Cosmos",
-                        price: 45,
-                        img: "1qRGjZI2iAk_K8YeidUYU8ACzB_0OVv94"
-                    },
-                    {
-                        id: "new_1051",
-                        name: "Girasol",
-                        price: 45,
-                        img: "1bfCyhYkQKpUZKtxcCB2WGzp4i0qlNet4"
-                    },
-                    {
-                        id: "new_1052",
-                        name: "Cebolla China",
-                        price: 45,
-                        img: "1pDdinVawTRpgxW0YYTHPCf32tYq1Hlca"
-                    },
-                    {
-                        id: "new_1053",
-                        name: "Maracuya",
-                        price: 45,
-                        img: "1OMUiNJ8JgO3oYVa4NYPAsf12gRkzfSLU"
-                    },
-                    {
-                        id: "new_1054",
-                        name: "Paico",
-                        price: 45,
-                        img: "1R_pQ1xxbebTh4vJFM2VH3VVFbUe17l3d"
-                    },
-                    {
-                        id: "new_1055",
-                        name: "Espinaca",
-                        price: 45,
-                        img: "1ZO_MurqVyYDwEUxGu1djCnvcukL_Lpgb"
-                    },
-                    {
-                        id: "new_1056",
-                        name: "LechugaSeda",
-                        price: 45,
-                        img: "1-_nlaYLrNo7pOiYgfl06B_FOBPC-MMkL"
-                    },
-                    {
-                        id: "new_1057",
-                        name: "Papaya",
-                        price: 45,
-                        img: "1Apyp10vFv0P7dJXK1Xm4nhYkEvnyv6nD"
-                    },
-                    {
-                        id: "new_1058",
-                        name: "Albahaca",
-                        price: 45,
-                        img: "17jBp5w8OReWwqte8U1xIbHpwT80eoi5C"
-                    },
-                    {
-                        id: "new_1059",
-                        name: "Pimiento",
-                        price: 45,
-                        img: "1mDA5QIvZQBcqWH--e8hoMsqTy9XSMPme"
-                    },
-                    {
-                        id: "new_1060",
-                        name: "Rabanito",
-                        price: 45,
-                        img: "19S9eEesDVNuq4hirsNRAO4qm2GNHXnJT"
-                    },
-                    {
-                        id: "new_1061",
-                        name: "Zanahoria",
-                        price: 45,
-                        img: "1wYu10acGDGDRMp3BEsm8uJjptankDlfJ"
-                    },
-                    {
-                        id: "new_1062",
-                        name: "Cebolla",
-                        price: 45,
-                        img: "17_hKY1p1nQR2QdKtgmDuj0N_SgPGB3b8"
-                    }
-                ]
-            }
-        ]
-    }
-];
+
+        // --- 3. LECTURA DEL EXCEL (Las columnas que me indicaste) ---
+        function parseCSV(csv) {
+            // Limpia Enters dentro de celdas para que no rompa el código
+            const safeCSV = csv.replace(/"([^"]*)"/g, (match, content) => {
+                return '"' + content.replace(/[\r\n]+/g, ' ') + '"';
+            });
+
+            const rows = safeCSV.split(/\r?\n/).slice(1); // Salta la fila de encabezados
+
+            return rows.map((row, index) => {
+                const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(val => val.replace(/^"|"$/g, '').trim());
+                if(cols.length < 6) return null;
+                
+                // Tus columnas: 0: Nombre, 1: ID, 2: Vis., 3: Dir., 4: Carpeta, 5: Precio
+                return {
+                    id: 'prod_' + index,
+                    name: cols[0] || "Producto sin nombre",
+                    img: cols[1], // Tomamos el ID de Drive
+                    category: cols[4] || 'General', // La Carpeta Contenedora
+                    price: parseFloat(cols[5]) || 0
+                };
+            }).filter(p => p && p.price > 0);
+        }
+
+        function buildDynamicMenu(products) {
+            const categoriesMap = {};
+            
+            // Agrupamos por categoría (Carpeta)
+            products.forEach(p => {
+                if(!categoriesMap[p.category]) categoriesMap[p.category] = [];
+                categoriesMap[p.category].push(p);
+            });
+
+            const categoriesArray = Object.keys(categoriesMap).map(catName => {
+                return {
+                    id: 'cat-' + catName.replace(/\s+/g, '-').toLowerCase(),
+                    title: catName,
+                    bannerImg: categoriesMap[catName][0].img, // Usa la primera foto de la carpeta como banner
+                    items: categoriesMap[catName]
+                }
+            });
+
+            return [{
+                macroTitle: 'Catálogo Floral',
+                categories: categoriesArray
+            }];
+        }
+
+        function getImgUrl(imgStr) {
+            if (!imgStr) return 'https://via.placeholder.com/400x500?text=Floreria+Silvia';
+            if (imgStr.startsWith('http')) return imgStr;
+            return `https://wsrv.nl/?url=https://drive.google.com/uc?id=${imgStr}&w=600&q=80&output=jpg`;
+        }
+
+        // --- 4. RENDERIZADO DEL SITIO (Diseño sin precios) ---
         function renderSite() {
             const menuContainer = document.getElementById('sidebarMenuContent');
             const desktopNavContainer = document.getElementById('desktopNav');
@@ -2184,10 +1494,11 @@
             let menuHtml = '';
             let desktopHtml = '';
             let catalogHtml = '';
+            
+            allItemsFlat = []; // Reiniciamos
+            
             menuData.forEach((macro, index) => {
-                // Color cíclico para el menú móvil (1 al 4)
                 let colorClass = `color-${(index % 4) + 1}`;
-                // Menú Lateral Móvil (Acordeón con colores)
                 menuHtml += `
                     <div class="menu-accordion ${colorClass}">
                         <button class="accordion-btn" onclick="toggleAccordion(this)">
@@ -2195,23 +1506,25 @@
                         </button>
                         <div class="accordion-content">
                 `;
-                // Menú Escritorio (Dropdown clickeable)
                 desktopHtml += `
                     <div class="nav-item">
                         ${macro.macroTitle} <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; margin-left: 4px;"></i>
                         <div class="dropdown-menu">
                 `;
                 macro.categories.forEach(sec => {
-                    // Enlaces en ambos menús
                     menuHtml += `<a href="#${sec.id}" onclick="toggleSidebar()">${sec.title}</a>`;
                     desktopHtml += `<a href="#${sec.id}">${sec.title}</a>`;
-                    // Renderizado estándar de productos
+                    
+                    // LÓGICA PRECIO "DESDE": Encuentra el precio más bajo
+                    const minPrice = Math.min(...sec.items.map(item => item.price));
+
                     catalogHtml += `
                         <section class="rosatel-section" id="${sec.id}">
                             <div class="cat-banner-side">
                                 <img src="${getImgUrl(sec.bannerImg)}" alt="${sec.title}" loading="lazy">
                                 <div class="cat-banner-overlay">
                                     <h2>${sec.title}</h2>
+                                    <p>Desde S/ ${minPrice.toFixed(2)}</p>
                                 </div>
                             </div>
                             <div class="cat-slider-side">
@@ -2226,9 +1539,7 @@
                                     <img src="${getImgUrl(item.img)}" alt="${item.name}" loading="lazy" onclick="openLightbox(this.src)">
                                 </div>
                                 <div class="prod-name">${item.name}</div>
-                                <div class="prod-price">S/ ${item.price.toFixed(2)}</div>
-                                <div class="comprar-txt" onclick="addDirect('${item.id}', this)">Comprar ahora</div>
-                                <button class="btn-add" onclick="addDirect('${item.id}', this)">Añadir al carrito</button>
+                                <button class="btn-add" onclick="addDirect('${item.id}', this)">Cotizar Diseño</button>
                             </div>
                         `;
                     });
@@ -2242,17 +1553,17 @@
                 menuHtml += `</div></div>`;
                 desktopHtml += `</div></div>`;
             });
-            // Enlaces adicionales móviles
             menuHtml += `<a href="#arma-pedido" class="direct-link" onclick="toggleSidebar()">Arma tu pedido</a>`;
             menuHtml += `<a href="#cuidados" class="direct-link" onclick="toggleSidebar()">Cuidados de plantas</a>`;
             menuHtml += `<a href="#visitanos" class="direct-link" onclick="toggleSidebar()">Visítanos</a>`;
-            // Enlace adicional PC
             desktopHtml += `<a href="#arma-pedido" class="nav-item" style="text-decoration:none;">Arma tu pedido</a>`;
-            menuContainer.innerHTML = menuHtml;
-            desktopNavContainer.innerHTML = desktopHtml;
-            catalogContainer.innerHTML = catalogHtml;
+            
+            if(menuContainer) menuContainer.innerHTML = menuHtml;
+            if(desktopNavContainer) desktopNavContainer.innerHTML = desktopHtml;
+            if(catalogContainer) catalogContainer.innerHTML = catalogHtml;
         }
-        // --- FUNCIONES DE INTERFAZ ---
+
+        // --- 5. FUNCIONES DE INTERFAZ ---
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('active');
             document.getElementById('sidebarOverlay').classList.toggle('active');
@@ -2260,30 +1571,23 @@
         function toggleAccordion(btn) {
             btn.classList.toggle("active");
             var content = btn.nextElementSibling;
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
-            } else {
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
+            if (content.style.maxHeight) content.style.maxHeight = null;
+            else content.style.maxHeight = content.scrollHeight + "px";
         }
-        // Dropdown en PC por clic
         function toggleDesktopDropdown(el, e) {
             if (e.target.tagName !== 'A') {
                 e.preventDefault();
-                // Cerrar los demás primero
                 document.querySelectorAll('.nav-item').forEach(nav => {
                     if (nav !== el) nav.classList.remove('active');
                 });
                 el.classList.toggle('active');
             }
         }
-        // Cerrar menú PC al hacer clic afuera
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.desktop-nav')) {
                 document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
             }
         });
-        // Slider Horizontal
         function scrollSlider(id, direction) {
             const slider = document.getElementById(id);
             if (!slider) return;
@@ -2293,7 +1597,6 @@
             const scrollAmount = card.offsetWidth + gap;
             slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
         }
-        // Lightbox
         function openLightbox(imgSrc) {
             document.getElementById('lightboxImg').src = imgSrc;
             document.getElementById('lightboxOverlay').style.display = 'flex';
@@ -2302,17 +1605,19 @@
             if (e && e.target !== e.currentTarget && !e.target.classList.contains('lightbox-close')) return;
             document.getElementById('lightboxOverlay').style.display = 'none';
         }
-        // --- FUNCIONES DE CARRITO ---
+
+        // --- 6. FUNCIONES DE COTIZACIÓN (LISTA) ---
         function addDirect(itemId, element) {
             const item = allItemsFlat.find(i => i.id === itemId);
             if (!item) return;
             const existing = cart.find(c => c.id === item.id);
             if (existing) existing.qty += 1;
             else cart.push({ ...item, qty: 1 });
+            
             const btn = element.closest('.prod-card').querySelector('.btn-add');
             if (btn) {
                 const originalText = btn.innerText;
-                btn.innerText = "¡Agregado!";
+                btn.innerText = "¡A la lista!";
                 btn.style.background = "var(--accent)";
                 btn.style.color = "white";
                 setTimeout(() => {
@@ -2323,11 +1628,11 @@
             }
             updateCartUI();
         }
+
         function updateCartUI() {
-            const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
             const count = cart.reduce((sum, i) => sum + i.qty, 0);
             document.getElementById('cartCount').innerText = `${count} items`;
-            document.getElementById('cartTotal').innerText = `S / ${total.toFixed(2)} `;
+            
             const bar = document.getElementById('cartBar');
             const wsp = document.getElementById('wspBtn');
             if (count > 0) {
@@ -2337,62 +1642,56 @@
                 document.getElementById('cartSidebarPanel').classList.remove('active');
                 document.getElementById('cartSidebarOverlay').classList.remove('active');
             }
-            // Render sidebar items
+            
             const container = document.getElementById('cartSidebarItems');
-            document.getElementById('cartSidebarTotal').innerText = `S / ${total.toFixed(2)} `;
             let html = '';
             cart.forEach(item => {
                 html += `
-                        <div class="cart-item-card" >
-                            <img src="${getImgUrl(item.img)}" alt="${item.name}" class="cart-item-img">
-                                <div class="cart-item-info">
-                                    <div class="cart-item-title">${item.name}</div>
-                                    <div class="cart-item-price">S/ ${item.price.toFixed(2)}</div>
-                                    <div class="cart-qty-ctrl">
-                                        <span class="cart-qty-btn" onclick="updateCartItemQty('${item.id}', -1)">-</span>
-                                        <span class="cart-qty-val">${item.qty}</span>
-                                        <span class="cart-qty-btn" onclick="updateCartItemQty('${item.id}', 1)">+</span>
-                                    </div>
-                                </div>
-                                <i class="fa-regular fa-trash-can cart-item-del" onclick="removeCartItem('${item.id}')"></i>
+                    <div class="cart-item-card" >
+                        <img src="${getImgUrl(item.img)}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-qty-ctrl">
+                                <span class="cart-qty-btn" onclick="updateCartItemQty('${item.id}', -1)">-</span>
+                                <span class="cart-qty-val">${item.qty}</span>
+                                <span class="cart-qty-btn" onclick="updateCartItemQty('${item.id}', 1)">+</span>
                             </div>
-                    `;
+                        </div>
+                        <i class="fa-regular fa-trash-can cart-item-del" onclick="removeCartItem('${item.id}')"></i>
+                    </div>
+                `;
             });
             container.innerHTML = html;
         }
+
         function toggleCartSidebar() {
             document.getElementById('cartSidebarPanel').classList.toggle('active');
             document.getElementById('cartSidebarOverlay').classList.toggle('active');
         }
         function openCheckoutModal() {
             if (cart.length === 0) return;
-            // Cerrar sidebar del carrito
             document.getElementById('cartSidebarPanel').classList.remove('active');
             document.getElementById('cartSidebarOverlay').classList.remove('active');
-            // Abrir modal
             document.getElementById('checkoutModalOverlay').style.display = 'flex';
         }
         function closeCheckoutModal(e) {
             if (e && e.target !== e.currentTarget && !e.target.classList.contains('checkout-close-btn') && !e.target.classList.contains('btn-cancel-checkout')) return;
             document.getElementById('checkoutModalOverlay').style.display = 'none';
         }
-        function emptyCart() {
-            cart = [];
-            updateCartUI();
-        }
+        function emptyCart() { cart = []; updateCartUI(); }
+        
         function updateCartItemQty(id, delta) {
             const item = cart.find(c => c.id === id);
             if (!item) return;
             item.qty += delta;
-            if (item.qty <= 0) {
-                cart = cart.filter(c => c.id !== id);
-            }
+            if (item.qty <= 0) cart = cart.filter(c => c.id !== id);
             updateCartUI();
         }
         function removeCartItem(id) {
             cart = cart.filter(c => c.id !== id);
             updateCartUI();
         }
+
         function confirmOrderWsp() {
             if (cart.length === 0) return;
             const name = document.getElementById('orderName').value.trim();
@@ -2401,33 +1700,37 @@
             const district = document.getElementById('orderDistrict').value.trim();
             const address = document.getElementById('orderAddress').value.trim();
             const message = document.getElementById('orderMessage').value.trim();
+            
             if (!name || !phone || !date || !district || !address) {
-                alert("Por favor, completa los datos obligatorios para el envío (nombre, teléfono, fecha, distrito y dirección).");
+                alert("Por favor, completa los datos obligatorios para cotizar el envío.");
                 return;
             }
-            let msg = "Hola Floreria Silvia, deseo realizar el siguiente pedido:\n\n";
-            msg += `* DATOS DEL CLIENTE:*\n`;
+            
+            let msg = "Hola Florería Silvia, deseo cotizar los siguientes diseños:\n\n";
+            msg += `*DATOS DEL CLIENTE:*\n`;
             msg += `- Nombre: ${name} \n`;
             msg += `- Teléfono: ${phone} \n`;
             msg += `- Fecha de Entrega: ${date} \n`;
             msg += `- Distrito: ${district} \n`;
             msg += `- Dirección: ${address} \n`;
-            if (message) msg += `- Dedicatoria / Indicaciones: ${message} \n`;
-            msg += `\n * DETALLE DEL PEDIDO:*\n`;
-            let sub = 0;
+            if (message) msg += `- Indicaciones: ${message} \n`;
+            
+            msg += `\n*DISEÑOS A COTIZAR:*\n`;
             cart.forEach(i => {
-                const rowTotal = i.price * i.qty;
-                msg += `- ${i.qty}x ${i.name} (S / ${rowTotal.toFixed(2)}) \n`;
-                sub += rowTotal;
+                msg += `- ${i.qty}x ${i.name}\n`;
             });
-            msg += `\n * Total a pagar: S / ${sub.toFixed(2)}* `;
+            
+            msg += `\n*Quedo a la espera de la confirmación del monto total.*`;
+            
             sendWsp(msg);
             closeCheckoutModal(null);
             emptyCart();
         }
+        
         function sendWsp(msg) { window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank'); }
-        // Iniciar Web
-        renderSite();
+        
+        // ¡ARRANCAMOS EL SISTEMA!
+        init();
     </script>
 </body>
 </html>
