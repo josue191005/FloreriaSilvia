@@ -521,14 +521,22 @@
     font-family:var(--font-body);
     font-weight:800;
     font-size:0.95rem;
-    margin:15px 10px;
+    margin:15px 10px 5px; /* Modificado el margen para dar espacio al precio */
     color:var(--text-main);
     display:flex;
     align-items:center;
     justify-content:center;
     line-height:1.2;
     overflow:hidden;
-    flex: 1; /* Para que empuje el botón hacia abajo */
+    flex: 1; 
+    }
+        /* NUEVA CLASE PARA EL PRECIO */
+        .prod-price {
+    font-family:var(--font-body);
+    font-weight:900;
+    font-size:1.15rem;
+    color:var(--accent-dark);
+    margin-bottom:15px;
     }
         .btn-add {
     margin:auto auto 0;
@@ -571,7 +579,7 @@
     flex:0 0 calc(33.333% - 13.33px)}
         .prod-name {
     font-size:1.05rem;
-    margin:15px 15px;}
+    margin:15px 15px 5px;}
         .btn-add {
     width:80%;
     padding:12px 0;
@@ -920,7 +928,6 @@
     font-weight:700;
     color:var(--text-main);
     margin-bottom:2px}
-        /* Eliminada la clase .cart-item-price para que no se vea en el carrito */
         .cart-qty-ctrl {
     display:flex;
     align-items:center;
@@ -965,10 +972,10 @@
         .cart-subtotal-row span {
     font-weight:600;
     color:var(--text-main);
-    font-size:1rem}
+    font-size:1.1rem}
         .cart-subtotal-val {
     font-weight:800;
-    font-size:1.3rem !important;
+    font-size:1.4rem !important;
     color:#8A204C !important}
         .btn-checkout-final {
     width:100%;
@@ -1220,7 +1227,7 @@
         <div class="steps-wrapper">
             <div class="step-v-card">
                 <div class="step-img-box">
-                    <img src="https://lh3.googleusercontent.com/d/15sLZL4jwzacFN9zOrlYMBHyFgvrkFagD"
+                    <img src="https://images.unsplash.com/photo-1591886960571-74d43a9d4166?w=600&q=80"
                         alt="Muestra tu referencia" onclick="openLightbox(this.src)">
                     <div class="step-number">1</div>
                 </div>
@@ -1311,11 +1318,10 @@
             <div class="map-wrap">
                 <div class="map-container">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3905.3002358037243!2d-77.13259342494251!3d-11.814233288404768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTHCsDQ4JzUxLjIiUyA3N8KwMDcnNDguMSJX!5e0!3m2!1ses-419!2spe!4v1772975067347!5m2!1ses-419!2spe"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.6669911878345!2d-77.1352!3d-11.77!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDQ2JzEyLjAiUyA3N8KwMDgnMDYuNyJX!5e0!3m2!1ses!2spe!4v1690000000000!5m2!1ses!2spe"
                         allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <a href="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3905.3002358037243!2d-77.13259342494251!3d-11.814233288404768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTHCsDQ4JzUxLjIiUyA3N8KwMDcnNDguMSJX!5e0!3m2!1ses-419!2spe!4v1772975067347!5m2!1ses-419!2spe"
-                    target="_blank" class="map-link">Ver ubicacion en Google Maps</a>
+                <a href="#" target="_blank" class="map-link">Ver ubicacion en Google Maps</a>
             </div>
         </div>
     </footer>
@@ -1329,27 +1335,29 @@
         id="wspBtn">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
+    
     <div class="cart-sidebar-overlay" id="cartSidebarOverlay" onclick="toggleCartSidebar()"></div>
     <div class="cart-sidebar" id="cartSidebarPanel">
         <div class="cart-sidebar-header">
-            <div class="cart-sidebar-title"><i class="fa-solid fa-list-check"></i> Tu Cotización</div>
+            <div class="cart-sidebar-title"><i class="fa-solid fa-cart-shopping"></i> Tu Carrito</div>
             <div class="cart-close-btn" onclick="toggleCartSidebar()">×</div>
         </div>
         <div class="cart-items-container" id="cartSidebarItems">
             </div>
         <div class="cart-sidebar-footer">
             <div class="cart-subtotal-row">
-                <span>Estado:</span>
-                <span class="cart-subtotal-val" style="font-size: 1rem !important; color: #666 !important;">Por Cotizar</span>
+                <span id="cartSubtotalLabel">Total:</span>
+                <span class="cart-subtotal-val" id="cartSubtotalValue">S/ 0.00</span>
             </div>
-            <button class="btn-checkout-final" onclick="openCheckoutModal()">SOLICITAR COTIZACIÓN</button>
+            <button class="btn-checkout-final" onclick="openCheckoutModal()">PROCEDER AL PIDO</button>
             <button class="btn-empty-cart" onclick="emptyCart()">VACIAR LISTA</button>
         </div>
     </div>
+
     <div class="checkout-modal-overlay animate-fadeIn" id="checkoutModalOverlay" onclick="closeCheckoutModal(event)">
         <div class="checkout-modal animate-fadeInUp" style="animation-duration: 0.4s;">
             <div class="checkout-modal-header">
-                <h2>Datos para Cotizar</h2>
+                <h2>Datos de Envío</h2>
                 <div class="checkout-close-btn" onclick="closeCheckoutModal(null)">×</div>
             </div>
             <div class="checkout-modal-body">
@@ -1386,42 +1394,39 @@
             <div class="checkout-modal-footer">
                 <button class="btn-cancel-checkout" onclick="closeCheckoutModal(null)">CANCELAR</button>
                 <button class="btn-confirm-checkout" onclick="confirmOrderWsp()"><i class="fa-brands fa-whatsapp"></i>
-                    ENVIAR A WHATSAPP</button>
+                    ENVIAR PEDIDO</button>
             </div>
         </div>
     </div>
+
     <div class="cart-bar" id="cartBar">
         <div>
             <div style="font-size: 0.85rem; color:var(--text-light); font-weight: 700;" id="cartCount">0 items</div>
-            <div style="font-size: 1.1rem; font-weight: 800; color:var(--text-main);">Por Cotizar</div>
+            <div style="font-size: 1.1rem; font-weight: 800; color:var(--text-main);" id="cartTotalBar">S/ 0.00</div>
         </div>
         <button class="btn-pedir-cart" onclick="toggleCartSidebar()">VER LISTA</button>
     </div>
+
     <script>
         // --- 1. CONFIGURACIÓN DEL SHEETS ---
-        // ⚠️ IMPORTANTE: REEMPLAZA ESTE LINK POR EL DE TU NUEVO SHEETS (debe terminar en pub?output=csv)
-        
         const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQziHqjXImLCjHwqBqSEVWKU1AFPK2pQm83INGPkJyLhLluR1E8dzsxX4iOUucu_ruWNp9RxtEfSIrx/pub?output=csv';
         const PHONE = '51936625197';
         
         let cart = [];
         let allItemsFlat = [];
-        let menuData = []; // Ahora empieza vacío y se llena solo
+        let menuData = []; 
 
         // --- 2. INICIO Y CONEXIÓN AL SHEETS ---
         async function init() {
             try {
-                // El Date.now() evita que Google nos dé una versión vieja (caché)
                 const res = await fetch(SHEET_URL + '&t=' + Date.now());
                 if (!res.ok) throw new Error("Error conectando con el catálogo.");
                 
                 const text = await res.text();
                 const rawProducts = parseCSV(text);
                 
-                // Construimos la estructura agrupando por "Carpeta Contenedora"
                 menuData = buildDynamicMenu(rawProducts);
                 
-                // Ocultamos el loader y pintamos la web
                 const loader = document.getElementById('loader');
                 if(loader) loader.style.display = 'none';
                 
@@ -1432,34 +1437,30 @@
             }
         }
 
-        // --- 3. LECTURA DEL EXCEL (Las columnas que me indicaste) ---
+        // --- 3. LECTURA DEL EXCEL ---
         function parseCSV(csv) {
-            // Limpia Enters dentro de celdas para que no rompa el código
             const safeCSV = csv.replace(/"([^"]*)"/g, (match, content) => {
                 return '"' + content.replace(/[\r\n]+/g, ' ') + '"';
             });
 
-            const rows = safeCSV.split(/\r?\n/).slice(1); // Salta la fila de encabezados
+            const rows = safeCSV.split(/\r?\n/).slice(1);
 
             return rows.map((row, index) => {
                 const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(val => val.replace(/^"|"$/g, '').trim());
                 if(cols.length < 6) return null;
                 
-                // Tus columnas: 0: Nombre, 1: ID, 2: Vis., 3: Dir., 4: Carpeta, 5: Precio
                 return {
                     id: 'prod_' + index,
                     name: cols[0] || "Producto sin nombre",
-                    img: cols[1], // Tomamos el ID de Drive
-                    category: cols[4] || 'General', // La Carpeta Contenedora
-                    price: parseFloat(cols[5]) || 0
+                    img: cols[1],
+                    category: cols[4] || 'General',
+                    price: parseFloat(cols[5]) || 0 
                 };
             }).filter(p => p && p.price > 0);
         }
 
         function buildDynamicMenu(products) {
             const categoriesMap = {};
-            
-            // Agrupamos por categoría (Carpeta)
             products.forEach(p => {
                 if(!categoriesMap[p.category]) categoriesMap[p.category] = [];
                 categoriesMap[p.category].push(p);
@@ -1469,7 +1470,7 @@
                 return {
                     id: 'cat-' + catName.replace(/\s+/g, '-').toLowerCase(),
                     title: catName,
-                    bannerImg: categoriesMap[catName][categoriesMap[catName].length - 1].img, // Usa la primera foto de la carpeta como banner
+                    bannerImg: categoriesMap[catName][categoriesMap[catName].length - 1].img, 
                     items: categoriesMap[catName]
                 }
             });
@@ -1486,7 +1487,7 @@
             return `https://wsrv.nl/?url=https://drive.google.com/uc?id=${imgStr}&w=600&q=80&output=jpg`;
         }
 
-        // --- 4. RENDERIZADO DEL SITIO (Diseño sin precios) ---
+        // --- 4. RENDERIZADO DEL SITIO ---
         function renderSite() {
             const menuContainer = document.getElementById('sidebarMenuContent');
             const desktopNavContainer = document.getElementById('desktopNav');
@@ -1495,7 +1496,7 @@
             let desktopHtml = '';
             let catalogHtml = '';
             
-            allItemsFlat = []; // Reiniciamos
+            allItemsFlat = [];
             
             menuData.forEach((macro, index) => {
                 let colorClass = `color-${(index % 4) + 1}`;
@@ -1515,7 +1516,6 @@
                     menuHtml += `<a href="#${sec.id}" onclick="toggleSidebar()">${sec.title}</a>`;
                     desktopHtml += `<a href="#${sec.id}">${sec.title}</a>`;
                     
-                    // LÓGICA PRECIO "DESDE": Encuentra el precio más bajo
                     const minPrice = Math.min(...sec.items.map(item => item.price));
 
                     catalogHtml += `
@@ -1533,13 +1533,15 @@
                     `;
                     sec.items.forEach(item => {
                         allItemsFlat.push(item);
+                        // MODIFICADO: Agregada la clase .prod-price y el botón dice "Añadir al carrito"
                         catalogHtml += `
                             <div class="prod-card">
                                 <div class="prod-img-wrap">
                                     <img src="${getImgUrl(item.img)}" alt="${item.name}" loading="lazy" onclick="openLightbox(this.src)">
                                 </div>
                                 <div class="prod-name">${item.name}</div>
-                                <button class="btn-add" onclick="addDirect('${item.id}', this)">Cotizar Diseño</button>
+                                <div class="prod-price">S/ ${item.price.toFixed(2)}</div>
+                                <button class="btn-add" onclick="addDirect('${item.id}', this)">Añadir al carrito</button>
                             </div>
                         `;
                     });
@@ -1606,7 +1608,7 @@
             document.getElementById('lightboxOverlay').style.display = 'none';
         }
 
-        // --- 6. FUNCIONES DE COTIZACIÓN (LISTA) ---
+        // --- 6. FUNCIONES DE COTIZACIÓN Y PRECIOS ---
         function addDirect(itemId, element) {
             const item = allItemsFlat.find(i => i.id === itemId);
             if (!item) return;
@@ -1617,7 +1619,7 @@
             const btn = element.closest('.prod-card').querySelector('.btn-add');
             if (btn) {
                 const originalText = btn.innerText;
-                btn.innerText = "¡A la lista!";
+                btn.innerText = "¡Agregado!";
                 btn.style.background = "var(--accent)";
                 btn.style.color = "white";
                 setTimeout(() => {
@@ -1629,14 +1631,18 @@
             updateCartUI();
         }
 
+        // MODIFICADO: Ahora calcula el subtotal y lo inyecta en el HTML
         function updateCartUI() {
             const count = cart.reduce((sum, i) => sum + i.qty, 0);
+            const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            
             document.getElementById('cartCount').innerText = `${count} items`;
             
             const bar = document.getElementById('cartBar');
             const wsp = document.getElementById('wspBtn');
             if (count > 0) {
                 bar.classList.add('visible'); wsp.classList.add('shift-up');
+                document.getElementById('cartTotalBar').innerText = `S/ ${total.toFixed(2)}`;
             } else {
                 bar.classList.remove('visible'); wsp.classList.remove('shift-up');
                 document.getElementById('cartSidebarPanel').classList.remove('active');
@@ -1651,6 +1657,7 @@
                         <img src="${getImgUrl(item.img)}" alt="${item.name}" class="cart-item-img">
                         <div class="cart-item-info">
                             <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price" style="font-weight:900; color:var(--accent-dark); font-size: 0.95rem;">S/ ${(item.price * item.qty).toFixed(2)}</div>
                             <div class="cart-qty-ctrl">
                                 <span class="cart-qty-btn" onclick="updateCartItemQty('${item.id}', -1)">-</span>
                                 <span class="cart-qty-val">${item.qty}</span>
@@ -1662,6 +1669,9 @@
                 `;
             });
             container.innerHTML = html;
+
+            document.getElementById('cartSubtotalValue').innerText = `S/ ${total.toFixed(2)}`;
+            document.getElementById('cartSubtotalLabel').innerText = 'Total a Pagar:';
         }
 
         function toggleCartSidebar() {
@@ -1692,6 +1702,7 @@
             updateCartUI();
         }
 
+        // MODIFICADO: WhatsApp ahora recibe el resumen de productos y precios + el total final
         function confirmOrderWsp() {
             if (cart.length === 0) return;
             const name = document.getElementById('orderName').value.trim();
@@ -1702,12 +1713,14 @@
             const message = document.getElementById('orderMessage').value.trim();
             
             if (!name || !phone || !date || !district || !address) {
-                alert("Por favor, completa los datos obligatorios para cotizar el envío.");
+                alert("Por favor, completa los datos obligatorios para confirmar el envío.");
                 return;
             }
             
-            let msg = "Hola Florería Silvia, deseo cotizar los siguientes diseños:\n\n";
-            msg += `*DATOS DEL CLIENTE:*\n`;
+            const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+
+            let msg = "Hola Florería Silvia, deseo confirmar el siguiente pedido:\n\n";
+            msg += `*DATOS DE ENVÍO:*\n`;
             msg += `- Nombre: ${name} \n`;
             msg += `- Teléfono: ${phone} \n`;
             msg += `- Fecha de Entrega: ${date} \n`;
@@ -1715,12 +1728,13 @@
             msg += `- Dirección: ${address} \n`;
             if (message) msg += `- Indicaciones: ${message} \n`;
             
-            msg += `\n*DISEÑOS A COTIZAR:*\n`;
+            msg += `\n*MI CARRITO:*\n`;
             cart.forEach(i => {
-                msg += `- ${i.qty}x ${i.name}\n`;
+                msg += `- ${i.qty}x ${i.name} (S/ ${(i.price * i.qty).toFixed(2)})\n`;
             });
             
-            msg += `\n*Quedo a la espera de la confirmación del monto total.*`;
+            msg += `\n*TOTAL A PAGAR: S/ ${total.toFixed(2)}*\n`;
+            msg += `\nQuedo a la espera de la confirmación y método de pago.`;
             
             sendWsp(msg);
             closeCheckoutModal(null);
